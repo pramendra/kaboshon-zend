@@ -1,0 +1,10 @@
+{	
+    "PHP": {
+        "php": '/f/php',
+        "phpExtraPaths": ['/f/htdocs/kaboshon-zend/vendor/zendframework/zendframework/library/Zend'],
+        "phpConfigFile": 'php.ini'
+    },
+    "JavaScript": {
+        "javascriptExtraPaths": []
+    },
+}

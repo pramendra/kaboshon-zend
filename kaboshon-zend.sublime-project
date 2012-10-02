@@ -1,0 +1,13 @@
+{
+	"folders":
+	[
+		{
+			"path": "/F/htdocs/kaboshon-zend"
+		}
+	],
+
+    "settings": {
+        "xdebug": { "url": "http://kaboshon" }
+    }
+
+}
