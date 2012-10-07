@@ -23,7 +23,7 @@ class Module
     {
         return array(
             'factories' => array(
-                'Album\Model\AlbumTable' =>  function($sm) {
+                'Album\Model\AlbumTable' => function($sm) {
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $table     = new AlbumTable($dbAdapter);
                     return $table;

@@ -13,7 +13,7 @@ class AlbumController extends AbstractActionController
     protected $albumTable;
 
     public function indexAction()
-    {
+    {   var_dump($this->getServiceLocator()->get('Configuration'));
         return new ViewModel(array(
             'albums' => $this->getAlbumTable()->fetchAll(),
         ));
@@ -107,5 +107,5 @@ class AlbumController extends AbstractActionController
             $this->albumTable = $sm->get('Album\Model\AlbumTable');
         }
         return $this->albumTable;
-    }    
+    }
 }
