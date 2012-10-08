@@ -13,7 +13,7 @@ class AlbumController extends AbstractActionController
     protected $albumTable;
 
     public function indexAction()
-    {   var_dump($this->getServiceLocator()->get('Configuration'));
+    {           
         return new ViewModel(array(
             'albums' => $this->getAlbumTable()->fetchAll(),
         ));
@@ -27,8 +27,8 @@ class AlbumController extends AbstractActionController
         $request = $this->getRequest();
         if ($request->isPost()) {
             $album = new Album();
-            $form->setInputFilter($album->getInputFilter());
-            $form->setData($request->getPost());
+            $form->setInputFilter($album->getInputFilter())
+                ->setData($request->getPost());
 
             if ($form->isValid()) {
                 $album->exchangeArray($form->getData());
