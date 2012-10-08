@@ -15,7 +15,7 @@ $this->headTitle($title);
     <th>&nbsp;</th>
 </tr>
 <?php foreach($albums as $album) : ?>
-<tr> <?php var_dump($album); ?>
+<tr>
     <td><?php echo $this->escapeHtml($album->getTitle());?></td>
     <td><?php echo $this->escapeHtml($album->getArtist());?></td>    <td>
         <a href="<?php echo $this->url('album',
