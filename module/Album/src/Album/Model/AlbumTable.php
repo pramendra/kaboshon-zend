@@ -40,10 +40,10 @@ class AlbumTable extends AbstractTableGateway {
 
     public function saveAlbum(Album $album) {
         $data = array(
-            'artist' => $album->artist,
-            'title'  => $album->title,
+            'artist' => $album->getArtist(),
+            'title'  => $album->getTitle(),
         );
-        $id      = (int) $album->id;
+        $id      = (int) $album->getId();
         if ($id == 0) {
             $this->insert($data);
         } else {
