@@ -1,31 +1,35 @@
 <?php
+
 namespace Album\Model;
 
 use Zend\Db\Adapter\Adapter;
-use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\AbstractTableGateway;
+use Zend\Db\ResultSet\HydratingResultSet as ResultSet;
+use Zend\Stdlib\Hydrator\ArraySerializable as Hydrator;
 
-class AlbumTable extends AbstractTableGateway
-{
-    protected $table ='album';
+class AlbumTable extends AbstractTableGateway {
 
-    public function __construct(Adapter $adapter)
-    {
+    protected $table = 'album';
+
+    public function __construct(Adapter $adapter) {
         $this->adapter = $adapter;
-        $this->resultSetPrototype = new ResultSet();
-        $this->resultSetPrototype->setArrayObjectPrototype(new Album());
+
+        $resultSet = new ResultSet(
+                        new Hydrator,
+                        new Album
+        );
+
+        $this->resultSetPrototype = $resultSet;
         $this->initialize();
     }
 
-    public function fetchAll()
-    {
+    public function fetchAll() {
         $resultSet = $this->select();
         return $resultSet;
     }
 
-    public function getAlbum($id)
-    {
-        $id  = (int) $id;
+    public function getAlbum($id) {
+        $id     = (int) $id;
         $rowset = $this->select(array('id' => $id));
         $row = $rowset->current();
         if (!$row) {
@@ -34,13 +38,12 @@ class AlbumTable extends AbstractTableGateway
         return $row;
     }
 
-    public function saveAlbum(Album $album)
-    {
+    public function saveAlbum(Album $album) {
         $data = array(
             'artist' => $album->artist,
             'title'  => $album->title,
         );
-        $id = (int)$album->id;
+        $id      = (int) $album->id;
         if ($id == 0) {
             $this->insert($data);
         } else {
@@ -52,8 +55,8 @@ class AlbumTable extends AbstractTableGateway
         }
     }
 
-    public function deleteAlbum($id)
-    {
+    public function deleteAlbum($id) {
         $this->delete(array('id' => $id));
     }
+
 }

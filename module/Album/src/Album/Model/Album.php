@@ -6,11 +6,11 @@ use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 
-class Album
+class Album extends \Abstracts\Model
 {
-    public $id;
-    public $artist;
-    public $title;
+    protected $id;
+    protected $artist;
+    protected $title;
     protected $inputFilter;
 
     public function exchangeArray($data)
@@ -81,10 +81,5 @@ class Album
         }
 
        return $this->inputFilter;
-    }
-
-    public function getArrayCopy()
-    {
-        return get_object_vars($this);
-    }
+    }    
 }

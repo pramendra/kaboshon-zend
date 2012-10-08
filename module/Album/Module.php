@@ -4,6 +4,8 @@ namespace Album;
 
 use Zend\Db\Adapter\Adapter as Adapter;
 use Album\Model\AlbumTable;
+use Zend\Stdlib\Hydrator\ClassMethods;
+use Zend\Db\ResultSet\HydratingResultSet;
 
 class Module {
 
@@ -30,7 +32,7 @@ class Module {
                     $dbParams['password'] = $config['password_training'];
                     $dbParams['dsn']      = $config['dsn_training'];                    
                     $dbAdapter            = new Adapter($dbParams);
-                    $table                = new AlbumTable($dbAdapter);
+                    $table                = new AlbumTable($dbAdapter);                    
                     return $table;
                 },
             ),
