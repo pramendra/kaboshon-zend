@@ -2,7 +2,7 @@
 
 namespace Album\Model;
 
-class Bug extends \Abstracts\Model
+class Bug extends \Abstracts\Entity
 {
     protected $id;
     protected $engineerId;
@@ -10,5 +10,5 @@ class Bug extends \Abstracts\Model
     protected $description;
     protected $created;
     protected $status;
-    
+
 }

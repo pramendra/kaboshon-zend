@@ -2,13 +2,10 @@
 
 namespace Album\Model;
 
-/**
- * Description of BugTable
- *
- * @author Alexandr Generalov <ruderudebastrad at gmail.com>
- */
-class BugTable
+use Zend\Db\TableGateway\AbstractTableGateway;
+
+class BugTable extends AbstractTableGateway
 {
-    //put your code here
+    protected $table = 'bugs';
 }
 

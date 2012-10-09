@@ -6,29 +6,29 @@ use Zend\InputFilter\Factory as InputFactory;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterInterface;
 
-class Album extends \Abstracts\Model
+class Album extends \Abstracts\Entity
 {
     /**
      * Album row PK
-     * @var int 
+     * @var int
      */
     protected $id;
 
     /**
      *  Album artist name
-     * @var string 
+     * @var string
      */
     protected $artist;
 
     /**
-     * Album artist 
-     * @var string 
+     * Album artist
+     * @var string
      */
     protected $title;
 
     /**
-     * Input filter for this class 
-     * @var InputFilterInterface 
+     * Input filter for this class
+     * @var InputFilterInterface
      */
     protected $inputFilter;
 

@@ -2,13 +2,12 @@
 
 namespace Album\Model;
 
-/**
- * Description of ProductTable
- *
- * @author Alexandr Generalov <ruderudebastrad at gmail.com>
- */
-class ProductTable
+use Zend\Db\TableGateway\AbstractTableGateway;
+
+class ProductTable extends AbstractTableGateway
 {
-    //put your code here
+    protected $table = 'products';
+
+
 }
 
