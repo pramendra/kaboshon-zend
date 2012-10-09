@@ -7,11 +7,13 @@ use Zend\Db\TableGateway\AbstractTableGateway;
 use Zend\Db\ResultSet\HydratingResultSet as ResultSet;
 use Zend\Stdlib\Hydrator\ArraySerializable as Hydrator;
 
-class AlbumTable extends AbstractTableGateway {
+class AlbumTable extends AbstractTableGateway
+{
 
     protected $table = 'album';
 
-    public function __construct(Adapter $adapter) {
+    public function __construct(Adapter $adapter)
+    {
         $this->adapter = $adapter;
 
         $resultSet = new ResultSet(
@@ -23,12 +25,14 @@ class AlbumTable extends AbstractTableGateway {
         $this->initialize();
     }
 
-    public function fetchAll() {
+    public function fetchAll()
+    {
         $resultSet = $this->select();
         return $resultSet;
     }
 
-    public function getAlbum($id) {
+    public function getAlbum($id)
+    {
         $id     = (int) $id;
         $rowset = $this->select(array('id' => $id));
         $row = $rowset->current();
@@ -38,12 +42,11 @@ class AlbumTable extends AbstractTableGateway {
         return $row;
     }
 
-    public function saveAlbum(Album $album) {
-        $data = array(
-            'artist' => $album->getArtist(),
-            'title'  => $album->getTitle(),
-        );
-        $id      = (int) $album->getId();
+    public function saveAlbum(Album $album)
+    {
+        $id   = (int) $album->getId();
+        $data = $album->getdata();        
+        
         if ($id == 0) {
             $this->insert($data);
         } else {
@@ -55,7 +58,8 @@ class AlbumTable extends AbstractTableGateway {
         }
     }
 
-    public function deleteAlbum($id) {
+    public function deleteAlbum($id)
+    {
         $this->delete(array('id' => $id));
     }
 

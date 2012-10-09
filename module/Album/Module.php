@@ -2,12 +2,16 @@
 
 namespace Album;
 
-use Zend\Db\Adapter\Adapter as Adapter;
 use Album\Model\AlbumTable;
+use Album\Model\ProductTable;
+use Album\Model\BugTable;
+use Album\Model\UserTable;
 
-class Module {
+class Module
+{
 
-    public function getAutoloaderConfig() {
+    public function getAutoloaderConfig()
+    {
         return array(
             'Zend\Loader\ClassMapAutoloader' => array(
                 __DIR__ . '/autoload_classmap.php',
@@ -20,24 +24,34 @@ class Module {
         );
     }
 
-    public function getServiceConfig() {
+    public function getServiceConfig()
+    {
         return array(
-            'factories' => array(
-                'Album\Model\AlbumTable' => function($sm) {
-                    $config               = $sm->get('Configuration');
-                    $dbParams             = $config['db'];
-                    $dbParams['username'] = $config['username_training'];
-                    $dbParams['password'] = $config['password_training'];
-                    $dbParams['dsn']      = $config['dsn_training'];
-                    $dbAdapter            = new Adapter($dbParams);
-                    $table                = new AlbumTable($dbAdapter);
-                    return $table;
+            'aliases' => array(
+                'Album\Model\AlbumTable'   => 'AlbumTable',
+                'Album\Model\ProductTable' => 'ProductTable',
+                'Album\Model\UserTable'    => 'UserTable',
+                'Album\Model\BugTable'     => 'BugTable',
+            ),
+            'factories'=> array(
+                'AlbumTable' => function($sm) {
+                    return new AlbumTable($sm->get('TestDbAdapter'));
+                },
+                'ProductTable' => function ($sm) {
+                    return new ProductTable($sm->get('TestDbAdapter'));
+                },
+                'UserTable' => function ($sm) {
+                    return new UserTable($sm->get('TestDbAdapter'));
+                },
+                'BugTable' => function ($sm) {
+                    return new BugTable($sm->get('TestDbAdapter'));
                 },
             ),
         );
     }
 
-    public function getConfig() {
+    public function getConfig()
+    {
         return include __DIR__ . '/config/module.config.php';
     }
 

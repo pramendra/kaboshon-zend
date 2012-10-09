@@ -11,9 +11,13 @@ use Album\Model\Album,
 class AlbumController extends AbstractActionController
 {
     protected $albumTable;
-
+    protected $bugTable;
+    protected $userTable;
+    protected $productTable;
+    protected $sm;
+   
     public function indexAction()
-    {           
+    {            
         return new ViewModel(array(
             'albums' => $this->getAlbumTable()->fetchAll(),
         ));
@@ -99,13 +103,39 @@ class AlbumController extends AbstractActionController
             'album' => $this->getAlbumTable()->getAlbum($id)
         );
     }
-
+    
     public function getAlbumTable()
     {
-        if (!$this->albumTable) {
-            $sm = $this->getServiceLocator();
-            $this->albumTable = $sm->get('Album\Model\AlbumTable');
-        }
+        if (!$this->albumTable)            
+            $this->albumTable = $this->sm()->get('AlbumTable');        
         return $this->albumTable;
     }
+    
+    public function getProductTable()
+    {
+        if (!$this->productTable)            
+            $this->productTable = $this->sm()->get('ProductTable');        
+        return $this->productTable;
+    }
+    
+    public function getUserTable()
+    {
+        if (!$this->userTable)             
+            $this->userTable = $this->sm()->get('UserTable');        
+        return $this->userTable;
+    }
+    
+    public function getBugTable()
+    {
+        if (!$this->bugTable) 
+            $this->bugTable = $this->sm()->get('BugTable');        
+        return $this->bugTable;
+    }
+    
+    public function sm()
+    {       
+        if (!$this->sm)
+            $this->sm = $this->getServiceLocator();
+        return $this->sm;
+    }    
 }

@@ -1,32 +1,44 @@
 <?php
+
 return array(
     'controllers' => array(
         'invokables' => array(
             'Album\Controller\Album' => 'Album\Controller\AlbumController',
         ),
     ),
-
     // The following section is new and should be added to your file
-    'router' => array(
+    'router'                 => array(
         'routes' => array(
             'album' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => '/album[/:action][/:id]',
+                    'route'       => '/album[/:action][/:id]',
                     'constraints' => array(
-                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'id'     => '[0-9]+',
+                        'action'   => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'       => '[0-9]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'Album\Controller\Album',
-                        'action'     => 'index',
+                        'controller'      => 'Album\Controller\Album',
+                        'action'          => 'index',
                     ),
                 ),
             ),
         ),
     ),
-
-    'view_manager' => array(
+    'service_manager' => array(
+        'factories' => array(
+            'TestDbAdapter' => function ($sm) {
+                $config               = $sm->get('Configuration');
+                $dbParams             = $config['db'];
+                $dbParams['username'] = $config['username_training'];
+                $dbParams['password'] = $config['password_training'];
+                $dbParams['dsn']      = $config['dsn_training'];
+                $dbAdapter            = new Zend\Db\Adapter\Adapter($dbParams);
+                return $dbAdapter;
+            },
+        ),
+    ),
+    'view_manager'        => array(
         'template_path_stack' => array(
             'album' => __DIR__ . '/../view',
         ),
