@@ -15,9 +15,10 @@ class AlbumController extends AbstractActionController
     protected $userTable;
     protected $productTable;
     protected $sm;
-   
+
     public function indexAction()
-    {            
+    {
+        var_dump($this->getBugTable()->select());
         return new ViewModel(array(
             'albums' => $this->getAlbumTable()->fetchAll(),
         ));
@@ -103,39 +104,39 @@ class AlbumController extends AbstractActionController
             'album' => $this->getAlbumTable()->getAlbum($id)
         );
     }
-    
+
     public function getAlbumTable()
     {
-        if (!$this->albumTable)            
-            $this->albumTable = $this->sm()->get('AlbumTable');        
+        if (!$this->albumTable)
+            $this->albumTable = $this->sm()->get('AlbumTable');
         return $this->albumTable;
     }
-    
+
     public function getProductTable()
     {
-        if (!$this->productTable)            
-            $this->productTable = $this->sm()->get('ProductTable');        
+        if (!$this->productTable)
+            $this->productTable = $this->sm()->get('ProductTable');
         return $this->productTable;
     }
-    
+
     public function getUserTable()
     {
-        if (!$this->userTable)             
-            $this->userTable = $this->sm()->get('UserTable');        
+        if (!$this->userTable)
+            $this->userTable = $this->sm()->get('UserTable');
         return $this->userTable;
     }
-    
+
     public function getBugTable()
     {
-        if (!$this->bugTable) 
-            $this->bugTable = $this->sm()->get('BugTable');        
+        if (!$this->bugTable)
+            $this->bugTable = $this->sm()->get('BugTable');
         return $this->bugTable;
     }
-    
+
     public function sm()
-    {       
+    {
         if (!$this->sm)
             $this->sm = $this->getServiceLocator();
         return $this->sm;
-    }    
+    }
 }
