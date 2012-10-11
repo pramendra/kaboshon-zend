@@ -5,8 +5,10 @@ return array(
         'Album',
         'Cart',
         'Catalog',
-        'Checkout',
+        'Checkout',        
         'Profile',
+        'DoctrineModule',
+        'DoctrineORMModule',
     ),
     'module_listener_options' => array(
         'config_glob_paths'    => array(

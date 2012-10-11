@@ -91,13 +91,20 @@ class Entity
     /**
      * Init entity fields from array
      * @param array $data
+     * return $this
      */
-    public function exchangeArray($data)
+    public function exchangeArray($data = array())
     {
         $caller = get_called_class();
         foreach ($data as $key => $value) {
             if (property_exists($caller, $key))
                 $this->$key = $value;
         }
+        return $this;
+    }
+    
+    public function populate($data)
+    {
+        return $this->exchangeArray($data);
     }
 }
