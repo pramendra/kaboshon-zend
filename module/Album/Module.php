@@ -47,6 +47,7 @@ class Module
                     return new BugTable($sm->get('TestDbAdapter'));
                 },
             ),
+                    
         );
     }
 
