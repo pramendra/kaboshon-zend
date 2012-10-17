@@ -18,7 +18,7 @@ class AlbumTable extends AbstractTableGateway
 
         $resultSet = new ResultSet(
                         new Hydrator,
-                        new Album
+                        new Entity\Album
         );
 
         $this->resultSetPrototype = $resultSet;
@@ -45,8 +45,8 @@ class AlbumTable extends AbstractTableGateway
     public function saveAlbum(Album $album)
     {
         $id   = (int) $album->getId();
-        $data = $album->getdata();        
-        
+        $data = $album->getdata();
+
         if ($id == 0) {
             $this->insert($data);
         } else {

@@ -7,6 +7,7 @@ use Zend\Db\TableGateway\AbstractTableGateway;
 use Zend\Db\ResultSet\HydratingResultSet as ResultSet;
 use Zend\Stdlib\Hydrator\ArraySerializable as Hydrator;
 
+
 /**
  * Description of UserTable
  *
@@ -22,7 +23,7 @@ class UserTable extends AbstractTableGateway
 
         $resultSet = new ResultSet(
                         new Hydrator,
-                        new User
+                        new Entiy\User
         );
 
         $this->resultSetPrototype = $resultSet;

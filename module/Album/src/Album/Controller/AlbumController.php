@@ -47,8 +47,8 @@ class AlbumController extends AbstractActionController
     public function editAction()
     {
         $id = (int) $this->getEvent()->getRouteMatch()->getParam('id');
-        if (!$id) 
-            return $this->redirect()->toRoute('album', array('action' => 'add'));        
+        if (!$id)
+            return $this->redirect()->toRoute('album', array('action' => 'add'));
 
         $album = $this->em()->find('Album\Entity\Album', $id);
         $form  = new AlbumForm();
@@ -103,15 +103,21 @@ class AlbumController extends AbstractActionController
         );
     }
 
-    public function em()
+    public function testAction()
+    {                
+        $product = $this->em()->getRepository('Album\Entity\Product')->findByName('test1');        
+        return false;
+    }
+
+    protected function em()
     {
         if (null === $this->em) {
             $this->em = $this->sm()->get('Doctrine\ORM\EntityManager');
         }
         return $this->em;
     }
-    
-    public function sm()
+
+    protected function sm()
     {
         if (!$this->sm)
             $this->sm = $this->getServiceLocator();

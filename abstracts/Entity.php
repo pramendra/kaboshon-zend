@@ -4,12 +4,13 @@ namespace Abstracts;
 
 class Entity
 {
-
+    
+    private $caller;
+    
     public function __construct($data = null) {
-
+                
         if (is_array($data))
             $this->exchangeArray($data);
-
     }
 
     /**
@@ -22,7 +23,6 @@ class Entity
     public function __call($name, $arguments)
     {
         switch (substr($name, 0, 3)) {
-
             case 'get':
                 return $this->getter($name);
             break;
@@ -31,7 +31,7 @@ class Entity
                 if (!isset($arguments[0]))
                      throw new \RuntimeException('Missed property value');
 
-                if ($this->setter($name, $arguments[0]) === null)
+                if (!$this->setter($name, $arguments[0]) === null)
                     throw new \RuntimeException('Property not exist');
 
                 return $this;
@@ -48,7 +48,7 @@ class Entity
     private function getter($method)
     {
         $name = $this->getPropertyName($method);
-        return isset($this->$name)? $this->$name: null;
+        return $this->propertyExists( $name)? $this->$name: null;
     }
 
     /**
@@ -60,7 +60,7 @@ class Entity
     private function setter($method, $value)
     {
         $name = $this->getPropertyName($method);
-        if (isset($this->$name))
+        if ($this->propertyExists( $name))
             return $this->$name = $value;
         else
             return null;
@@ -94,17 +94,27 @@ class Entity
      * return $this
      */
     public function exchangeArray($data = array())
-    {
-        $caller = get_called_class();
+    {        
         foreach ($data as $key => $value) {
-            if (property_exists($caller, $key))
+            if ($this->propertyExists( $key))
                 $this->$key = $value;
         }
         return $this;
     }
     
-    public function populate($data)
+    /**
+     * Alias for $this->exchangeArray   
+     */
+    public function populate($data = array())
     {
         return $this->exchangeArray($data);
     }
+    
+    private function propertyExists($property)
+    {
+        if (!$this->caller)
+            $this->caller = get_called_class();
+        
+        return property_exists($this->caller, $property);
+    }        
 }

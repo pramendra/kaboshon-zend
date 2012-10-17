@@ -7,6 +7,7 @@ use Zend\Db\TableGateway\AbstractTableGateway;
 use Zend\Db\ResultSet\HydratingResultSet as ResultSet;
 use Zend\Stdlib\Hydrator\ArraySerializable as Hydrator;
 use Zend\Db\Sql\Select;
+use Album\Entity;
 
 class BugTable extends AbstractTableGateway
 {
@@ -19,7 +20,7 @@ class BugTable extends AbstractTableGateway
 
         $resultSet = new ResultSet(
                         new Hydrator,
-                        new Bug
+                        new Entity\Bug
         );
 
         $this->resultSetPrototype = $resultSet;
