@@ -53,8 +53,8 @@ return array(
                     __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
                 ),
 
-            )
-        ),
+            )            
+        ),        
     ),
     'view_manager'            => array(
         'template_path_stack' => array(

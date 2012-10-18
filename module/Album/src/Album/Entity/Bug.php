@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * @ORM\Entity
  * @ORM\Table(name="bugs")
+ * @ORM\repositoryClass="Repository\BugRepository"
  **/
 class Bug extends \Abstracts\Entity
 {
