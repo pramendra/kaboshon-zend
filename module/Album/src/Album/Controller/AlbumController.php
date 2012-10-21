@@ -105,8 +105,8 @@ class AlbumController extends AbstractActionController
 
     public function testAction()
     {                
-        $product = $this->em()->getRepository('Album\Entity\Bug')->getRecentBugs('test1');        
-        return false;
+        $data = $this->em()->getRepository('Album\Entity\Bug')->getOpenBugsByProduct();           
+        return array('data' => $data);
     }
 
     protected function em()

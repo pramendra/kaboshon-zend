@@ -6,9 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Album\Repository\BugRepository")
  * @ORM\Table(name="bugs")
- * @ORM\repositoryClass="Repository\BugRepository"
  **/
 class Bug extends \Abstracts\Entity
 {
