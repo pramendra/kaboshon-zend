@@ -9,13 +9,13 @@ return array(
     // The following section is new and should be added to your file
     'router'                 => array(
         'routes' => array(
-            'album' => array(
+            'catalog' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'       => '/album[/:action][/:id]',
+                    'route'       => '/[:controller[/:action]]',                  
                     'constraints' => array(
-                        'action'   => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'id'       => '[0-9]+',
+                        'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
                     ),
                     'defaults' => array(
                         'controller'      => 'Catalog\Controller\Catalog',

@@ -55,8 +55,17 @@
 			"file": "module/Catalog/config/module.config.php",
 			"settings":
 			{
-				"buffer_size": 1639,
+				"buffer_size": 1681,
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "module/Catalog/src/Catalog/Controller/CatalogController.php",
+			"settings":
+			{
+				"buffer_size": 6,
+				"line_ending": "Windows",
+				"name": "<?php"
 			}
 		}
 	],
@@ -140,6 +149,7 @@
 	},
 	"file_history":
 	[
+		"/C/Users/gerich/AppData/Roaming/Sublime Text 2/Packages/Alignment/Default (Windows).sublime-keymap",
 		"/F/htdocs/kaboshon-zend/module/Album/config/module.config.php",
 		"/F/htdocs/kaboshon-zend/module/Catalog/config/module.config.php",
 		"/F/htdocs/kaboshon-zend/module/Album/src/Album/Entity/Bug.php",
@@ -156,7 +166,6 @@
 		"/F/htdocs/kaboshon-zend/.gitignore",
 		"/F/htdocs/kaboshon-zend/abstract/Model.php",
 		"/F/htdocs/kaboshon-zend/config/autoload/local.php",
-		"/C/Users/gerich/AppData/Roaming/Sublime Text 2/Packages/Alignment/Default (Windows).sublime-keymap",
 		"/F/htdocs/kaboshon-zend/module/Application/Module.php",
 		"/F/htdocs/kaboshon-zend/public/index.php",
 		"/F/htdocs/kaboshon-zend/init_autoloader.php",
@@ -284,7 +293,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -524,15 +533,15 @@
 					"file": "module/Catalog/config/module.config.php",
 					"settings":
 					{
-						"buffer_size": 1639,
+						"buffer_size": 1681,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1570,
-								1570
+								974,
+								974
 							]
 						],
 						"settings":
@@ -625,10 +634,39 @@
 								"Ruby on Rails": "ruby"
 							},
 							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "module/Catalog/src/Catalog/Controller/CatalogController.php",
+					"settings":
+					{
+						"buffer_size": 6,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6,
+								6
+							]
+						],
+						"settings":
+						{
+							"auto_name": "<?php",
 							"syntax": "Packages/PHP/PHP.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 228.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
