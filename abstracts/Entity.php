@@ -4,11 +4,11 @@ namespace Abstracts;
 
 class Entity
 {
-    
+
     private $caller;
-    
+
     public function __construct($data = null) {
-                
+
         if (is_array($data))
             $this->exchangeArray($data);
     }
@@ -91,30 +91,30 @@ class Entity
     /**
      * Init entity fields from array
      * @param array $data
-     * return $this
+     * @return $this
      */
     public function exchangeArray($data = array())
-    {        
+    {
         foreach ($data as $key => $value) {
             if ($this->propertyExists( $key))
                 $this->$key = $value;
         }
         return $this;
     }
-    
+
     /**
-     * Alias for $this->exchangeArray   
+     * Alias for $this->exchangeArray
      */
     public function populate($data = array())
     {
         return $this->exchangeArray($data);
     }
-    
+
     private function propertyExists($property)
     {
         if (!$this->caller)
             $this->caller = get_called_class();
-        
+
         return property_exists($this->caller, $property);
-    }        
+    }
 }

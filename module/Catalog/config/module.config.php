@@ -12,7 +12,7 @@ return array(
             'catalog' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'       => '/[:controller[/:action]]',                  
+                    'route'       => 'catalog/[:controller[/:action]]',
                     'constraints' => array(
                         'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
@@ -36,9 +36,9 @@ return array(
             'orm_default' => array(
                 'drivers' => array(
                     __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
-                ),                
-            ),                
-        ),        
+                ),
+            ),
+        ),
     ),
     'view_manager'            => array(
         'template_path_stack' => array(

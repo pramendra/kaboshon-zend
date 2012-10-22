@@ -2,16 +2,12 @@
 
 namespace Album\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController,
-    Zend\View\Model\ViewModel,
+use Zend\View\Model\ViewModel,
     Album\Entity\Album,
     Album\Form\AlbumForm;
 
-class AlbumController extends AbstractActionController
+class AlbumController extends \Abstracts\ActionController
 {
-
-    protected $sm;
-    protected $em;
 
     public function indexAction()
     {
@@ -104,24 +100,8 @@ class AlbumController extends AbstractActionController
     }
 
     public function testAction()
-    {                
-        $data = $this->em()->getRepository('Album\Entity\Bug')->getOpenBugsByProduct();           
+    {
+        $data = $this->em()->getRepository('Album\Entity\Bug')->getOpenBugsByProduct();
         return array('data' => $data);
     }
-
-    protected function em()
-    {
-        if (null === $this->em) {
-            $this->em = $this->sm()->get('Doctrine\ORM\EntityManager');
-        }
-        return $this->em;
-    }
-
-    protected function sm()
-    {
-        if (!$this->sm)
-            $this->sm = $this->getServiceLocator();
-        return $this->sm;
-    }
-
 }
