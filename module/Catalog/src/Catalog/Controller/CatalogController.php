@@ -18,6 +18,6 @@ class CatalogController extends \Abstracts\ActionController
 
     public function categoryAction()
     {
-             
+        
     }
 }
