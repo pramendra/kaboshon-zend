@@ -40,12 +40,25 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span2"> 
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+                <li class="nav-header">Sidebar</li>
+                <li class="active"><a href="#">Link</a></li>
+                <li><a href="#">Link</a></li>     
+            </ul>
+          </div>  
+        </div>
 
-      <?php echo $this->content; ?>
-
+        <div class="span10">
+          <div class="hero-unit">
+            <?php echo $this->content; ?>
+          </div>
+        </div>
+      </div>
       <hr>
-
       <footer>
         <p>&copy; 2005 - 2012 by Zend Technologies Ltd. <?php echo $this->translate('All rights reserved.') ?></p>
       </footer>

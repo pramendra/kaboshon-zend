@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"zend",
+				"zend-training"
+			],
+			[
+				"arra",
+				"array"
+			],
+			[
+				"d",
+				"div>  (element)"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
 				"A",
 				"Album  (namespace)"
 			],
@@ -14,10 +30,6 @@
 			[
 				"a",
 				"Album  (namespace)"
-			],
-			[
-				"arra",
-				"array	$… = array (…)"
 			],
 			[
 				"reque",
@@ -35,46 +47,17 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "config/autoload/local.php",
-			"settings":
-			{
-				"buffer_size": 1174,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "module/Catalog/Module.php",
-			"settings":
-			{
-				"buffer_size": 558,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "module/Catalog/config/module.config.php",
-			"settings":
-			{
-				"buffer_size": 1681,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "module/Catalog/src/Catalog/Controller/CatalogController.php",
-			"settings":
-			{
-				"buffer_size": 36,
-				"line_ending": "Windows",
-				"name": "<?php"
-			}
-		}
 	],
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 311.0,
+		"height": 81.0,
 		"selected_items":
 		[
+			[
+				"Package Control: in",
+				"Package Control: Install Package"
+			],
 			[
 				"Package Control: ",
 				"Package Control: List Packages"
@@ -149,14 +132,44 @@
 	},
 	"file_history":
 	[
+		"/F/htdocs/kaboshon-zend/module/Album/Module.php",
+		"/F/htdocs/kaboshon-zend/module/Album/src/Album/Controller/AlbumController.php",
+		"/F/htdocs/kaboshon-zend/config/autoload/local.php",
+		"/F/htdocs/kaboshon-zend/init_autoloader.php",
+		"/F/htdocs/kaboshon-zend/config/application.config.php",
+		"/F/htdocs/kaboshon-zend/module/Abstracts/Module.php",
+		"/F/htdocs/kaboshon-zend/module/Abstracts/autoload_classmap.php",
+		"/F/htdocs/kaboshon-zend/module/Application/config/module.config.php",
+		"/F/htdocs/kaboshon-zend/module/Admin/Module.php",
+		"/F/htdocs/kaboshon-zend/abstracts/Module.php",
+		"/F/htdocs/kaboshon-zend/module/Catalog/src/Catalog/Controller/CatalogController.php",
+		"/F/htdocs/kaboshon-zend/module/Catalog/src/Catalog/Controller/AdminCatalogController.php",
+		"/F/htdocs/kaboshon-zend/module/Catalog/config/module.config.php",
+		"/F/htdocs/kaboshon-zend/module/Catalog/Module.php",
+		"/F/htdocs/kaboshon-zend/vendor/zendframework/zendframework/library/Zend/Mvc/MvcEvent.php",
+		"/F/htdocs/kaboshon-zend/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php",
+		"/F/htdocs/kaboshon-zend/vendor/zendframework/zendframework/library/Zend/Mvc/Application.php",
+		"/F/htdocs/kaboshon-zend/vendor/zendframework/zendframework/library/Zend/EventManager/EventManagerInterface.php",
+		"/F/htdocs/kaboshon-zend/vendor/zendframework/zendframework/library/Zend/Mvc/Controller/AbstractActionController.php",
+		"/F/htdocs/kaboshon-zend/vendor/zendframework/zendframework/library/Zend/MVC/Controller/AbstractController.php",
+		"/F/htdocs/kaboshon-zend/vendor/zendframework/zendframework/library/Zend/Mvc/Controller/PluginManager.php",
+		"/F/htdocs/kaboshon-zend/vendor/zendframework/zendframework/library/Zend/Mvc/Controller/Plugin/Params.php",
+		"/F/htdocs/kaboshon-zend/vendor/zendframework/zendframework/library/Zend/View/Helper/Placeholder.php",
+		"/F/htdocs/kaboshon-zend/vendor/zendframework/zendframework/library/Zend/Mvc/Service/ControllerLoaderFactory.php",
+		"/F/htdocs/kaboshon-zend/vendor/zendframework/zendframework/library/Zend/Mvc/Service/ServiceManagerConfig.php",
+		"/F/htdocs/kaboshon-zend/vendor/zendframework/zendframework/library/Zend/ModuleManager/Listener/ServiceListener.php",
+		"/F/htdocs/kaboshon-zend/module/Application/view/layout/layout.phtml",
+		"/F/htdocs/kaboshon-zend/module/Application/view/layout/admin.phtml",
+		"/F/htdocs/kaboshon-zend/public/css/style.css",
+		"/F/htdocs/kaboshon-zend/module/Catalog/view/catalog/catalog/model.php",
+		"/F/htdocs/kaboshon-zend/module/Catalog/view/catalog/catalog/category.phtml",
+		"/F/htdocs/kaboshon-zend/module/Catalog/view/catalog/catalog/model_preview.phtml",
+		"/F/htdocs/kaboshon-zend/abstracts/ActionController.php",
+		"/F/htdocs/kaboshon-zend/abstracts/Entity.php",
 		"/C/Users/gerich/AppData/Roaming/Sublime Text 2/Packages/Alignment/Default (Windows).sublime-keymap",
 		"/F/htdocs/kaboshon-zend/module/Album/config/module.config.php",
-		"/F/htdocs/kaboshon-zend/module/Catalog/config/module.config.php",
 		"/F/htdocs/kaboshon-zend/module/Album/src/Album/Entity/Bug.php",
 		"/F/htdocs/kaboshon-zend/module/Album/view/album/album/test.phtml",
-		"/F/htdocs/kaboshon-zend/module/Album/src/Album/Controller/AlbumController.php",
-		"/F/htdocs/kaboshon-zend/module/Album/Module.php",
-		"/F/htdocs/kaboshon-zend/module/Catalog/Module.php",
 		"/F/htdocs/kaboshon-zend/module/Album/src/Album/Repository/BugRepository.php",
 		"/F/htdocs/kaboshon-zend/.codeintel/config",
 		"/F/htdocs/kaboshon-zend/vendor/doctrine/orm/lib/Doctrine/ORM/EntityRepository.php",
@@ -165,15 +178,11 @@
 		"/F/htdocs/kaboshon-zend/config/autoload/global.php",
 		"/F/htdocs/kaboshon-zend/.gitignore",
 		"/F/htdocs/kaboshon-zend/abstract/Model.php",
-		"/F/htdocs/kaboshon-zend/config/autoload/local.php",
 		"/F/htdocs/kaboshon-zend/module/Application/Module.php",
 		"/F/htdocs/kaboshon-zend/public/index.php",
-		"/F/htdocs/kaboshon-zend/init_autoloader.php",
 		"/F/htdocs/kaboshon-zend/public/.htaccess",
 		"/F/htdocs/kaboshon-zend/include/BasicModule.php",
-		"/F/htdocs/kaboshon-zend/config/application.config.php",
 		"/F/htdocs/kaboshon-zend/config/autoload/BasicModule.php",
-		"/F/htdocs/kaboshon-zend/module/Application/config/module.config.php",
 		"/F/htdocs/kaboshon-zend/config/autoload/README.md",
 		"/F/htdocs/kaboshon-zend/module/Catalog/autoload_classmap.php",
 		"/F/htdocs/kaboshon-zend/vendor/zendframework/zendframework/library/Zend/View/Model/ViewModel.php",
@@ -255,6 +264,10 @@
 		"height": 0.0,
 		"where_history":
 		[
+			"F:\\htdocs\\kaboshon-zend\\vendor\\zendframework\\zendframework\\library\\Zend\\MVC",
+			"F:\\htdocs\\kaboshon-zend\\vendor\\zendframework\\zendframework\\library\\Zend\\",
+			"F:\\htdocs\\kaboshon-zend\\vendor\\zendframework\\zendframework\\library\\Zend\\MVC",
+			"F:\\htdocs\\kaboshon-zend\\vendor\\zendframework\\zendframework\\library\\Zend",
 			"F:\\htdocs\\cityboots"
 		]
 	},
@@ -263,6 +276,25 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"layout",
+			"att",
+			"getEventManager",
+			"AbstractController",
+			"lay",
+			"AbstractActionController",
+			"controllers",
+			"template",
+			"layouts",
+			"layout",
+			"controllers",
+			" controllers*invokables",
+			"cont",
+			"inv",
+			"con",
+			"contr",
+			"cont",
+			"contro",
+			"invokables",
 			"'/watermark.p",
 			"'/watermark.p'",
 			"'/watermark.php'",
@@ -279,7 +311,7 @@
 		"highlight": true,
 		"in_selection": false,
 		"preserve_case": false,
-		"regex": false,
+		"regex": true,
 		"replace_history":
 		[
 			"'/watermark.png'"
@@ -293,472 +325,8 @@
 	"groups":
 	[
 		{
-			"selected": 3,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "config/autoload/local.php",
-					"settings":
-					{
-						"buffer_size": 1174,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1120,
-								1120
-							]
-						],
-						"settings":
-						{
-							"annotations":
-							[
-								"TODO",
-								"README",
-								"FIXME"
-							],
-							"csslint_options":
-							{
-								"adjoining-classes": "warning",
-								"box-model": true,
-								"box-sizing": "warning",
-								"compatible-vendor-prefixes": "warning",
-								"display-property-grouping": true,
-								"duplicate-background-images": "warning",
-								"duplicate-properties": true,
-								"empty-rules": true,
-								"errors": true,
-								"fallback-colors": "warning",
-								"floats": "warning",
-								"font-faces": "warning",
-								"font-sizes": "warning",
-								"gradients": "warning",
-								"ids": "warning",
-								"import": "warning",
-								"important": "warning",
-								"known-properties": true,
-								"outline-none": "warning",
-								"overqualified-elements": "warning",
-								"qualified-headings": "warning",
-								"regex-selectors": "warning",
-								"rules-count": "warning",
-								"shorthand": "warning",
-								"star-property-hack": "warning",
-								"text-indent": "warning",
-								"underscore-property-hack": "warning",
-								"unique-headings": "warning",
-								"universal-selector": "warning",
-								"vendor-prefix": true,
-								"zero-units": "warning"
-							},
-							"gjslint_ignore":
-							[
-								110
-							],
-							"gjslint_options":
-							[
-							],
-							"javascript_linter": "jshint",
-							"jshint_options":
-							{
-								"browser": true,
-								"evil": true,
-								"regexdash": true,
-								"sub": true,
-								"trailing": true,
-								"wsh": true
-							},
-							"pep8": true,
-							"pep8_ignore":
-							[
-								"E501"
-							],
-							"perl_linter": "perlcritic",
-							"pyflakes_ignore":
-							[
-							],
-							"pyflakes_ignore_import_*": true,
-							"sublimelinter": true,
-							"sublimelinter_delay": 2,
-							"sublimelinter_disable":
-							[
-							],
-							"sublimelinter_executable_map":
-							{
-							},
-							"sublimelinter_fill_outlines": false,
-							"sublimelinter_gutter_marks": false,
-							"sublimelinter_mark_style": "outline",
-							"sublimelinter_notes": false,
-							"sublimelinter_objj_check_ascii": false,
-							"sublimelinter_popup_errors_on_save": false,
-							"sublimelinter_syntax_map":
-							{
-								"C++": "c",
-								"Python Django": "python",
-								"Ruby on Rails": "ruby"
-							},
-							"sublimelinter_wrap_find": true,
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "module/Catalog/Module.php",
-					"settings":
-					{
-						"buffer_size": 558,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								358,
-								358
-							]
-						],
-						"settings":
-						{
-							"annotations":
-							[
-								"TODO",
-								"README",
-								"FIXME"
-							],
-							"csslint_options":
-							{
-								"adjoining-classes": "warning",
-								"box-model": true,
-								"box-sizing": "warning",
-								"compatible-vendor-prefixes": "warning",
-								"display-property-grouping": true,
-								"duplicate-background-images": "warning",
-								"duplicate-properties": true,
-								"empty-rules": true,
-								"errors": true,
-								"fallback-colors": "warning",
-								"floats": "warning",
-								"font-faces": "warning",
-								"font-sizes": "warning",
-								"gradients": "warning",
-								"ids": "warning",
-								"import": "warning",
-								"important": "warning",
-								"known-properties": true,
-								"outline-none": "warning",
-								"overqualified-elements": "warning",
-								"qualified-headings": "warning",
-								"regex-selectors": "warning",
-								"rules-count": "warning",
-								"shorthand": "warning",
-								"star-property-hack": "warning",
-								"text-indent": "warning",
-								"underscore-property-hack": "warning",
-								"unique-headings": "warning",
-								"universal-selector": "warning",
-								"vendor-prefix": true,
-								"zero-units": "warning"
-							},
-							"gjslint_ignore":
-							[
-								110
-							],
-							"gjslint_options":
-							[
-							],
-							"javascript_linter": "jshint",
-							"jshint_options":
-							{
-								"browser": true,
-								"evil": true,
-								"regexdash": true,
-								"sub": true,
-								"trailing": true,
-								"wsh": true
-							},
-							"pep8": true,
-							"pep8_ignore":
-							[
-								"E501"
-							],
-							"perl_linter": "perlcritic",
-							"pyflakes_ignore":
-							[
-							],
-							"pyflakes_ignore_import_*": true,
-							"sublimelinter": true,
-							"sublimelinter_delay": 2,
-							"sublimelinter_disable":
-							[
-							],
-							"sublimelinter_executable_map":
-							{
-							},
-							"sublimelinter_fill_outlines": false,
-							"sublimelinter_gutter_marks": false,
-							"sublimelinter_mark_style": "outline",
-							"sublimelinter_notes": false,
-							"sublimelinter_objj_check_ascii": false,
-							"sublimelinter_popup_errors_on_save": false,
-							"sublimelinter_syntax_map":
-							{
-								"C++": "c",
-								"Python Django": "python",
-								"Ruby on Rails": "ruby"
-							},
-							"sublimelinter_wrap_find": true,
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "module/Catalog/config/module.config.php",
-					"settings":
-					{
-						"buffer_size": 1681,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								974,
-								974
-							]
-						],
-						"settings":
-						{
-							"annotations":
-							[
-								"TODO",
-								"README",
-								"FIXME"
-							],
-							"csslint_options":
-							{
-								"adjoining-classes": "warning",
-								"box-model": true,
-								"box-sizing": "warning",
-								"compatible-vendor-prefixes": "warning",
-								"display-property-grouping": true,
-								"duplicate-background-images": "warning",
-								"duplicate-properties": true,
-								"empty-rules": true,
-								"errors": true,
-								"fallback-colors": "warning",
-								"floats": "warning",
-								"font-faces": "warning",
-								"font-sizes": "warning",
-								"gradients": "warning",
-								"ids": "warning",
-								"import": "warning",
-								"important": "warning",
-								"known-properties": true,
-								"outline-none": "warning",
-								"overqualified-elements": "warning",
-								"qualified-headings": "warning",
-								"regex-selectors": "warning",
-								"rules-count": "warning",
-								"shorthand": "warning",
-								"star-property-hack": "warning",
-								"text-indent": "warning",
-								"underscore-property-hack": "warning",
-								"unique-headings": "warning",
-								"universal-selector": "warning",
-								"vendor-prefix": true,
-								"zero-units": "warning"
-							},
-							"gjslint_ignore":
-							[
-								110
-							],
-							"gjslint_options":
-							[
-							],
-							"javascript_linter": "jshint",
-							"jshint_options":
-							{
-								"browser": true,
-								"evil": true,
-								"regexdash": true,
-								"sub": true,
-								"trailing": true,
-								"wsh": true
-							},
-							"pep8": true,
-							"pep8_ignore":
-							[
-								"E501"
-							],
-							"perl_linter": "perlcritic",
-							"pyflakes_ignore":
-							[
-							],
-							"pyflakes_ignore_import_*": true,
-							"sublimelinter": true,
-							"sublimelinter_delay": 2,
-							"sublimelinter_disable":
-							[
-							],
-							"sublimelinter_executable_map":
-							{
-							},
-							"sublimelinter_fill_outlines": false,
-							"sublimelinter_gutter_marks": false,
-							"sublimelinter_mark_style": "outline",
-							"sublimelinter_notes": false,
-							"sublimelinter_objj_check_ascii": false,
-							"sublimelinter_popup_errors_on_save": false,
-							"sublimelinter_syntax_map":
-							{
-								"C++": "c",
-								"Python Django": "python",
-								"Ruby on Rails": "ruby"
-							},
-							"sublimelinter_wrap_find": true,
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "module/Catalog/src/Catalog/Controller/CatalogController.php",
-					"settings":
-					{
-						"buffer_size": 36,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								25,
-								25
-							]
-						],
-						"settings":
-						{
-							"annotations":
-							[
-								"TODO",
-								"README",
-								"FIXME"
-							],
-							"auto_name": "<?php",
-							"csslint_options":
-							{
-								"adjoining-classes": "warning",
-								"box-model": true,
-								"box-sizing": "warning",
-								"compatible-vendor-prefixes": "warning",
-								"display-property-grouping": true,
-								"duplicate-background-images": "warning",
-								"duplicate-properties": true,
-								"empty-rules": true,
-								"errors": true,
-								"fallback-colors": "warning",
-								"floats": "warning",
-								"font-faces": "warning",
-								"font-sizes": "warning",
-								"gradients": "warning",
-								"ids": "warning",
-								"import": "warning",
-								"important": "warning",
-								"known-properties": true,
-								"outline-none": "warning",
-								"overqualified-elements": "warning",
-								"qualified-headings": "warning",
-								"regex-selectors": "warning",
-								"rules-count": "warning",
-								"shorthand": "warning",
-								"star-property-hack": "warning",
-								"text-indent": "warning",
-								"underscore-property-hack": "warning",
-								"unique-headings": "warning",
-								"universal-selector": "warning",
-								"vendor-prefix": true,
-								"zero-units": "warning"
-							},
-							"gjslint_ignore":
-							[
-								110
-							],
-							"gjslint_options":
-							[
-							],
-							"javascript_linter": "jshint",
-							"jshint_options":
-							{
-								"browser": true,
-								"evil": true,
-								"regexdash": true,
-								"sub": true,
-								"trailing": true,
-								"wsh": true
-							},
-							"pep8": true,
-							"pep8_ignore":
-							[
-								"E501"
-							],
-							"perl_linter": "perlcritic",
-							"pyflakes_ignore":
-							[
-							],
-							"pyflakes_ignore_import_*": true,
-							"sublimelinter": true,
-							"sublimelinter_delay": 2,
-							"sublimelinter_disable":
-							[
-							],
-							"sublimelinter_executable_map":
-							{
-							},
-							"sublimelinter_fill_outlines": false,
-							"sublimelinter_gutter_marks": false,
-							"sublimelinter_mark_style": "outline",
-							"sublimelinter_notes": false,
-							"sublimelinter_objj_check_ascii": false,
-							"sublimelinter_popup_errors_on_save": false,
-							"sublimelinter_syntax_map":
-							{
-								"C++": "c",
-								"Python Django": "python",
-								"Ruby on Rails": "ruby"
-							},
-							"sublimelinter_wrap_find": true,
-							"syntax": "Packages/PHP/PHP.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -803,6 +371,30 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"mvce",
+				"vendor/zendframework/zendframework/library/Zend/Mvc/MvcEvent.php"
+			],
+			[
+				"eventmanager",
+				"vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php"
+			],
+			[
+				"eventmanagerinterface",
+				"vendor/zendframework/zendframework/library/Zend/EventManager/EventManagerInterface.php"
+			],
+			[
+				"mvcevent",
+				"vendor/zendframework/zendframework/library/Zend/Mvc/MvcEvent.php"
+			],
+			[
+				"z/mvc/a",
+				"vendor/zendframework/zendframework/library/Zend/Mvc/Application.php"
+			],
+			[
+				"zend/mvc/a",
+				"vendor/zendframework/zendframework/library/Zend/Mvc/Application.php"
+			],
 			[
 				"a/dele",
 				"module/Album/view/album/album/delete.phtml"

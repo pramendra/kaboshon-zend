@@ -6,6 +6,7 @@ use Album\Model\AlbumTable;
 use Album\Model\ProductTable;
 use Album\Model\BugTable;
 use Album\Model\UserTable;
+use Abstracts;
 
 class Module
 {

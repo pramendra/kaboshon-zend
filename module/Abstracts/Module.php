@@ -1,11 +1,11 @@
 <?php
-namespace Catalog;
 
-use Zend\Mvc\MvcEvent;
+namespace Abstracts;
 
-class Module 
+class Module
 {
-   public function getAutoloaderConfig()
+
+    public function getAutoloaderConfig()
     {
         return array(
             'Zend\Loader\ClassMapAutoloader' => array(
@@ -13,14 +13,9 @@ class Module
             ),
             'Zend\Loader\StandardAutoloader' => array(
                 'namespaces' => array(
-                    __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
+                    __NAMESPACE__ => __DIR__ ,
                 ),
             ),
         );
     }
-
-    public function getConfig()
-    {
-        return include __DIR__ . '/config/module.config.php';
-    }       
 }

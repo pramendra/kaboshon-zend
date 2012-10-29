@@ -2,28 +2,42 @@
 return array(
     'controllers' => array(
         'invokables' => array(
-            'Catalog\Controller\Catalog' => 'Catalog\Controller\CatalogController',
+            'Catalog\Controller\Catalog' => 'Catalog\Controller\CatalogController',            
         ),
     ),
 
     // The following section is new and should be added to your file
     'router'                 => array(
-        'routes' => array(
-            'catalog' => array(
+        'routes' => array(           
+            'category' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'       => 'catalog/[:controller[/:action]]',
+                    'route'       => '/category/:id[-:alias]',
                     'constraints' => array(
-                        'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'    => '[0-9]+',
+                        'alias' => '[a-zA-Z0-9_-]*'
                     ),
                     'defaults' => array(
                         'controller'      => 'Catalog\Controller\Catalog',
-                        'action'          => 'index',
+                        'action'          => 'category',
                     ),
                 ),
             ),
-        ),
+            'model' => array(
+                'type'    => 'segment', 
+                'options' => array(
+                    'route'       => '/model/:id[-:alias]',
+                    'constraints' => array(
+                        'id'    => '[0-9]+',
+                        'alias' => '[a-zA-Z0-9_-]*'
+                    ),
+                    'defaults' => array(
+                        'controller'      => 'Catalog\Controller\Catalog',
+                        'action'          => 'model',
+                    ),
+                ),
+            ),
+        ),        
     ),
     // Doctrine config
     'doctrine'            => array(

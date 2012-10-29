@@ -1,8 +1,11 @@
 <?php
+
 return array(
-    'modules' => array(
-        'Application',
+    'modules' => array(  
+        'Abstracts',
+        'Admin',
         'Album',
+        'Application',        
         'Cart',
         'Catalog',
         'Checkout',        

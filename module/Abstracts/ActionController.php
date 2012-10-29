@@ -2,9 +2,10 @@
 
 namespace Abstracts;
 
-use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Mvc\Controller\AbstractActionController,
+    Zend\View\Model\ViewModel;
 
-class ActionController extends AbstractActionController
+abstract class ActionController extends AbstractActionController
 {
     /**
      * Intstance of service manage, provide access to service layer from this

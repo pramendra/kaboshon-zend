@@ -2,8 +2,9 @@
 
 namespace Catalog\Controller;
 
-class CatalogController extends \Abstracts\ActionController
-{
+class AdminController extends \Abstracts\ActionController
+{   
+
     public function indexAction()
     {
         
@@ -18,6 +19,6 @@ class CatalogController extends \Abstracts\ActionController
 
     public function categoryAction()
     {
-             
+        
     }
 }

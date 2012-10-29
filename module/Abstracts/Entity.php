@@ -2,7 +2,7 @@
 
 namespace Abstracts;
 
-class Entity
+abstract class Entity
 {
 
     private $caller;
