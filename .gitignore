@@ -11,3 +11,4 @@ nbproject
 .codeintel
 composer.lock
 vendor
+tmp
