@@ -14,4 +14,7 @@ return array(
             => 'Zend\Db\Adapter\AdapterServiceFactory',
         ),
     ),
+    'doctrine' => array(
+
+    )
 );
