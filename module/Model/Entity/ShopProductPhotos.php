@@ -1,6 +1,6 @@
 <?php
 
-
+namespace Model\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -10,10 +10,10 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="shop_product_photos")
  * @ORM\Entity
  */
-class ShopProductPhotos
+class ShopProductPhotos extends \Abstracts\Entity
 {
     /**
-     * @var integer $photoId
+     * @var integer
      *
      * @ORM\Column(name="photo_id", type="integer", nullable=false)
      * @ORM\Id
@@ -22,25 +22,28 @@ class ShopProductPhotos
     private $photoId;
 
     /**
-     * @var string $name
+     * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, nullable=true)
      */
     private $name;
 
     /**
-     * @var string $file
+     * @var string
      *
      * @ORM\Column(name="file", type="string", length=255, nullable=false)
      */
     private $file;
 
     /**
-     * @var integer $productId
+     * @var \Model\Entity\ShopProducts
      *
-     * @ORM\Column(name="product_id", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Model\Entity\ShopProducts")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="product_id", referencedColumnName="product_id")
+     * })
      */
-    private $productId;
+    private $product;
 
 
 }

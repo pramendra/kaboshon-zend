@@ -10,10 +10,10 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="shop_groups")
  * @ORM\Entity
  */
-class ShopGroups
+class ShopGroups extends \Abstracts\Entity
 {
     /**
-     * @var integer $groupId
+     * @var integer
      *
      * @ORM\Column(name="group_id", type="integer", nullable=false)
      * @ORM\Id
@@ -22,14 +22,14 @@ class ShopGroups
     private $groupId;
 
     /**
-     * @var string $name
+     * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
     private $name;
 
     /**
-     * @var integer $discount
+     * @var integer
      *
      * @ORM\Column(name="discount", type="integer", nullable=true)
      */

@@ -1,6 +1,6 @@
 <?php
 
-
+namespace Model\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -50,9 +50,9 @@ class ShopUsers extends \Abstracts\Entity
     private $permission;
 
     /**
-     * @var \ShopGroups
+     * @var \Model\Entity\ShopGroups
      *
-     * @ORM\ManyToOne(targetEntity="ShopGroups")
+     * @ORM\ManyToOne(targetEntity="Model\Entity\ShopGroups")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="group_id", referencedColumnName="group_id")
      * })

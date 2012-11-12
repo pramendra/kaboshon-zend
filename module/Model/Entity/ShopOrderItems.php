@@ -1,6 +1,6 @@
 <?php
 
-
+namespace Model\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -10,10 +10,10 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="shop_order_items")
  * @ORM\Entity
  */
-class ShopOrderItems
+class ShopOrderItems extends \Abstracts\Entity
 {
     /**
-     * @var integer $orderItemId
+     * @var integer
      *
      * @ORM\Column(name="order_item_id", type="integer", nullable=false)
      * @ORM\Id
@@ -22,16 +22,16 @@ class ShopOrderItems
     private $orderItemId;
 
     /**
-     * @var integer $quantity
+     * @var integer
      *
      * @ORM\Column(name="quantity", type="integer", nullable=false)
      */
     private $quantity;
 
     /**
-     * @var ShopOrders
+     * @var \Model\Entity\ShopOrders
      *
-     * @ORM\ManyToOne(targetEntity="ShopOrders")
+     * @ORM\ManyToOne(targetEntity="Model\Entity\ShopOrders")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="order_id", referencedColumnName="order_id")
      * })
@@ -39,9 +39,9 @@ class ShopOrderItems
     private $order;
 
     /**
-     * @var ShopProducts
+     * @var \Model\Entity\ShopProducts
      *
-     * @ORM\ManyToOne(targetEntity="ShopProducts")
+     * @ORM\ManyToOne(targetEntity="Model\Entity\ShopProducts")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="product_id", referencedColumnName="product_id")
      * })

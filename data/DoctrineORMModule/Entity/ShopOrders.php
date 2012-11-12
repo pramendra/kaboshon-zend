@@ -10,10 +10,10 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="shop_orders")
  * @ORM\Entity
  */
-class ShopOrders
+class ShopOrders extends \Abstracts\Entity
 {
     /**
-     * @var integer $orderId
+     * @var integer
      *
      * @ORM\Column(name="order_id", type="integer", nullable=false)
      * @ORM\Id
@@ -22,14 +22,14 @@ class ShopOrders
     private $orderId;
 
     /**
-     * @var boolean $status
+     * @var boolean
      *
      * @ORM\Column(name="status", type="boolean", nullable=true)
      */
     private $status;
 
     /**
-     * @var ShopUserInfo
+     * @var \ShopUserInfo
      *
      * @ORM\ManyToOne(targetEntity="ShopUserInfo")
      * @ORM\JoinColumns({

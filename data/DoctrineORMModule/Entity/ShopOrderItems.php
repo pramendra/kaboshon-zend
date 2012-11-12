@@ -10,10 +10,10 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="shop_order_items")
  * @ORM\Entity
  */
-class ShopOrderItems
+class ShopOrderItems extends \Abstracts\Entity
 {
     /**
-     * @var integer $orderItemId
+     * @var integer
      *
      * @ORM\Column(name="order_item_id", type="integer", nullable=false)
      * @ORM\Id
@@ -22,14 +22,14 @@ class ShopOrderItems
     private $orderItemId;
 
     /**
-     * @var integer $quantity
+     * @var integer
      *
      * @ORM\Column(name="quantity", type="integer", nullable=false)
      */
     private $quantity;
 
     /**
-     * @var ShopOrders
+     * @var \ShopOrders
      *
      * @ORM\ManyToOne(targetEntity="ShopOrders")
      * @ORM\JoinColumns({
@@ -39,7 +39,7 @@ class ShopOrderItems
     private $order;
 
     /**
-     * @var ShopProducts
+     * @var \ShopProducts
      *
      * @ORM\ManyToOne(targetEntity="ShopProducts")
      * @ORM\JoinColumns({
