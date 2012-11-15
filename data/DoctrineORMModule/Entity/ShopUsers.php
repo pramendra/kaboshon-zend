@@ -10,10 +10,10 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="shop_users")
  * @ORM\Entity
  */
-class ShopUsers extends \Abstracts\Entity
+class ShopUsers
 {
     /**
-     * @var integer
+     * @var integer $userId
      *
      * @ORM\Column(name="user_id", type="integer", nullable=false)
      * @ORM\Id
@@ -22,35 +22,35 @@ class ShopUsers extends \Abstracts\Entity
     private $userId;
 
     /**
-     * @var string
+     * @var string $login
      *
      * @ORM\Column(name="login", type="string", length=16, nullable=false)
      */
     private $login;
 
     /**
-     * @var string
+     * @var string $password
      *
      * @ORM\Column(name="password", type="string", length=32, nullable=false)
      */
     private $password;
 
     /**
-     * @var string
+     * @var string $email
      *
      * @ORM\Column(name="email", type="string", length=129, nullable=false)
      */
     private $email;
 
     /**
-     * @var string
+     * @var string $permission
      *
      * @ORM\Column(name="permission", type="string", length=20, nullable=true)
      */
     private $permission;
 
     /**
-     * @var \ShopGroups
+     * @var ShopGroups
      *
      * @ORM\ManyToOne(targetEntity="ShopGroups")
      * @ORM\JoinColumns({

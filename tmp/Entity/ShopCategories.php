@@ -1,6 +1,6 @@
 <?php
 
-namespace Model\Entity;
+
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -10,10 +10,10 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="shop_categories")
  * @ORM\Entity
  */
-class ShopCategories extends \Abstracts\Entity
+class ShopCategories
 {
     /**
-     * @var integer
+     * @var integer $categoryId
      *
      * @ORM\Column(name="category_id", type="integer", nullable=false)
      * @ORM\Id
@@ -22,37 +22,37 @@ class ShopCategories extends \Abstracts\Entity
     private $categoryId;
 
     /**
-     * @var string
+     * @var string $name
      *
      * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
     private $name;
 
     /**
-     * @var string
+     * @var string $descr
      *
      * @ORM\Column(name="descr", type="string", length=255, nullable=true)
      */
     private $descr;
 
     /**
-     * @var string
+     * @var string $metaDescr
      *
      * @ORM\Column(name="meta_descr", type="string", length=255, nullable=true)
      */
     private $metaDescr;
 
     /**
-     * @var string
+     * @var string $metaKeywords
      *
      * @ORM\Column(name="meta_keywords", type="string", length=255, nullable=true)
      */
     private $metaKeywords;
 
     /**
-     * @var \Model\Entity\ShopCategories
+     * @var ShopCategories
      *
-     * @ORM\ManyToOne(targetEntity="Model\Entity\ShopCategories")
+     * @ORM\ManyToOne(targetEntity="ShopCategories")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="parent_id", referencedColumnName="category_id")
      * })

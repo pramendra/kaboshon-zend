@@ -1,6 +1,6 @@
 <?php
 
-namespace Model\Entity;
+
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -10,10 +10,10 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="shop_orders_history")
  * @ORM\Entity
  */
-class ShopOrdersHistory extends \Abstracts\Entity
+class ShopOrdersHistory
 {
     /**
-     * @var integer
+     * @var integer $orderId
      *
      * @ORM\Column(name="order_id", type="integer", nullable=false)
      * @ORM\Id
