@@ -5,45 +5,50 @@ namespace Model\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * ShopProductPhotos
+ * Model\Entity\ProductPhoto
  *
  * @ORM\Table(name="shop_product_photos")
  * @ORM\Entity
  */
 class ProductPhoto extends \Abstracts\Entity
 {
+
     /**
-     * @var integer
+     * @var integer $id
      *
-     * @ORM\Column(name="photo_id", type="integer", nullable=false)
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $photoId;
+    protected $id;
 
     /**
-     * @var string
+     * @var string $name
      *
      * @ORM\Column(name="name", type="string", length=255, nullable=true)
      */
-    private $name;
+    protected $name;
 
     /**
-     * @var string
+     * @var string $file
      *
      * @ORM\Column(name="file", type="string", length=255, nullable=false)
      */
-    private $file;
+    protected $file;
+    
+    /**
+     * @var bool $isMain
+     *      
+     * @ORM\Column(name="is_main", type="boolean", nullable=false)
+     */
+    protected $isMain = false;
 
     /**
-     * @var \Model\Entity\ShopProducts
-     *
-     * @ORM\ManyToOne(targetEntity="Model\Entity\ShopProducts")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="product_id", referencedColumnName="product_id")
-     * })
+     * @var Model\Entity\Product
+     *     
+     * @ORM\ManyToOne(targetEntity="Model\Entity\Product", inversedBy="photos")
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="id")         
      */
-    private $product;
-
+    protected $product;
 
 }

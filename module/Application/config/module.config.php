@@ -1,4 +1,7 @@
 <?php
+
+namespace Application;
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,17 +9,16 @@
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 return array(
     'router' => array(
         'routes' => array(
             'home' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'type'    => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
                     'route'    => '/',
                     'defaults' => array(
-                        'controller' => 'Application\Controller\Index',
-                        'action'     => 'index',
+                        'controller'  => 'Application\Controller\Index',
+                        'action'      => 'index',
                     ),
                 ),
             ),
@@ -35,16 +37,16 @@ return array(
                     ),
                 ),
                 'may_terminate' => true,
-                'child_routes' => array(
+                'child_routes'  => array(
                     'default' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '/[:controller[/:action]]',
+                            'route'       => '/[:controller[/:action]]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
                             ),
-                            'defaults' => array(
+                            'defaults'   => array(
                             ),
                         ),
                     ),
@@ -58,12 +60,12 @@ return array(
         ),
     ),
     'translator' => array(
-        'locale' => 'ru_RU',
+        'locale'                    => 'ru_RU',
         'translation_file_patterns' => array(
             array(
-                'type'     => 'gettext',
-                'base_dir' => __DIR__ . '/../language',
-                'pattern'  => '%s.mo',
+                'type'        => 'gettext',
+                'base_dir'    => __DIR__ . '/../language',
+                'pattern'     => '%s.mo',
             ),
         ),
     ),
@@ -72,21 +74,36 @@ return array(
             'Application\Controller\Index' => 'Application\Controller\IndexController'
         ),
     ),
-    'view_manager' => array(
+    'view_manager'                 => array(
         'display_not_found_reason' => true,
         'display_exceptions'       => true,
         'doctype'                  => 'HTML5',
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',
-        'template_map' => array(
-            'layout/admin'           => __DIR__ . '/../view/layout/admin.phtml',
+        'template_map'             => array(
+            'layout/admin'            => __DIR__ . '/../view/layout/admin.phtml',
             'layout/layout'           => __DIR__ . '/../view/layout/client.phtml',
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
         ),
-        'template_path_stack' => array(
+        'template_path_stack'     => array(
             __DIR__ . '/../view',
+        ),
+    ),
+    // Doctrine config
+    'doctrine' => array(
+        'driver' => array(
+            __NAMESPACE__ . '_driver' => array(
+                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+                'cache' => 'array',
+                'paths' => array(__DIR__ . '/../src/' . __NAMESPACE__ . '/Entity')
+            ),
+            'orm_default' => array(
+                'drivers' => array(
+                    __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
+                ),
+            ),
         ),
     ),
 );

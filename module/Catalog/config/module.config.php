@@ -1,46 +1,48 @@
 <?php
+
+namespace Catalog;
+
 return array(
     'controllers' => array(
         'invokables' => array(
-            'Catalog\Controller\Catalog' => 'Catalog\Controller\CatalogController',            
+            'Catalog\Controller\Catalog' => 'Catalog\Controller\CatalogController',
         ),
     ),
-
     // The following section is new and should be added to your file
-    'router'                 => array(
-        'routes' => array(           
+    'router' => array(
+        'routes' => array(
             'category' => array(
                 'type'    => 'segment',
                 'options' => array(
                     'route'       => '/category/:id[-:alias]',
                     'constraints' => array(
-                        'id'    => '[0-9]+',
-                        'alias' => '[a-zA-Z0-9_-]*'
+                        'id'       => '[0-9]+',
+                        'alias'    => '[a-zA-Z0-9_-]*'
                     ),
                     'defaults' => array(
-                        'controller'      => 'Catalog\Controller\Catalog',
-                        'action'          => 'category',
+                        'controller' => 'Catalog\Controller\Catalog',
+                        'action'     => 'category',
                     ),
                 ),
             ),
-            'model' => array(
-                'type'    => 'segment', 
+            'model'      => array(
+                'type'    => 'segment',
                 'options' => array(
                     'route'       => '/model/:id[-:alias]',
                     'constraints' => array(
-                        'id'    => '[0-9]+',
-                        'alias' => '[a-zA-Z0-9_-]*'
+                        'id'       => '[0-9]+',
+                        'alias'    => '[a-zA-Z0-9_-]*'
                     ),
                     'defaults' => array(
-                        'controller'      => 'Catalog\Controller\Catalog',
-                        'action'          => 'model',
+                        'controller' => 'Catalog\Controller\Catalog',
+                        'action'     => 'model',
                     ),
                 ),
             ),
-        ),        
+        ),
     ),
     // Doctrine config
-    'doctrine'            => array(
+    'doctrine'   => array(
         'driver' => array(
             __NAMESPACE__ . '_driver' => array(
                 'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
@@ -52,11 +54,6 @@ return array(
                     __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
                 ),
             ),
-        ),
-    ),
-    'view_manager'            => array(
-        'template_path_stack' => array(
-            'catalog' => __DIR__ . '/../view',
         ),
     ),
 );

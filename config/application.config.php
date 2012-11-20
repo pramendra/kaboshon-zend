@@ -4,14 +4,16 @@ return array(
     'modules' => array(  
         'Abstracts',
         'Admin',
-        'Album',
+//        'Album',
         'Application',        
         'Cart',
         'Catalog',
         'Checkout',        
         'Profile',
+        'Model',
         'DoctrineModule',
-        'DoctrineORMModule',
+        'DoctrineORMModule',      
+        'Codegenerator',
     ),
     'module_listener_options' => array(
         'config_glob_paths'    => array(

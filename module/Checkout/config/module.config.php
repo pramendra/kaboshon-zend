@@ -1,10 +1,10 @@
 <?php
 
-namespace Album;
+namespace Checkout;
 
-return array(
+return array(    
     // Doctrine config
-    'doctrine'            => array(
+    'doctrine'   => array(
         'driver' => array(
             __NAMESPACE__ . '_driver' => array(
                 'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
@@ -14,13 +14,8 @@ return array(
             'orm_default' => array(
                 'drivers' => array(
                     __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
-                ),                
-            ),                
-        ),        
-    ),
-    'view_manager'            => array(
-        'template_path_stack' => array(
-            'album' => __DIR__ . '/../view',
+                ),
+            ),
         ),
     ),
 );
