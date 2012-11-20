@@ -30,7 +30,7 @@ class Order extends \Abstracts\Entity
     protected $status;
 
     /**
-     * @var Model\Entity\UserInfo
+     * @var Profile\Entity\UserInfo
      *
      * @ORM\ManyToOne(targetEntity="Model\Entity\UserInfo", inversedBy="orders")
      * @ORM\JoinColumn(name="user_info_id", referencedColumnName="id")
@@ -38,7 +38,7 @@ class Order extends \Abstracts\Entity
     protected $userInfo;
     
     /**     
-     * @var Model\Entity\OrderItems[] 
+     * @var Checkout\Entity\OrderItems[] 
      * 
      * @ORM\OneToMany(targetEntity="Model\Entity\OrderItem", mappedBy="order")   
      */

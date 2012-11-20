@@ -1,13 +1,11 @@
 <?php
 
-namespace {
-    $module
-}\Controller;
+namespace Profile\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-class {$module}Controller extends AbstractActionController
+class ProfileController extends AbstractActionController
 {
 	public function indexAction()
 	{

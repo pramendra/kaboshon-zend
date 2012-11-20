@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Model\Entity\Category
+ * Catalog\Entity\Category
  *
  * @ORM\Table(name="shop_categories")
  * @ORM\Entity
@@ -51,24 +51,24 @@ class Category extends \Abstracts\Entity
     protected $metaKeywords;
 
     /**
-     * @var Model\Entity\Category
+     * @var Catalog\Entity\Category
      *
-     * @ORM\ManyToOne(targetEntity="Model\Entity\Category", inversedBy="children")
+     * @ORM\ManyToOne(targetEntity="Catalog\Entity\Category", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      */
     protected $parent;
     
     /**
-     * @var Model\Entity\Category[]
+     * @var Catalog\Entity\Category[]
      * 
-     * @ORM\OneToMany(targetEntity="Model\Entity\Category", mappedBy="parent")     
+     * @ORM\OneToMany(targetEntity="Catalog\Entity\Category", mappedBy="parent")     
      */
     protected $children;
     
     /**     
-     * @var Model\Entity\Product[]
+     * @var Catalog\Entity\Product[]
      * 
-     * @ORM\OneToMany(targetEntity="Model\Entity\Product", mappedBy="category")
+     * @ORM\OneToMany(targetEntity="Catalog\Entity\Product", mappedBy="category")
      */
     protected $products;
         

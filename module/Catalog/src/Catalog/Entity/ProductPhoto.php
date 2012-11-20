@@ -5,7 +5,7 @@ namespace Model\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Model\Entity\ProductPhoto
+ * Catalog\Entity\ProductPhoto
  *
  * @ORM\Table(name="shop_product_photos")
  * @ORM\Entity
@@ -44,9 +44,9 @@ class ProductPhoto extends \Abstracts\Entity
     protected $isMain = false;
 
     /**
-     * @var Model\Entity\Product
+     * @var Catalog\Entity\Product
      *     
-     * @ORM\ManyToOne(targetEntity="Model\Entity\Product", inversedBy="photos")
+     * @ORM\ManyToOne(targetEntity="Catalog\Entity\Product", inversedBy="photos")
      * @ORM\JoinColumn(name="product_id", referencedColumnName="id")         
      */
     protected $product;

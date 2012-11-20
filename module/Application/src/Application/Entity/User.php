@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Model\Entity\User
+ * Application\Entity\User
  *
  * @ORM\Table(name="shop_users")
  * @ORM\Entity
@@ -51,9 +51,9 @@ class User extends \Abstracts\Entity
     protected $permission;
     
     /**     
-     * @var Model\Entity\UserInfo[]
+     * @var Profile\Entity\UserInfo[]
      * 
-     * @ORM\OneToMany(targetEntity="Model\Entity\UserInfo", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Application\Entity\UserInfo", mappedBy="user")
      */
     protected $addresses;
 

@@ -13,7 +13,6 @@ return array(
         'Model',
         'DoctrineModule',
         'DoctrineORMModule',      
-        'Codegenerator',
     ),
     'module_listener_options' => array(
         'config_glob_paths'    => array(
