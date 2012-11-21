@@ -9,7 +9,7 @@ return array(
         ),
     ),
     // The following section is new and should be added to your file
-    'router' => array(
+    'router'                     => array(
         'routes' => array(
             'category' => array(
                 'type'    => 'segment',
@@ -25,7 +25,7 @@ return array(
                     ),
                 ),
             ),
-            'model'      => array(
+            'model' => array(
                 'type'    => 'segment',
                 'options' => array(
                     'route'       => '/model/:id[-:alias]',
@@ -38,7 +38,7 @@ return array(
                         'action'     => 'model',
                     ),
                 ),
-            ),
+            ),           
         ),
     ),
     // Doctrine config

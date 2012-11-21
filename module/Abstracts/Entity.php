@@ -48,7 +48,7 @@ abstract class Entity
     private function getter($method)
     {
         $name = $this->getPropertyName($method);
-        return $this->propertyExists( $name)? $this->$name: null;
+        return $this->propertyExists($name)? $this->$name: null;
     }
 
     /**
@@ -96,7 +96,7 @@ abstract class Entity
     public function exchangeArray($data = array())
     {
         foreach ($data as $key => $value) {
-            if ($this->propertyExists( $key))
+            if ($this->propertyExists($key))
                 $this->$key = $value;
         }
         return $this;

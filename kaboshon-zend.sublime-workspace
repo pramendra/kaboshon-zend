@@ -47,21 +47,17 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "config/autoload/global.php",
-			"settings":
-			{
-				"buffer_size": 469,
-				"line_ending": "Windows"
-			}
-		}
 	],
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 81.0,
+		"height": 219.0,
 		"selected_items":
 		[
+			[
+				"Package Control: I",
+				"Package Control: Install Package"
+			],
 			[
 				"Package Control: in",
 				"Package Control: Install Package"
@@ -111,10 +107,6 @@
 				"Package Control: Install Package"
 			],
 			[
-				"Package Control: I",
-				"Package Control: Install Package"
-			],
-			[
 				"Package Control: i",
 				"Package Control: Install Package"
 			],
@@ -123,7 +115,7 @@
 				"Preferences: Browse Packages"
 			]
 		],
-		"width": 536.0
+		"width": 400.0
 	},
 	"console":
 	{
@@ -140,6 +132,7 @@
 	},
 	"file_history":
 	[
+		"/C/server/htdocs/kaboshon-zend/config/autoload/global.php",
 		"/C/Users/gerich/AppData/Roaming/Sublime Text 2/Packages/Alignment/Default (Windows).sublime-keymap",
 		"/F/htdocs/kaboshon-zend/module/Album/Module.php",
 		"/F/htdocs/kaboshon-zend/module/Album/src/Album/Controller/AlbumController.php",
@@ -269,7 +262,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 93.0,
 		"where_history":
 		[
 			"F:\\htdocs\\kaboshon-zend\\vendor\\zendframework\\zendframework\\library\\Zend\\MVC",
@@ -335,122 +328,6 @@
 		{
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "config/autoload/global.php",
-					"settings":
-					{
-						"buffer_size": 469,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								434,
-								434
-							]
-						],
-						"settings":
-						{
-							"annotations":
-							[
-								"TODO",
-								"README",
-								"FIXME"
-							],
-							"csslint_options":
-							{
-								"adjoining-classes": "warning",
-								"box-model": true,
-								"box-sizing": "warning",
-								"compatible-vendor-prefixes": "warning",
-								"display-property-grouping": true,
-								"duplicate-background-images": "warning",
-								"duplicate-properties": true,
-								"empty-rules": true,
-								"errors": true,
-								"fallback-colors": "warning",
-								"floats": "warning",
-								"font-faces": "warning",
-								"font-sizes": "warning",
-								"gradients": "warning",
-								"ids": "warning",
-								"import": "warning",
-								"important": "warning",
-								"known-properties": true,
-								"outline-none": "warning",
-								"overqualified-elements": "warning",
-								"qualified-headings": "warning",
-								"regex-selectors": "warning",
-								"rules-count": "warning",
-								"shorthand": "warning",
-								"star-property-hack": "warning",
-								"text-indent": "warning",
-								"underscore-property-hack": "warning",
-								"unique-headings": "warning",
-								"universal-selector": "warning",
-								"vendor-prefix": true,
-								"zero-units": "warning"
-							},
-							"gjslint_ignore":
-							[
-								110
-							],
-							"gjslint_options":
-							[
-							],
-							"javascript_linter": "jshint",
-							"jshint_options":
-							{
-								"browser": true,
-								"evil": true,
-								"regexdash": true,
-								"sub": true,
-								"trailing": true,
-								"wsh": true
-							},
-							"pep8": true,
-							"pep8_ignore":
-							[
-								"E501"
-							],
-							"perl_linter": "perlcritic",
-							"pyflakes_ignore":
-							[
-							],
-							"pyflakes_ignore_import_*": true,
-							"sublimelinter": true,
-							"sublimelinter_delay": 2,
-							"sublimelinter_disable":
-							[
-							],
-							"sublimelinter_executable_map":
-							{
-							},
-							"sublimelinter_fill_outlines": false,
-							"sublimelinter_gutter_marks": false,
-							"sublimelinter_mark_style": "outline",
-							"sublimelinter_notes": false,
-							"sublimelinter_objj_check_ascii": false,
-							"sublimelinter_popup_errors_on_save": false,
-							"sublimelinter_syntax_map":
-							{
-								"C++": "c",
-								"Python Django": "python",
-								"Ruby on Rails": "ruby"
-							},
-							"sublimelinter_wrap_find": true,
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
 			]
 		}
 	],

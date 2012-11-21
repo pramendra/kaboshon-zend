@@ -2,17 +2,34 @@
 
 namespace Album\Controller;
 
-use Zend\View\Model\ViewModel,
-    Album\Entity\Album,
-    Album\Form\AlbumForm;
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
+use Album\Entity\Album;
+use Album\Form\AlbumForm;
 
-class AlbumController extends \Abstracts\ActionController
+class AlbumController extends AbstractActionController
 {
+    
+    /**
+     * Intstance of service, provide access to service layer from this
+     * controller. Lazy init on first call.
+     * @var Album\Service\Test
+     */
+    protected $service;      
+
+    protected function getService()
+    {        
+        if (!$this->service)
+            $this->service = $this->getServiceLocator()->get('test.service');
+        return $this->service;
+    }
 
     public function indexAction()
     {
+        
         return new ViewModel(array(
-                    'albums' => $this->em()->getRepository('Album\Entity\Album')->findAll(),
+                    'albums' => null,
+                    'dump'   => $this->getService()->t()
                 ));
     }
 
@@ -98,7 +115,9 @@ class AlbumController extends \Abstracts\ActionController
             'album' => $this->em()->find('Album\Entity\Album', $id)
         );
     }
-
+    
+    
+    
     public function testAction()
     {
         $data = $this->em()->getRepository('Album\Entity\Bug')->getOpenBugsByProduct();

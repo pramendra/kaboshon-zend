@@ -2,12 +2,22 @@
 
 namespace Catalog\Controller;
 
-class CatalogController extends \Abstracts\ActionController
-{
+use Abstracts\ActionController;
+use Zend\View\Model\ViewModel;
+
+class CatalogController extends ActionController
+{    
+    
+    /**
+     *
+     * @var Catalog\Service\
+     */
+    protected $categoryService;
+
+
     public function indexAction()
     {
-        
-        
+                
         return false;
     }
 

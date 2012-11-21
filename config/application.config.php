@@ -4,7 +4,7 @@ return array(
     'modules' => array(  
         'Abstracts',
         'Admin',
-//        'Album',
+        'Album',
         'Application',        
         'Cart',
         'Catalog',
