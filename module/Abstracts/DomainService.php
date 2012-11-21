@@ -22,5 +22,17 @@ abstract class DomainService extends Service
         }
         return $this->em;
     }
+
+    // public function __construct($options = array())
+    // {
+    //     $this->em = $this->sm()->get('Doctrine\ORM\EntityManager');
+    //     parent::__construct($options);
+    // }
+
+    //@TODO
+    public function load($id)
+    {
+
+    }
 }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Model\Entity;
+namespace Catalog\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
