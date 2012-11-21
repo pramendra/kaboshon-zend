@@ -83,7 +83,7 @@
 			"file": "module/Abstracts/DomainService.php",
 			"settings":
 			{
-				"buffer_size": 566,
+				"buffer_size": 753,
 				"line_ending": "Windows"
 			}
 		}
@@ -91,7 +91,7 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 81.0,
+		"height": 392.0,
 		"selected_items":
 		[
 			[
@@ -172,6 +172,7 @@
 	},
 	"file_history":
 	[
+		"/F/htdocs/kaboshon-zend/module/Abstracts/Service.php",
 		"/F/htdocs/kaboshon-zend/module/Catalog/src/Catalog/Service/ProductPhoto.php",
 		"/F/htdocs/kaboshon-zend/module/Catalog/src/Catalog/Service/Product.php",
 		"/C/Users/gerich/AppData/Roaming/Sublime Text 2/Packages/User/Base File.sublime-settings",
@@ -298,8 +299,7 @@
 		"/F/htdocs/cityboots/published/SC/html/scripts/excel_export/js/import_manager.js",
 		"/F/htdocs/cityboots/published/SC/html/scripts/modules/adminscreens/_methods/erase_products.php",
 		"/F/htdocs/cityboots/cityboots.sublime-project",
-		"/F/htdocs/cityboots/published/SC/html/scripts/excel_export.php",
-		"/F/htdocs/cityboots/published/index.php"
+		"/F/htdocs/cityboots/published/SC/html/scripts/excel_export.php"
 	],
 	"find":
 	{
@@ -725,7 +725,9 @@
 								"Ruby on Rails": "ruby"
 							},
 							"sublimelinter_wrap_find": true,
-							"syntax": "Packages/PHP/PHP.tmLanguage"
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -854,15 +856,15 @@
 					"file": "module/Abstracts/DomainService.php",
 					"settings":
 					{
-						"buffer_size": 566,
+						"buffer_size": 753,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								556,
-								556
+								693,
+								693
 							]
 						],
 						"settings":
@@ -1009,6 +1011,14 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"se",
+				"module/Abstracts/Service.php"
+			],
+			[
+				"ser",
+				"module/Abstracts/Service.php"
+			],
 			[
 				"domain",
 				"module/Abstracts/DomainService.php"
