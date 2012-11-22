@@ -18,8 +18,7 @@ class CatalogController extends ActionController
 
     public function indexAction()
     {
-                
-        return false;
+                       
     }
 
     public function modelAction()
@@ -34,7 +33,7 @@ class CatalogController extends ActionController
     
     public function testAction()
     {
-        var_dump($this->sm()->get('ViewResolver')->resolve('catalog/catalog/index'));
+        var_dump($this->sm()->get('ViewResolver'));
         return new ViewModel(array(
            'dump' => 'ok'
         ));                                
