@@ -3,6 +3,8 @@ nbproject
 .~lock.*
 *.sublime-project
 *.sublime-workspace
+kaboshon-zend.sublime-workspace
+kaboshon-zend.sublime-project
 .buildpath
 .DS_Store
 .idea
@@ -11,4 +13,5 @@ nbproject
 .codeintel
 composer.lock
 vendor
+data
 tmp
