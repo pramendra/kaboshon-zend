@@ -6,11 +6,11 @@ use Abstracts\ActionController;
 use Zend\View\Model\ViewModel;
 
 class CatalogController extends ActionController
-{    
-    
+{
+
     /**
      * Catalog service instance
-     * 
+     *
      * @var Catalog\Service\catalog
      */
     protected $service;
@@ -18,24 +18,23 @@ class CatalogController extends ActionController
 
     public function indexAction()
     {
-                       
+
     }
 
     public function modelAction()
     {
-        
+
     }
 
     public function categoryAction()
     {
-        
+
     }
-    
+
     public function testAction()
     {
-        var_dump($this->sm()->get('ViewResolver'));
         return new ViewModel(array(
            'dump' => 'ok'
-        ));                                
+        ));
     }
 }

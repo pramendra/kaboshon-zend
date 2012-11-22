@@ -29,11 +29,12 @@ class Module
     public function init(ModuleManager $moduleManager)
     {
         $sharedEvents = $moduleManager->getEventManager()->getSharedManager();
-        $sharedEvents->attach(__NAMESPACE__, 'dispatch', function($e) {
-                    $controller = $e->getTarget();
-                    if (!($controller instanceof Catalog\Controller\CatalogController))
-                        $controller->layout('layout/admin');
-                }, 100);
+        $sharedEvents->attach(__NAMESPACE__, 'dispatch',
+                              function($e) {
+                $controller = $e->getTarget();
+                if (get_class($controller) != 'Catalog\Controller\CatalogController')
+                    $controller->layout('layout/admin');
+            }, 100);
     }
 
 }
