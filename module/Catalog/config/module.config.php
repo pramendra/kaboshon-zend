@@ -5,11 +5,15 @@ namespace Catalog;
 return array(
     'controllers' => array(
         'invokables' => array(
-            'Catalog\Controller\Catalog' => 'Catalog\Controller\CatalogController',
+            'Catalog\Controller\Catalog'  => 'Catalog\Controller\CatalogController',
+            'Catalog\Controller\Admin'    => 'Catalog\Controller\CatalogAdminController',
+            'Catalog\Controller\Product'  => 'Catalog\Controller\ProductController',
+            'Catalog\Controller\Category' => 'Catalog\Controller\CategoryController',
+            'Catalog\Controller\Test'     => 'Catalog\Controller\TestController',
         ),
     ),
     // The following section is new and should be added to your file
-    'router'                     => array(
+    'router'                      => array(
         'routes' => array(
             'category' => array(
                 'type'    => 'segment',
@@ -21,11 +25,11 @@ return array(
                     ),
                     'defaults' => array(
                         'controller' => 'Catalog\Controller\Catalog',
-                        'action'     => 'category',
+                        'action'     => 'category'
                     ),
                 ),
             ),
-            'model' => array(
+            'model'      => array(
                 'type'    => 'segment',
                 'options' => array(
                     'route'       => '/model/:id[-:alias]',
@@ -38,7 +42,17 @@ return array(
                         'action'     => 'model',
                     ),
                 ),
-            ),           
+            ),
+            'test'       => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/test',
+                    'defaults' => array(
+                        'controller' => 'Catalog\Controller\Catalog',
+                        'action'     => 'test',
+                    ),
+                ),
+            ),
         ),
     ),
     // Doctrine config
@@ -56,4 +70,9 @@ return array(
             ),
         ),
     ),
+    'template_path_stack' => array(
+        __DIR__ . '/../view',
+//        'catalog' => __DIR__ . '/../view',
+//        'catalog/test' => __DIR__ . '/../view/catalog/test'
+    )
 );

@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Catalog\Entity\Category
  *
  * @ORM\Table(name="shop_categories")
- * @ORM\Entity
+ * @ORM\Entity(re[ositoryClass="Catalog\Repository\Category")
  */
 class Category extends \Abstracts\Entity
 {

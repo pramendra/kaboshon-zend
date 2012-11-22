@@ -2,9 +2,13 @@
 
 namespace Abstracts;
 
+//@todo Вынести сеттеры геттеры в отдельный трейт после миграции на 5.4
 abstract class Entity
 {
-
+    /**
+     * Caller class for this entity
+     * @var mixed
+     */
     private $caller;
 
     public function __construct($data = null) {

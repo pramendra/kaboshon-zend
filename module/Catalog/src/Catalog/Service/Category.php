@@ -6,6 +6,7 @@ use Abstracts\DomainService as Service;
 
 class Category extends Service
 {
+        
     public function addCategory($params)
     {
 
@@ -28,7 +29,8 @@ class Category extends Service
 
     public function getChildCategories($id)
     {
-
-    }    
+        $category = $this->load($id);
+        return $category->child;
+    }                 
 }
 

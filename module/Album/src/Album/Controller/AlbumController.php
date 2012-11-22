@@ -9,16 +9,16 @@ use Album\Form\AlbumForm;
 
 class AlbumController extends AbstractActionController
 {
-    
+
     /**
      * Intstance of service, provide access to service layer from this
      * controller. Lazy init on first call.
      * @var Album\Service\Test
      */
-    protected $service;      
+    protected $service;
 
     protected function getService()
-    {        
+    {
         if (!$this->service)
             $this->service = $this->getServiceLocator()->get('test.service');
         return $this->service;
@@ -26,10 +26,10 @@ class AlbumController extends AbstractActionController
 
     public function indexAction()
     {
-        
+
         return new ViewModel(array(
                     'albums' => null,
-                    'dump'   => $this->getService()->t()
+                    'dump'   => null
                 ));
     }
 
@@ -115,12 +115,11 @@ class AlbumController extends AbstractActionController
             'album' => $this->em()->find('Album\Entity\Album', $id)
         );
     }
-    
-    
-    
+
     public function testAction()
     {
         $data = $this->em()->getRepository('Album\Entity\Bug')->getOpenBugsByProduct();
         return array('data' => $data);
     }
+
 }

@@ -9,10 +9,11 @@ class CatalogController extends ActionController
 {    
     
     /**
-     *
-     * @var Catalog\Service\
+     * Catalog service instance
+     * 
+     * @var Catalog\Service\catalog
      */
-    protected $categoryService;
+    protected $service;
 
 
     public function indexAction()
@@ -29,5 +30,13 @@ class CatalogController extends ActionController
     public function categoryAction()
     {
         
+    }
+    
+    public function testAction()
+    {
+        var_dump($this->sm()->get('ViewResolver')->resolve('catalog/catalog/index'));
+        return new ViewModel(array(
+           'dump' => 'ok'
+        ));                                
     }
 }

@@ -1,11 +1,13 @@
 <?php
+
 namespace Catalog;
 
-use Zend\Mvc\MvcEvent;
+use Zend\ModuleManager\ModuleManager;
 
-class Module 
+class Module
 {
-   public function getAutoloaderConfig()
+
+    public function getAutoloaderConfig()
     {
         return array(
             'Zend\Loader\ClassMapAutoloader' => array(
@@ -22,5 +24,16 @@ class Module
     public function getConfig()
     {
         return include __DIR__ . '/config/module.config.php';
-    }       
+    }
+
+    public function init(ModuleManager $moduleManager)
+    {
+        $sharedEvents = $moduleManager->getEventManager()->getSharedManager();
+        $sharedEvents->attach(__NAMESPACE__, 'dispatch', function($e) {
+                    $controller = $e->getTarget();
+                    if (!($controller instanceof Catalog\Controller\CatalogController))
+                        $controller->layout('layout/admin');
+                }, 100);
+    }
+
 }

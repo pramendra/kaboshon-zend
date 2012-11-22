@@ -10,13 +10,13 @@ abstract class ActionController extends AbstractActionController
      * Instance of service manager. Lazy initializated.
      * @var Zend\ServiceManager\ServiceManager
      */
-    protected $serviceManager;
+    private $serviceManager;
     
     public function sm()
     {
         if (!$this->serviceManager)
             $this->serviceManager = $this->getServiceLocator();
         
-        return $this->sm;
+        return $this->serviceManager;
     }                   
 }

@@ -11,7 +11,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  */
 abstract class Service implements ServiceLocatorAwareInterface
 {
-
+    
     /**
      * Service options 
      * @var array  
@@ -62,6 +62,14 @@ abstract class Service implements ServiceLocatorAwareInterface
     {
         if (!empty($options))
             $this->options = array_merge($this->options, $options);
+        
+        $properties = get_object_vars($this);
+        
+        foreach($properties as $key => $value) {
+            if (isset($this->options[$key])) {
+                $this->$key = $value;
+            }
+        }
     }
 
 }
