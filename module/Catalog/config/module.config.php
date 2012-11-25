@@ -70,9 +70,10 @@ return array(
             ),
         ),
     ),
-    'template_path_stack' => array(
-        __DIR__ . '/../view',
-//        'catalog' => __DIR__ . '/../view',
-//        'catalog/test' => __DIR__ . '/../view/catalog/test'
+    'view_manager' => array(
+        'template_path_stack' => array(
+            __DIR__ . '/../view',
+            
+        )
     )
 );

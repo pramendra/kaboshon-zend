@@ -32,9 +32,10 @@ class CatalogController extends ActionController
     }
 
     public function testAction()
-    {
+    {         
+        $this->getService();
         return new ViewModel(array(
-           'dump' => 'ok'
+           'dump' => $this->params('controller')
         ));
     }
 }

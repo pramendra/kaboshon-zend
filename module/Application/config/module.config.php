@@ -13,7 +13,7 @@ return array(
     'router' => array(
         'routes' => array(
             'home' => array(
-                'type'    => 'Zend\Mvc\Router\Http\Literal',
+                'type'    => 'Literal',
                 'options' => array(
                     'route'    => '/',
                     'defaults' => array(
@@ -41,7 +41,7 @@ return array(
                     'default' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'       => '/[:controller[/:action]]',
+                            'route'       => '/[:module[/:controller[/:action]]]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
