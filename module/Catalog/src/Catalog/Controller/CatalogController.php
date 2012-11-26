@@ -15,13 +15,20 @@ class CatalogController extends ActionController
      */
     protected $service;
 
+    public function getService()
+    {
+        if (!$this->service)
+            $this->service = $this->sm('Catalog/Service/Catalog');
+
+        return $this->service;
+    }
 
     public function indexAction()
     {
 
     }
 
-    public function modelAction()
+    public function productAction()
     {
 
     }
@@ -29,13 +36,5 @@ class CatalogController extends ActionController
     public function categoryAction()
     {
 
-    }
-
-    public function testAction()
-    {         
-        $this->getService();
-        return new ViewModel(array(
-           'dump' => $this->params('controller')
-        ));
     }
 }

@@ -13,13 +13,6 @@ abstract class ActionController extends AbstractActionController
     private $serviceManager;
 
     /**
-     * if exists ModuleName\Service\ControllerName service layer class,
-     * this property is instance for them. lazy init.
-     * @var \Abstracts\Service
-     */
-    private $priorityService;
-
-    /**
      * name of priority svice for this controller
      * @var string
      */
@@ -42,27 +35,4 @@ abstract class ActionController extends AbstractActionController
         
         return $this->serviceManager;
     }                       
-
-    /**
-     * init and return priority service for this controller
-     * @return \Abstracts\Service
-     */
-    public function getService()
-    {   
-        
-        if (!$this->priorityServiceName) {
-            $controllerName = get_called_class();        
-            $this->priorityServiceName = str_replace('Controller', 'Service', 
-                $this->controllerName);
-        }
-
-        if (!class_exists($this->priorityServiceName))
-            throw new \RuntimeException('priority service not found: ' 
-                . $this->priorityServiceName);
-            
-        if (!$this->priorityService)
-            $this->priorityService = $this->sm($this->priorityServiceName);
-
-        return $this->priorityService;
-    }  
 }

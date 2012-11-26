@@ -29,30 +29,48 @@ return array(
                     ),
                 ),
             ),
-            'model'      => array(
+            'product'      => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'       => '/model/:id[-:alias]',
+                    'route'       => '/product/:id[-:alias]',
                     'constraints' => array(
                         'id'       => '[0-9]+',
                         'alias'    => '[a-zA-Z0-9_-]*'
                     ),
                     'defaults' => array(
                         'controller' => 'Catalog\Controller\Catalog',
-                        'action'     => 'model',
+                        'action'     => 'product',
                     ),
                 ),
             ),
-            'test'       => array(
-                'type'    => 'Literal',
+            'product_admin' => array(
+                'type'    => 'segment',
                 'options' => array(
-                    'route'    => '/test',
+                    'route'       => '/admin/product[/:action][/:id]',
+                    'constraints' => array(
+                        'action'   => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'       => '[0-9]+',
+                    ),
                     'defaults' => array(
-                        'controller' => 'Catalog\Controller\Catalog',
-                        'action'     => 'test',
+                        'controller'   => 'Catalog\Controller\Product',
+                        'action'       => 'index',
                     ),
                 ),
-            ),
+            ), 
+            'category_admin' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'       => '/admin/category[/:action][/:id]',
+                    'constraints' => array(
+                        'action'   => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'       => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller'   => 'Catalog\Controller\Category',
+                        'action'       => 'index',
+                    ),
+                ),
+            ),      
         ),
     ),
     // Doctrine config
