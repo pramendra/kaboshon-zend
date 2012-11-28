@@ -14,7 +14,7 @@ use Zend\InputFilter\InputFilterInterface;
  * Catalog\Entity\Category
  *
  * @ORM\Table(name="shop_categories")
- * @ORM\Entity(re[ositoryClass="Catalog\Repository\Category")
+ * @ORM\Entity(repositoryClass="Catalog\Repository\Category")
  */
 class Category extends \Abstracts\Entity
 {
