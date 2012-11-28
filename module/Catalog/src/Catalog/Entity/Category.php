@@ -16,7 +16,7 @@ use Zend\InputFilter\InputFilterInterface;
  * @ORM\Table(name="shop_categories")
  * @ORM\Entity(repositoryClass="Catalog\Repository\Category")
  */
-class Category extends \Abstracts\Entity
+class Category extends \Abstracts\Entity implements InputFilterAwareInterface
 {
     /**
      * @var integer $id
@@ -37,14 +37,14 @@ class Category extends \Abstracts\Entity
     /**
      * @var string $descr
      *
-     * @ORM\Column(name="descr", type="string", length=255, nullable=true)
+     * @ORM\Column(name="descr", type="string", length=100, nullable=true)
      */
     protected $descr;
 
     /**
      * @var string $metaDescr
      *
-     * @ORM\Column(name="meta_descr", type="string", length=255, nullable=true)
+     * @ORM\Column(name="meta_descr", type="text", length=255, nullable=true)
      */
     protected $metaDescr;
 
@@ -77,11 +77,71 @@ class Category extends \Abstracts\Entity
      */
     protected $products;
 
+    /**
+     * input filter for this entity 
+     * @var Zend\InputFilter\InputFilterInterface
+     */
+    protected $inputFilter;
+
     public function __construct($data = null)
     {
         parent::__construct($data);
         $this->children = new ArrayCollection();
     }
 
-    p
+    /**
+     * create and return input filter for this entity 
+     * @return Zend\InputFilter\InputFilterInterface
+     */
+    public function initFilter()
+    {
+        $inputFilter = new InputFilter();
+        $factory     = new InputFactory();
+
+        $inputFilter->add($factory->createInput(array(
+           'name'       => 'id',
+           'required'   => true,
+           'filters'    => array(
+               array('name' => 'Int'),
+           ),
+        )));
+
+        $inputFilter->add($factory->createInput(array(
+            'name'     => 'name',
+            'required' => true,
+            'filters'  => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+            ),
+            'validators' => array(
+                array(
+                    'name'    => 'StringLength',
+                    'options' => array(
+                        'encoding' => 'UTF-8',
+                        'min'      => 4,
+                        'max'      => 100,
+                    ),
+                ),
+            ),
+        )));        
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getInputFilter()
+    {
+        if (!$this->inputFilter) 
+            $this->inputFilter = $this->initFilter();
+
+        return $this->inputFilter;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setInputFilter(InputFilterInterface $inputFilter)
+    {
+        $this->inputFilter = $inputFilter;
+    }    
 }
