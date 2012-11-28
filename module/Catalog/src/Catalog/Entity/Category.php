@@ -4,6 +4,11 @@ namespace Catalog\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Zend\InputFilter\Factory as InputFactory;
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterAwareInterface;
+use Zend\InputFilter\InputFilterInterface;
+
 
 /**
  * Catalog\Entity\Category
@@ -57,24 +62,26 @@ class Category extends \Abstracts\Entity
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      */
     protected $parent;
-    
+
     /**
      * @var Catalog\Entity\Category[]
-     * 
-     * @ORM\OneToMany(targetEntity="Catalog\Entity\Category", mappedBy="parent")     
+     *
+     * @ORM\OneToMany(targetEntity="Catalog\Entity\Category", mappedBy="parent")
      */
     protected $children;
-    
-    /**     
+
+    /**
      * @var Catalog\Entity\Product[]
-     * 
+     *
      * @ORM\OneToMany(targetEntity="Catalog\Entity\Product", mappedBy="category")
      */
     protected $products;
-        
+
     public function __construct($data = null)
     {
         parent::__construct($data);
-        $this->children = new ArrayCollection();        
+        $this->children = new ArrayCollection();
     }
+
+    p
 }

@@ -3,12 +3,13 @@
 namespace Catalog\Controller;
 
 use Abstracts\ActionController;
+use Zend\View\ViewModel;
 
 class CategoryController extends ActionController
 {
     public function indexAction()
     {
-        
+
     }
 
     public function addAction()
@@ -23,6 +24,6 @@ class CategoryController extends ActionController
 
     public function deleteAction()
     {
-        
+
     }
 }
