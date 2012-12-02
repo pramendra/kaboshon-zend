@@ -59,7 +59,7 @@ class Category extends \Abstracts\Entity implements InputFilterAwareInterface
      * @var Catalog\Entity\Category
      *
      * @ORM\ManyToOne(targetEntity="Catalog\Entity\Category", inversedBy="children")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="parent", referencedColumnName="id")
      */
     protected $parent;
 
@@ -123,7 +123,14 @@ class Category extends \Abstracts\Entity implements InputFilterAwareInterface
                     ),
                 ),
             ),
-        )));        
+        )));  
+
+        $inputFilter->add($factory->createInput(array(
+           'name'       => 'parent',
+           'filters'    => array(
+               array('name' => 'Int'),
+           ),
+        )));      
     }
 
     /**
