@@ -3,13 +3,15 @@
 namespace Catalog;
 
 use Abstracts\DomainService as Service;
+use Catalog\Entity\Category;
 
 class Category extends Service
 {
         
-    public function addCategory($params)
+    public function addCategory($request)
     {
-
+        $category = new Category;
+        if 
     }
 
     public function deleteCategory($id)
