@@ -1,6 +1,6 @@
 <?php
 
-namespace Model\Entity;
+namespace Checkout\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -29,17 +29,17 @@ class OrderItem extends \Abstracts\Entity
     protected $quantity;
 
     /**
-     * @var Model\Entity\Order
+     * @var Checkout\Entity\Order
      *
-     * @ORM\ManyToOne(targetEntity="Model\Entity\Order", inversedBy="items")
+     * @ORM\ManyToOne(targetEntity="Checkout\Entity\Order", inversedBy="items")
      * @ORM\JoinColumn(name="order_id", referencedColumnName="id")
      */
     protected $order;
 
     /**
-     * @var Model\Entity\Product
+     * @var Catalog\Entity\Product
      *
-     * @ORM\ManyToOne(targetEntity="Model\Entity\Product")
+     * @ORM\ManyToOne(targetEntity="Catalog\Entity\Product")
      * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
      */
     protected $product;

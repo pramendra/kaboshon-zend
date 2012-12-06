@@ -1,18 +1,17 @@
 <?php
 
 return array(
-    'modules' => array(  
+    'modules' => array(
         'Abstracts',
         'Admin',
         'Album',
-        'Application',        
+        'Application',
         'Cart',
         'Catalog',
-        'Checkout',        
+        'Checkout',
         'Profile',
-        'Model',
         'DoctrineModule',
-        'DoctrineORMModule',      
+        'DoctrineORMModule',
     ),
     'module_listener_options' => array(
         'config_glob_paths'    => array(

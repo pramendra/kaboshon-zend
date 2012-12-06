@@ -7,14 +7,24 @@ use Zend\View\Model\ViewModel;
 
 class CategoryController extends ActionController
 {
+
+    protected $service;
+
+    public function getService()
+    {
+        if (!$this->service)
+            $this->service = $this->getServiceLocator()->get('category.service');
+
+        return $this->service;
+    }
+
+
     public function indexAction()
     {
-        /*return new ViewModel(array(
-
-            ));*/
-        var_dump($this->sm()->get('ViewResolver')->resolve('catalog/category/index'));
-        var_dump($this->sm()->get('ViewManager')->getView());
-        return true;
+                
+        return new ViewModel(array(
+            'categories' => $this->getService()->getCategory()
+        ));
     }
 
     public function addAction()

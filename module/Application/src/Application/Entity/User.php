@@ -49,17 +49,17 @@ class User extends \Abstracts\Entity
      * @ORM\Column(name="permission", type="string", length=50, nullable=true)
      */
     protected $permission;
-    
-    /**     
+
+    /**
      * @var Profile\Entity\UserInfo[]
-     * 
-     * @ORM\OneToMany(targetEntity="Application\Entity\UserInfo", mappedBy="user")
+     *
+     * @ORM\OneToMany(targetEntity="Profile\Entity\UserInfo", mappedBy="user")
      */
-    protected $addresses;
+    protected $userInfos;
 
     public function __construct($data = null)
     {
         parent::__construct($data);
-        $this->addresses = new ArrayCollection;
+        $this->userInfos = new ArrayCollection;
     }
 }

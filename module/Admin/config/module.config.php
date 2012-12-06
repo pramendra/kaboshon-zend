@@ -2,7 +2,13 @@
 
 namespace Admin;
 
-return array(    
+return array(
+    'controllers' => array(
+        'invokables' => array(
+            'Admin\Controller\Admin' => 'Admin\Controller\AdminController',
+        ),
+    ),
+
     // Doctrine config
     'doctrine'   => array(
         'driver' => array(

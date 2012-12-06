@@ -1,12 +1,12 @@
 <?php
 
-namespace Model\Entity;
+namespace Checkout\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Model\Entity\Order
+ * Checkout\Entity\Order
  *
  * @ORM\Table(name="shop_orders")
  * @ORM\Entity
@@ -14,7 +14,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Order extends \Abstracts\Entity
 {
     /**
-     * @var integer $orderId
+     * @var integer $id
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
@@ -32,18 +32,18 @@ class Order extends \Abstracts\Entity
     /**
      * @var Profile\Entity\UserInfo
      *
-     * @ORM\ManyToOne(targetEntity="Model\Entity\UserInfo", inversedBy="orders")
+     * @ORM\ManyToOne(targetEntity="Profile\Entity\UserInfo", inversedBy="orders")
      * @ORM\JoinColumn(name="user_info_id", referencedColumnName="id")
      */
     protected $userInfo;
-    
-    /**     
-     * @var Checkout\Entity\OrderItems[] 
-     * 
-     * @ORM\OneToMany(targetEntity="Model\Entity\OrderItem", mappedBy="order")   
+
+    /**
+     * @var Checkout\Entity\OrderItems[]
+     *
+     * @ORM\OneToMany(targetEntity="Checkout\Entity\OrderItem", mappedBy="order", cascade={"persist", "detach", "remove"})
      */
     protected $items;
-    
+
     public function __construct($data = null)
     {
         parent::__construct($data);

@@ -1,13 +1,14 @@
 <?php
 
-namespace Model\Entity;
+namespace Profile\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Model\Entity\UserInfo
  *
- * @ORM\Table(name="shop_user_info")
+ * @ORM\Table(name="shop_user_infos")
  * @ORM\Entity
  */
 class UserInfo extends \Abstracts\Entity
@@ -75,27 +76,30 @@ class UserInfo extends \Abstracts\Entity
      *
      * @ORM\Column(name="phone", type="string", length=12, nullable=true)
      */
-    protected $phone;       
-    
-    /**     
-     * @var Model\Entity\Order[]
-     * 
-     * @ORM\OneToMany(targetEntity="Model\Entity\Order", mappedBy="userInfo")
+    protected $phone;
+
+     /**
+     * @var Checkout\Entity\Order[]
+     *
+     * @ORM\OneToMany(targetEntity="Checkout\Entity\Order", mappedBy="userInfo", cascade={"persist", "detach"})
      */
-    protected $orders;    
-    
-    
-    /**          
-     * @var Model\Entity\User
-     * 
-     * @ORM\ManyToOne(targetEntity="Model\Entity\User", inversedBy="addresses")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id") 
+    protected $orders;
+
+    /**
+     * @var Application\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Entity\User", inversedBy="userInfos")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $user;
 
-    public function getFullName() 
+    public function getFullName()
     {
         return "{$this->lastName} {$this->firstName} {$this->middleName}";
     }
-    
+
+    public function __counstruct()
+    {
+        $this->orders = new ArrayCollection;
+    }
 }

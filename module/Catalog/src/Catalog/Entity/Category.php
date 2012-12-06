@@ -59,7 +59,7 @@ class Category extends \Abstracts\Entity implements InputFilterAwareInterface
      * @var Catalog\Entity\Category
      *
      * @ORM\ManyToOne(targetEntity="Catalog\Entity\Category", inversedBy="children")
-     * @ORM\JoinColumn(name="parent", referencedColumnName="id")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      */
     protected $parent;
 
@@ -78,7 +78,7 @@ class Category extends \Abstracts\Entity implements InputFilterAwareInterface
     protected $products;
 
     /**
-     * input filter for this entity 
+     * input filter for this entity
      * @var Zend\InputFilter\InputFilterInterface
      */
     protected $inputFilter;
@@ -90,7 +90,7 @@ class Category extends \Abstracts\Entity implements InputFilterAwareInterface
     }
 
     /**
-     * create and return input filter for this entity 
+     * create and return input filter for this entity
      * @return Zend\InputFilter\InputFilterInterface
      */
     public function initFilter()
@@ -123,14 +123,14 @@ class Category extends \Abstracts\Entity implements InputFilterAwareInterface
                     ),
                 ),
             ),
-        )));  
+        )));
 
         $inputFilter->add($factory->createInput(array(
            'name'       => 'parent',
            'filters'    => array(
                array('name' => 'Int'),
            ),
-        )));      
+        )));
     }
 
     /**
@@ -138,7 +138,7 @@ class Category extends \Abstracts\Entity implements InputFilterAwareInterface
      */
     public function getInputFilter()
     {
-        if (!$this->inputFilter) 
+        if (!$this->inputFilter)
             $this->inputFilter = $this->initFilter();
 
         return $this->inputFilter;
@@ -150,5 +150,5 @@ class Category extends \Abstracts\Entity implements InputFilterAwareInterface
     public function setInputFilter(InputFilterInterface $inputFilter)
     {
         $this->inputFilter = $inputFilter;
-    }    
+    }
 }

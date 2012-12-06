@@ -1,17 +1,15 @@
 <?php
 
-namespace Catalog;
+namespace Catalog\Service;
 
-use Abstracts\DomainService as Service;
-use Catalog\Entity\Category;
+use Abstracts\DomainService;
 
-class Category extends Service
+class Category extends DomainService
 {
-        
+
     public function addCategory($request)
     {
-        $category = new Category;
-        if 
+
     }
 
     public function deleteCategory($id)
@@ -26,21 +24,21 @@ class Category extends Service
 
     public function listCategories($offset = 0)
     {
-        
+
     }
 
     public function getChildCategories($id)
     {
         $category = $this->load($id);
         return $category->child;
-    }       
+    }
 
     public function getCategory($id = null)
     {
-        if (!$id) 
+        if (!$id)
             return $this->getRepository()->findAll();
         else
             return $this->load($id);
-    }          
+    }
 }
 

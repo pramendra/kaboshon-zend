@@ -12,7 +12,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ProductPhoto extends \Abstracts\Entity
 {
-
     /**
      * @var integer $id
      *
@@ -35,19 +34,19 @@ class ProductPhoto extends \Abstracts\Entity
      * @ORM\Column(name="file", type="string", length=255, nullable=false)
      */
     protected $file;
-    
+
     /**
      * @var bool $isMain
-     *      
+     *
      * @ORM\Column(name="is_main", type="boolean", nullable=false)
      */
     protected $isMain = false;
 
     /**
      * @var Catalog\Entity\Product
-     *     
+     *
      * @ORM\ManyToOne(targetEntity="Catalog\Entity\Product", inversedBy="photos")
-     * @ORM\JoinColumn(name="product_id", referencedColumnName="id")         
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
      */
     protected $product;
 
