@@ -21,10 +21,11 @@ class CategoryController extends ActionController
 
     public function indexAction()
     {
-                
-        return new ViewModel(array(
-            'categories' => $this->getService()->getCategory()
-        ));
+        var_dump($this->sm()->get('ViewResolver')->resolve('catalog/category/index'));
+        return true;
+//        return new ViewModel(array(
+//            'categories' => $this->getService()->getCategory()
+//        ));
     }
 
     public function addAction()
