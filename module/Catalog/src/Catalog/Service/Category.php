@@ -2,9 +2,9 @@
 
 namespace Catalog\Service;
 
-use Abstracts\DomainService;
+use Abstracts\CrudService as Service;
 
-class Category extends DomainService
+class Category extends Service
 {
 
     public function addCategory($request)

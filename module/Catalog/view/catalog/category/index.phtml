@@ -4,14 +4,15 @@ $this->headTitle($title);
 ?>
 <h1><?php echo $this->escapeHtml($title); ?></h1>
 
-<p><a href="<?php echo $this->url('category', array(
+<p><a href="<?php echo $this->url('admin/category', array(
         'action'=>'add'));?>">Добавить категорию</a></p>
 
-<table class="table">
+<table class="table"> 
 <tr>
     <th>ID</th>
     <th>Название</th>
-    <th>Родителсякая категория</th>
+    <th>Родительская категория</th>
+    <th>&nbsp;</th>
 </tr>
 <?php foreach($categories as $category) : ?>
 <tr>
@@ -24,3 +25,4 @@ $this->headTitle($title);
     </td>
 </tr>
 <?php endforeach; ?>
+</table>

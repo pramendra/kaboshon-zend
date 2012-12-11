@@ -16,5 +16,6 @@ return array(
     ),
     'doctrine' => array(
 
-    )
+    ),
+    'display_exception' => true
 );

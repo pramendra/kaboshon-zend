@@ -15,48 +15,34 @@ return array(
     // The following section is new and should be added to your file
     'router' => array(
         'routes' => array(
-           'category' => array(
-               'type'    => 'segment',
-               'options' => array(
-                   'route'       => '/category/:id[-:alias]',
-                   'constraints' => array(
-                       'id'       => '[0-9]+',
-                       'alias'    => '[a-zA-Z0-9_-]*'
-                   ),
-                   'defaults' => array(
-                       'controller' => 'Catalog\Controller\Catalog',
-                       'action'     => 'category'
-                   ),
-               ),
-           ),
-           'product'      => array(
-               'type'    => 'segment',
-               'options' => array(
-                   'route'       => '/product/:id[-:alias]',
-                   'constraints' => array(
-                       'id'       => '[0-9]+',
-                       'alias'    => '[a-zA-Z0-9_-]*'
-                   ),
-                   'defaults' => array(
-                       'controller' => 'Catalog\Controller\Catalog',
-                       'action'     => 'product',
-                   ),
-               ),
-           ),
-           'product_admin' => array(
-               'type'    => 'segment',
-               'options' => array(
-                   'route'       => '/admin/product[/:action[/:id]]',
-                   'constraints' => array(
-                       'action'   => '[a-zA-Z][a-zA-Z0-9_-]*',
-                       'id'       => '[0-9]+',
-                   ),
-                   'defaults' => array(
-                       'controller'   => 'Catalog\Controller\Product',
-                       'action'       => 'index',
-                   ),
-               ),
-           ),
+            'category' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'       => '/category/:id[-:alias]',
+                    'constraints' => array(
+                        'id'       => '[0-9]+',
+                        'alias'    => '[a-zA-Z0-9_-]*'
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Catalog\Controller\Catalog',
+                        'action'     => 'category'
+                    ),
+                ),
+            ),
+            'product'    => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'       => '/product/:id[-:alias]',
+                    'constraints' => array(
+                        'id'       => '[0-9]+',
+                        'alias'    => '[a-zA-Z0-9_-]*'
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Catalog\Controller\Catalog',
+                        'action'     => 'product',
+                    ),
+                ),
+            ),
         ),
     ),
     // Doctrine config

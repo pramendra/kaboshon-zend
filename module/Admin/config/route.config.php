@@ -17,7 +17,7 @@ return array(
                     'category' => array(
                         'type'    => 'segment',
                         'options' => array(
-                            'route'       => '/category[/:action][/:id]',
+                            'route'       => '/category[/:action]',
                             'constraints' => array(
                                 'action'   => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'id'       => '[0-9]+',
