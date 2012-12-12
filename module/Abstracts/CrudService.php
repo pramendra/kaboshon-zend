@@ -19,19 +19,19 @@ class CrudService extends Service
 
     /**
      * Entity for this service
-     * @var \Abstracts\Entity 
+     * @var \Abstracts\Entity
      */
     protected $entity;
 
     /**
      * Form for this service entity
-     * @var \Zend\From\From  
+     * @var \Zend\From\From
      */
     protected $form;
 
     /**
      * FQCN for entity, wich used in this service
-     * @var \Zend\From\From  
+     * @var \Zend\From\From
      */
     protected $formName;
 
@@ -59,7 +59,7 @@ class CrudService extends Service
      */
     public function newForm()
     {
-        return new $this->form;
+        return new $this->formName($this->em());
     }
 
     /**
@@ -128,13 +128,10 @@ class CrudService extends Service
 
     public function validate()
     {
-        
+
     }
 
-    /**
-     * init service for CRUD operations
-     */
-    private function init()
+    public function onInit()
     {
         if ($this->entityName && !$this->entity)
             $this->entity = $this->newEntity();
@@ -142,9 +139,9 @@ class CrudService extends Service
             throw new InvalidArgumentException('entity name not correct');
 
         if ($this->formName && !$this->form)
-            $this->entity = $this->newEntity();
-        elseif (!$this->initEntity())
-            throw new InvalidArgumentException('entity name not correct');
+            $this->form = $this->newForm();
+        elseif (!$this->initForm())
+            throw new InvalidArgumentException('form name not correct');
     }
 
     /**
@@ -177,20 +174,14 @@ class CrudService extends Service
         if ($this->form)
             return true;
 
-        $formName = str_replace('\\Service\\', '\\From\\', get_class($this)) . 'Form';
+        $formName = str_replace('\\Service\\', '\\Form\\', get_class($this)) . 'Form';
 
         if (class_exists($formName)) {
-            $this->entityName = $formName;
-            $this->entity     = $this->newEntity();
+            $this->formName = $formName;
+            $this->form     = $this->newForm();
             return true;
         } else
             return false;
-    }
-
-    public function __construct($options = array())
-    {
-        parent::__construct($options);
-        $this->init();
     }
 
 }

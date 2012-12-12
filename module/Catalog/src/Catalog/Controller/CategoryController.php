@@ -14,13 +14,13 @@ class CategoryController extends ActionController
     {
         if (!$this->service)
             $this->service = $this->getServiceLocator()->get('category.service');
-
+        
         return $this->service;
     }
 
 
     public function indexAction()
-    {   
+    {
         return new ViewModel(array(
             'categories' => $this->getService()->getCategory()
         ));
@@ -28,8 +28,14 @@ class CategoryController extends ActionController
 
     public function addAction()
     {
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+
+        }
+
+
         return array(
-            $this
+            'form' => $this->getService()->getForm()
         );
     }
 

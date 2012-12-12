@@ -4,7 +4,7 @@ namespace Catalog\Form;
 
 use Zend\Form\Form;
 
-class CatalogForm extends Form
+class CategoryForm extends Form
 {
     public function __construct($em, $name = 'category')
     {
@@ -16,7 +16,7 @@ class CatalogForm extends Form
             'name' => 'id',
             'attributes' => array(
                 'type'  => 'hidden',
-            ),           
+            ),
         ));
 
         $this->add(array(
@@ -69,7 +69,7 @@ class CatalogForm extends Form
                 'id' => 'resetbutton',
                 'class' => 'btn red-btn',
             ),
-        ));        
-    
+        ));
+
     }
 }

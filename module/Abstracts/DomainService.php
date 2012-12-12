@@ -14,14 +14,14 @@ abstract class DomainService extends Service
      * @var Doctrine\ORM\EntityManager
      */
     protected $em;
-    
+
     protected function em()
-    {
+    {   
         if (null === $this->em) {
             $this->em = $this->sm()->get('Doctrine\ORM\EntityManager');
         }
         return $this->em;
-    }    
+    }
 }
 
 

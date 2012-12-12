@@ -35,6 +35,7 @@ abstract class Service implements ServiceLocatorAwareInterface
     public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
     {
         $this->sm = $serviceLocator;
+        $this->onInit();
         return $this;
     }
 
@@ -83,6 +84,17 @@ abstract class Service implements ServiceLocatorAwareInterface
                 $this->$key = $this->options[$key];
             }
         }
+    }
+
+    /**
+     * after service locator inject event
+     * 
+     * @see $this->setServiceLocator()
+     * @return boolean success init or not
+     */
+    public function onInit()
+    {
+        return true;
     }
 
 }
