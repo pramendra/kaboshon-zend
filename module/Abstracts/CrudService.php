@@ -8,7 +8,7 @@ use Zend\Stdlib\Exception\InvalidArgumentException as InvalidArgumentException;
 use Zend\Stdlib\Exception\DomainException as DomainException;
 use Zend\Stdlib\Exception\LogicException as LogicException;
 
-class CrudService extends Service
+abstract class CrudService extends Service
 {
 
     /**
@@ -45,11 +45,15 @@ class CrudService extends Service
     }
 
     /**
-     * Getter for $this->form
+     * Getter for $this->form, lazy init
+     * @see $this->newForm()
      * @return \Zend\Form\Form
      */
     public function getForm()
     {
+        if (!$this->form)
+            $this->form = $this->newForm();
+
         return $this->form;
     }
 
@@ -74,12 +78,11 @@ class CrudService extends Service
         if ($entity === null)
             $this->sm()->get('response')->setStatusCode(404);
         else
-            return $entity;
+            return $this->entity = $entity;
     }
 
     /**
-     * repository for this service entity
-     *
+     * Repository for this service entity
      * @return type Doctrine\ORM\EntityRepository
      */
     protected function getRepository()
@@ -89,7 +92,6 @@ class CrudService extends Service
 
     /**
      * Create and return new entity
-     *
      * @return \Abstracts\Entity
      */
     protected function newEntity()
@@ -98,8 +100,8 @@ class CrudService extends Service
     }
 
     /**
-     * Get entity from service manager
-     *
+     * Get entity object?, lazy init
+     * @see $this->newEntity()
      * @return \Abstracts\Entity
      */
     public function getEntity()
@@ -133,14 +135,10 @@ class CrudService extends Service
 
     public function onInit()
     {
-        if ($this->entityName && !$this->entity)
-            $this->entity = $this->newEntity();
-        elseif (!$this->initEntity())
+        if (!$this->entityName && !$this->initEntityName())
             throw new InvalidArgumentException('entity name not correct');
 
-        if ($this->formName && !$this->form)
-            $this->form = $this->newForm();
-        elseif (!$this->initForm())
+        if (!$this->formName && !$this->initFormName())
             throw new InvalidArgumentException('form name not correct');
     }
 
@@ -148,19 +146,17 @@ class CrudService extends Service
      * init $this->entity and $this->entityName, if service name equals to entity name
      * @return bool succsess init or not
      */
-    private function initEntity()
+    private function initEntityName()
     {
 
-        if ($this->entity)
+        if ($this->entityName)
             return true;
 
         $entityName = str_replace('\\Service\\', '\\Entity\\', get_class($this));
 
-        if (class_exists($entityName)) {
-            $this->entityName = $entityName;
-            $this->entity     = $this->newEntity();
-            return true;
-        } else
+        if (class_exists($entityName))
+            return $this->entityName = $entityName;
+        else
             return false;
     }
 
@@ -168,7 +164,7 @@ class CrudService extends Service
      * init $this->form and $this->formName, if service name equals to form name concat "Form"
      * @return bool succsess init or not
      */
-    private function initForm()
+    private function initFormName()
     {
 
         if ($this->form)
@@ -176,12 +172,9 @@ class CrudService extends Service
 
         $formName = str_replace('\\Service\\', '\\Form\\', get_class($this)) . 'Form';
 
-        if (class_exists($formName)) {
-            $this->formName = $formName;
-            $this->form     = $this->newForm();
-            return true;
-        } else
+        if (class_exists($formName))
+            return $this->formName = $formName;
+        else
             return false;
     }
-
 }

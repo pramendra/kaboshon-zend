@@ -7,17 +7,20 @@ use Abstracts\CrudService as Service;
 class Category extends Service
 {
 
-    public function addCategory($request)
+    public function add(array $data = null)
+    {
+        if ($data)
+            $this->setParams($data);
+
+        
+    }
+
+    public function delete($id)
     {
 
     }
 
-    public function deleteCategory($id)
-    {
-
-    }
-
-    public function editCategory($id, $params)
+    public function edit($id, array $data)
     {
 
     }

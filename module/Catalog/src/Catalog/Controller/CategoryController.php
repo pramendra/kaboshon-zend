@@ -14,7 +14,7 @@ class CategoryController extends ActionController
     {
         if (!$this->service)
             $this->service = $this->getServiceLocator()->get('category.service');
-        
+
         return $this->service;
     }
 
@@ -29,14 +29,16 @@ class CategoryController extends ActionController
     public function addAction()
     {
         $request = $this->getRequest();
-        if ($request->isPost()) {
 
-        }
+        if ($request->isPost())
+            $this->getService()->setParams($request->getPost());
 
-
-        return array(
-            'form' => $this->getService()->getForm()
-        );
+        if ($this->getService()->add())
+            return $this->redirect()->toRoute('admin/category/index');
+        else
+            return array(
+                'form' => $this->getService()->getForm()
+            );
     }
 
     public function editAction()
