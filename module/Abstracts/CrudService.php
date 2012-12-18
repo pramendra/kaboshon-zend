@@ -11,30 +11,30 @@ use Zend\Stdlib\Exception\LogicException as LogicException;
 abstract class CrudService extends Service
 {
     /**
-     * FQCN for entity, wich used in this service
-     * @var mixed
+     * @var mixed FQCN for entity, wich used in this service
      */
     protected $entityName;
 
     /**
-     * Entity for this service
-     * @var \Abstracts\Entity
+     * @var \Abstracts\Entity Entity for this service
      */
     protected $entity;
 
     /**
-     * Form for this service entity
-     * @var \Zend\From\From
+     * @var \Zend\From\From Form for this service entity
      */
     protected $form;
 
     /**
-     * FQCN for entity, wich used in this service
-     * @var \Zend\From\From
+     * @var \Zend\From\From FQCN for entity, wich used in this service
      */
     protected $formName;
 
     /**
+     * @var bool validation data result
+     */
+    protected $isValid;
+        /**
      * Setter for $this->form
      * @param \Zend\Form\Form $form
      */
@@ -138,13 +138,16 @@ abstract class CrudService extends Service
     }
 
     /**
-     *
+     * valide data before crud operations
      * @return bool data validation reslut
      */
     public function validate()
     {
+        if ($this->isValid !== null)
+            return $this->isValid;
+
         if ($this->getForm())
-            return $this->getForm()->isValid();
+            return $this->isValid = $this->getForm()->isValid();
     }
 
     /**
@@ -205,6 +208,7 @@ abstract class CrudService extends Service
      */
     public function add($data = null)
     {
+
         return $this->getEntity();
     }
 
