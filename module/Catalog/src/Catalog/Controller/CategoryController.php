@@ -31,7 +31,7 @@ class CategoryController extends ActionController
         $request = $this->getRequest();
 
         if ($request->isPost())
-            $this->getService()->setParams($request->getPost());
+            $this->getService()->setData($request->getPost());
 
         if ($this->getService()->add())
             return $this->redirect()->toRoute('admin/category/index');

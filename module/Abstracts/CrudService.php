@@ -10,7 +10,6 @@ use Zend\Stdlib\Exception\LogicException as LogicException;
 
 abstract class CrudService extends Service
 {
-
     /**
      * FQCN for entity, wich used in this service
      * @var mixed
@@ -58,6 +57,16 @@ abstract class CrudService extends Service
     }
 
     /**
+     * create new form instance, init sevice form and entity and set from data
+     * @param array $name Data from different source
+     */
+    public function setData(array $data)
+    {
+        $form = $this->newForm();
+        $this->setForm($form->setData($data));
+    }
+
+    /**
      * Create and return new form
      * @return \Zend\Form\Form
      */
@@ -73,7 +82,7 @@ abstract class CrudService extends Service
      */
     public function load($id)
     {
-        $entity = $this->em()->find($this->entityName, (int) $id);
+        $entity = $this->em()->find($this->entityName, (int)$id);
 
         if ($entity === null)
             $this->sm()->get('response')->setStatusCode(404);
@@ -128,11 +137,20 @@ abstract class CrudService extends Service
         return $this;
     }
 
+    /**
+     *
+     * @return bool data validation reslut
+     */
     public function validate()
     {
-
+        if ($this->getForm())
+            return $this->getForm()->isValid();
     }
 
+    /**
+     * Init on the setting service locator event
+     * @throws InvalidArgumentException
+     */
     public function onInit()
     {
         if (!$this->entityName && !$this->initEntityName())
@@ -176,5 +194,32 @@ abstract class CrudService extends Service
             return $this->formName = $formName;
         else
             return false;
+    }
+
+
+    //CRUD Methods
+
+    /**
+     *
+     * @param type $data
+     */
+    public function add($data = null)
+    {
+        return $this->getEntity();
+    }
+
+    public function delete($id)
+    {
+
+    }
+
+    public function edit($id, $data = null)
+    {
+
+    }
+
+    public function fetch($offset = 0)
+    {
+
     }
 }

@@ -10,22 +10,22 @@ class Category extends Service
     public function add(array $data = null)
     {
         if ($data)
-            $this->setParams($data);
+            $this->setFormData($data);
 
-        
     }
 
     public function delete($id)
     {
-
+        
     }
 
-    public function edit($id, array $data)
+    public function edit($id, $data = null)
     {
-
+        if ($data)
+            $this->setFormData($data);
     }
 
-    public function listCategories($offset = 0)
+    public function fetch($offset = 0)
     {
 
     }
