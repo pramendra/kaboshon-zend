@@ -4,7 +4,7 @@ namespace Catalog\Form;
 
 use Zend\Form\Form;
 
-class CategoryForm extends Form
+class Category extends Form
 {
     public function __construct($em, $name = 'category')
     {
@@ -25,7 +25,7 @@ class CategoryForm extends Form
                 'type'  => 'text',
             ),
             'options' => array(
-                'label' => '%NAME_TITLE%',
+                'label' => 'name',
             ),
         ));
 
@@ -35,7 +35,7 @@ class CategoryForm extends Form
                 'type'  => 'textarea',
             ),
             'options' => array(
-                'label' => '%DESCRIPTION%',
+                'label' => 'description',
             ),
         ));
 
@@ -43,7 +43,7 @@ class CategoryForm extends Form
             'name' => 'parent',
             'type' => 'DoctrineORMModule\Form\Element\DoctrineEntity',
             'options' => array(
-                'label' => '%PARENT_CATEGORY%',
+                'label' => 'parent category',
                 'object_manager' => $em,
                 'target_class'   => 'Catalog\Entity\Category',
                 'identifier'     => 'id',
@@ -70,6 +70,5 @@ class CategoryForm extends Form
                 'class' => 'btn red-btn',
             ),
         ));
-
     }
 }

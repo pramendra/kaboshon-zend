@@ -1,0 +1,54 @@
+<?php
+
+namespace Catalog\Filter\Category;
+
+use Zend\InputFilter\InputFilter;
+
+class Category extends InputFilter
+{
+
+    public function __construct()
+    {
+        $this->init();
+    }
+
+    public function init()
+    {
+        $factory = $this->getFactory();
+
+        $this->add($factory->createInput(array(
+                    'name'     => 'id',
+                    'required' => true,
+                    'filters'  => array(
+                        array('name' => 'Int'),
+                    ),
+                )));
+
+        $this->add($factory->createInput(array(
+                    'name'     => 'name',
+                    'required' => true,
+                    'filters'  => array(
+                        array('name' => 'StripTags'),
+                        array('name' => 'StringTrim'),
+                    ),
+                    'validators' => array(
+                        array(
+                            'name'    => 'StringLength',
+                            'options' => array(
+                                'encoding' => 'UTF-8',
+                                'min'      => 4,
+                                'max'      => 100,
+                            ),
+                        ),
+                    ),
+                )));
+
+        $this->add($factory->createInput(array(
+                    'name'    => 'parent',
+                    'filters' => array(
+                        array('name' => 'Int'),
+                    ),
+                )));
+    }
+
+}

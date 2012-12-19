@@ -92,7 +92,7 @@ abstract class Service implements ServiceLocatorAwareInterface
      * @see $this->setServiceLocator()
      * @return boolean success init or not
      */
-    public function onInit()
+    protected function onInit()
     {
         return true;
     }

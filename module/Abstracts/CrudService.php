@@ -3,13 +3,13 @@
 namespace Abstracts;
 
 use Abstracts\DomainService as Service;
-use Zend\Form\Form as From;
 use Zend\Stdlib\Exception\InvalidArgumentException as InvalidArgumentException;
 use Zend\Stdlib\Exception\DomainException as DomainException;
 use Zend\Stdlib\Exception\LogicException as LogicException;
 
 abstract class CrudService extends Service
 {
+
     /**
      * @var mixed FQCN for entity, wich used in this service
      */
@@ -21,60 +21,97 @@ abstract class CrudService extends Service
     protected $entity;
 
     /**
-     * @var \Zend\From\From Form for this service entity
+     * @var \Zend\From\From form for this service entity
      */
     protected $form;
 
     /**
-     * @var \Zend\From\From FQCN for entity, wich used in this service
+     * @var string FQCN for entity, wich used in this service
      */
     protected $formName;
+
+    /**
+     * @var string FQCN for filter, wich used in this service
+     */
+    protected $filterName;
+
+    /**
+     * @var \Zend\InputFilter\InputFilter filter for this service 
+     */
+    protected $filter;
 
     /**
      * @var bool validation data result
      */
     protected $isValid;
-        /**
-     * Setter for $this->form
-     * @param \Zend\Form\Form $form
-     */
-    public function setForm(From $form)
-    {
-        $this->from = $form;
-    }
 
+    protected function newFilter()
+    {
+        return new $this->filterName;
+    }
+    
     /**
-     * Getter for $this->form, lazy init
-     * @see $this->newForm()
+     * Create and return new form
      * @return \Zend\Form\Form
      */
-    public function getForm()
+    protected function newForm()
     {
-        if (!$this->form)
-            $this->form = $this->newForm();
-
-        return $this->form;
+        $form = new $this->formName($this->em());
+        
+        if ($this->filter)
+            $form->setInputFilter($this->filter);
     }
-
+    
+    /**
+     * Create and return new entity
+     * @return \Abstracts\Entity
+     */
+    protected function newEntity($data = null)
+    {
+        return new $this->entityName($data);
+    }
+    
+    /**
+     * Getter for service properties, this method cant work in inherit classes
+     * @param string $name name of property
+     * @return mixed property value like a form, filter and entity instance
+     */
+    public function get($name)
+    {
+        if (!$name)
+            return null;
+        
+        $createMethod = 'new' . ucfirst($name);
+        
+        if (isset($this->$name))
+            throw new InvalidArgumentException("property $name not exists");                
+                   
+        if (!is_callable(array(get_class($this), $createMethod)))
+            throw new LogicException("create method for $name property not exists");
+        
+        if (!$this->$name)
+            $this->$name = $this->$createMethod();
+        
+        return $this->$name;
+    }   
+        
     /**
      * create new form instance, init sevice form and entity and set from data
      * @param array $name Data from different source
      */
     public function setData(array $data)
     {
-        $form = $this->newForm();
-        $this->setForm($form->setData($data));
+        if (!$this->form)
+            $this->form = $this->newForm();
+        
+        $this->form->setData($data);
+        
+        if (!$this->entity)
+            $this->form = $this->newEntity();
+        
+        $this->entity->populate($data);
     }
-
-    /**
-     * Create and return new form
-     * @return \Zend\Form\Form
-     */
-    public function newForm()
-    {
-        return new $this->formName($this->em());
-    }
-
+    
     /**
      * Load entity by id and validate exists
      * @param type $id
@@ -82,7 +119,7 @@ abstract class CrudService extends Service
      */
     public function load($id)
     {
-        $entity = $this->em()->find($this->entityName, (int)$id);
+        $entity = $this->em()->find($this->entityName, (int) $id);
 
         if ($entity === null)
             $this->sm()->get('response')->setStatusCode(404);
@@ -98,56 +135,20 @@ abstract class CrudService extends Service
     {
         return $this->em()->getRepository($this->entityName);
     }
-
+      
     /**
-     * Create and return new entity
-     * @return \Abstracts\Entity
-     */
-    protected function newEntity()
-    {
-        return new $this->entityName;
-    }
-
-    /**
-     * Get entity object?, lazy init
-     * @see $this->newEntity()
-     * @return \Abstracts\Entity
-     */
-    public function getEntity()
-    {
-        return $this->entity;
-    }
-
-    /**
-     * return entity name for this service
-     * @return string
-     */
-    public function getEntityName()
-    {
-        return $this->entityName;
-    }
-
-    /**
-     * set entity name for this service
-     * @param string $name
-     */
-    public function setEntityName($name)
-    {
-        $this->entityName = $name;
-        return $this;
-    }
-
-    /**
-     * valide data before crud operations
+     * Validate data before crud operations
      * @return bool data validation reslut
      */
     public function validate()
     {
         if ($this->isValid !== null)
             return $this->isValid;
-
-        if ($this->getForm())
-            return $this->isValid = $this->getForm()->isValid();
+               
+        if ($form = $this->getForm())
+            return $this->isValid = $form->isValid();
+        else 
+            throw new LogicException('form not init');
     }
 
     /**
@@ -156,74 +157,81 @@ abstract class CrudService extends Service
      */
     public function onInit()
     {
-        if (!$this->entityName && !$this->initEntityName())
-            throw new InvalidArgumentException('entity name not correct');
+        if (!$this->entityName && !$this->initName('Entity'))
+            throw new DomainException('entity name not correct');
 
-        if (!$this->formName && !$this->initFormName())
-            throw new InvalidArgumentException('form name not correct');
+        if (!$this->formName && !$this->initName('Form'))
+            throw new DomainException('form name not correct');
+
+        if (!$this->filterName && !$this->initName())
+            throw new DomainException('filter name not correct');
     }
 
     /**
      * init $this->entity and $this->entityName, if service name equals to entity name
      * @return bool succsess init or not
      */
-    private function initEntityName()
+    private function initName($name)
     {
+        $propertyName = $name . 'Name';
 
-        if ($this->entityName)
+        if (!isset($this->$propertyName))
+            throw new InvalidArgumentException('property not exists');
+
+        if ($this->$propertyName)
             return true;
 
-        $entityName = str_replace('\\Service\\', '\\Entity\\', get_class($this));
+        $FQCN = str_replace('\\Service\\', '\\Entity\\', get_class($this));
 
-        if (class_exists($entityName))
-            return $this->entityName = $entityName;
+        if (class_exists($FQCN))
+            return $this->$propertyName = $FQCN;
         else
             return false;
     }
-
-    /**
-     * init $this->form and $this->formName, if service name equals to form name concat "Form"
-     * @return bool succsess init or not
-     */
-    private function initFormName()
-    {
-
-        if ($this->form)
-            return true;
-
-        $formName = str_replace('\\Service\\', '\\Form\\', get_class($this)) . 'Form';
-
-        if (class_exists($formName))
-            return $this->formName = $formName;
-        else
-            return false;
-    }
-
 
     //CRUD Methods
 
     /**
-     *
-     * @param type $data
+     * Create operation
+     * @param array $data new entity property values
+     * @return type Description
      */
     public function add($data = null)
     {
-
-        return $this->getEntity();
+        $entity = $this->newEntity($data);
+        
+        if (!$this->validate()) 
+                        
+        $em = $this->em();
+        $em->persist($entity);
+        $em->flush();
+        return $this->entity = $entity;
     }
 
+    /**
+     * Delete opearation
+     * @param type $id
+     * @return bool success delete or not
+     */
     public function delete($id)
     {
-
+        if ($entity = $this->load($id))
+            return false;
+        
+        $em = $this->em();
+        $em->remove($entity);     
+        
+        return true;
     }
 
     public function edit($id, $data = null)
     {
-
+        
     }
 
     public function fetch($offset = 0)
     {
-
+        
     }
+
 }
