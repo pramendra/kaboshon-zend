@@ -6,9 +6,16 @@ use Abstracts\DomainService as Service;
 use Zend\Stdlib\Exception\InvalidArgumentException as InvalidArgumentException;
 use Zend\Stdlib\Exception\DomainException as DomainException;
 use Zend\Stdlib\Exception\LogicException as LogicException;
+use Zend\Paginator\Paginator as Paginator;
+use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as PaginatorAdapter;
 
 abstract class CrudService extends Service
 {
+
+    /**
+     * @var string FQCN of current inherit class
+     */
+    protected $caller;
 
     /**
      * @var mixed FQCN for entity, wich used in this service
@@ -41,9 +48,16 @@ abstract class CrudService extends Service
     protected $filter;
 
     /**
+     * @var \Zend\Pagination\Paginator paginator component, init in $this->fetch()
+     * @see $this->fetch()
+     */
+    protected $paginator;
+
+    /**
      * @var bool validation data result
      */
     protected $isValid;
+    protected $rowsPerPage = 20;
 
     protected function newFilter()
     {
@@ -58,7 +72,7 @@ abstract class CrudService extends Service
     {
         $form = new $this->formName($this->em());
         $form->setInputFilter($this->get('filter'))
-            ->setBindOnValidate(false);
+                ->setBindOnValidate(false);
 
         return $form;
     }
@@ -147,7 +161,7 @@ abstract class CrudService extends Service
         if ($this->isValid !== null)
             return $this->isValid;
 
-        if ($form = $this->getForm())
+        if ($form          = $this->getForm())
             return $this->isValid = $form->isValid();
         else
             throw new LogicException('form not init');
@@ -159,13 +173,15 @@ abstract class CrudService extends Service
      */
     public function onInit()
     {
-        if (!$this->entityName && !$this->initName('Entity'))
+        $this->caller = get_called_class();
+
+        if (!$this->entityName && !$this->initNameEntity())
             throw new DomainException('entity name not correct');
 
-        if (!$this->formName && !$this->initName('Form'))
+        if (!$this->formName && !$this->initNameForm())
             throw new DomainException('form name not correct');
 
-        if (!$this->filterName && !$this->initName())
+        if (!$this->filterName && !$this->initNameFilter())
             throw new DomainException('filter name not correct');
     }
 
@@ -173,17 +189,17 @@ abstract class CrudService extends Service
      * init $this->entity and $this->entityName, if service name equals to entity name
      * @return bool succsess init or not
      */
-    private function initName($name)
+    protected function initName($name)
     {
         $propertyName = $name . 'Name';
 
-        if (!isset($this->$propertyName))
-            throw new InvalidArgumentException('property not exists');
+        if (!property_exists($this->caller, $propertyName))
+            throw new InvalidArgumentException("property $name not exists");
 
         if ($this->$propertyName)
             return true;
 
-        $FQCN = str_replace('\\Service\\', '\\Entity\\', get_class($this));
+        $FQCN = str_replace('\\Service\\', '\\Entity\\', $this->caller);
 
         if (class_exists($FQCN))
             return $this->$propertyName = $FQCN;
@@ -194,8 +210,19 @@ abstract class CrudService extends Service
     public function __call($name, $arguments)
     {
         if (substr($name, 0, 3) == 'get') {
-            $property = strtolower(substr($name, 3));
-            return $this->get($property);
+            $property = lcfirst(substr($name, 3));
+
+            if (property_exists($this->caller, $property))
+                return $this->get($property);
+            else
+                throw new DomainException("method $name not exists");
+        } elseif (substr($name, 0, 8) == 'initName') {
+            $propertyName = lcfirst(substr($name, 8));
+
+            if (property_exists($this->caller, $propertyName))
+                return $this->initName($propertyName);
+            else
+                throw new DomainException("method $name not exists");
         }
     }
 
@@ -217,6 +244,7 @@ abstract class CrudService extends Service
             return false;
 
         $em = $this->em();
+
         $em->persist($entity);
         $em->flush();
         return $this->entity = $entity;
@@ -246,9 +274,11 @@ abstract class CrudService extends Service
      */
     public function edit($id, $data = null)
     {
+        if ($data)
+            $entity = $this->setData($data);
+
         if ($entity = $this->load($id))
             return false;
-
 
         if (!$this->validate())
             return false;
@@ -261,7 +291,18 @@ abstract class CrudService extends Service
 
     public function fetch($offset = 0)
     {
+        if ($offset < 0)
+            return false;
 
+        $rowsPerPage = $this->rowsPerPage;
+
+        $result          = $this->getRepository()->fetch($offset, $rowsPerPage);
+        $this->paginator = new Paginator(new PaginatorAdapter($result));
+
+        $this->paginator->setCurrentPageNumber($offset);
+        $this->paginator->setItemCountPerPage($rowsPerPage);
+
+        return $result;
     }
 
 }

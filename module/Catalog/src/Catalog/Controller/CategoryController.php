@@ -20,9 +20,9 @@ class CategoryController extends ActionController
 
 
     public function indexAction()
-    {
+    {                
         return new ViewModel(array(
-            'categories' => $this->getService()->getCategory()
+            'categories' => $this->getService()->fetch()
         ));
     }
 
@@ -30,15 +30,14 @@ class CategoryController extends ActionController
     {
         $request = $this->getRequest();
 
-        if ($request->isPost())
-            $this->getService()->setData($request->getPost());
-
-        if ($this->getService()->add())
+        if ($request->isPost() && $this->getService()->add($request->getPost()))                       
             return $this->redirect()->toRoute('admin/category/index');
-        else
-            return array(
-                'form' => $this->getService()->getForm()
-            );
+        
+        $form = $this->getService()->getForm();
+        
+        return array(
+            'form' => $form
+        );
     }
 
     public function editAction()
