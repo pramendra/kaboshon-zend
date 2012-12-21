@@ -6,6 +6,7 @@ use Zend\Form\Form;
 
 class Category extends Form
 {
+
     public function __construct($em, $name = 'category')
     {
         parent::__construct($name);
@@ -13,16 +14,16 @@ class Category extends Form
         $this->setAttribute('method', 'post');
 
         $this->add(array(
-            'name' => 'id',
+            'name'       => 'id',
             'attributes' => array(
-                'type'  => 'hidden',
+                'type' => 'hidden',
             ),
         ));
 
         $this->add(array(
-            'name' => 'name',
+            'name'       => 'name',
             'attributes' => array(
-                'type'  => 'text',
+                'type'    => 'text',
             ),
             'options' => array(
                 'label' => 'name',
@@ -30,9 +31,9 @@ class Category extends Form
         ));
 
         $this->add(array(
-            'name' => 'descr',
+            'name'       => 'descr',
             'attributes' => array(
-                'type'  => 'textarea',
+                'type'    => 'textarea',
             ),
             'options' => array(
                 'label' => 'description',
@@ -40,35 +41,39 @@ class Category extends Form
         ));
 
         $this->add(array(
-            'name' => 'parent',
-            'type' => 'DoctrineORMModule\Form\Element\DoctrineEntity',
+            'name'    => 'parent',
+            'type'    => 'DoctrineORMModule\Form\Element\DoctrineEntity',
             'options' => array(
-                'label' => 'parent category',
+                'label'          => 'parent category',
                 'object_manager' => $em,
                 'target_class'   => 'Catalog\Entity\Category',
                 'identifier'     => 'id',
-                'property'       => 'name'
+                'property'       => 'name',
+                'value_options'  => array(
+                    '' => 'parent not set'
+                )
             ),
         ));
 
         $this->add(array(
-            'name' => 'submit',
+            'name'       => 'submit',
             'attributes' => array(
                 'type'  => 'submit',
                 'value' => 'Go',
-                'id' => 'submitbutton',
+                'id'    => 'submitbutton',
                 'class' => 'btn btn-primary',
             ),
         ));
 
         $this->add(array(
-            'name' => 'reset',
+            'name'       => 'reset',
             'attributes' => array(
                 'type'  => 'reset',
                 'value' => 'Cancel',
-                'id' => 'resetbutton',
+                'id'    => 'resetbutton',
                 'class' => 'btn red-btn',
             ),
         ));
     }
+
 }

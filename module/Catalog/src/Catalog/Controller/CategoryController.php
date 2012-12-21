@@ -34,7 +34,7 @@ class CategoryController extends ActionController
             return $this->redirect()->toRoute('admin/category/index');
         
         $form = $this->getService()->getForm();
-        
+     
         return array(
             'form' => $form
         );

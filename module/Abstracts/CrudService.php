@@ -98,7 +98,7 @@ abstract class CrudService extends Service
 
         $createMethod = 'new' . ucfirst($name);
 
-        if (isset($this->$name))
+        if (!property_exists($this->caller, $name))
             throw new InvalidArgumentException("property $name not exists");
 
         if (!is_callable(array(get_class($this), $createMethod)))
@@ -122,7 +122,7 @@ abstract class CrudService extends Service
         $this->form->setData($data);
 
         if (!$this->entity)
-            $this->form = $this->newEntity();
+            $this->entity = $this->newEntity();
 
         $this->entity->populate($data);
     }
@@ -199,7 +199,7 @@ abstract class CrudService extends Service
         if ($this->$propertyName)
             return true;
 
-        $FQCN = str_replace('\\Service\\', '\\Entity\\', $this->caller);
+        $FQCN = str_replace('\\Service\\', '\\' . ucfirst($name) . '\\', $this->caller);
 
         if (class_exists($FQCN))
             return $this->$propertyName = $FQCN;

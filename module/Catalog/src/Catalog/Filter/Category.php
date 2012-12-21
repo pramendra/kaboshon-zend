@@ -1,6 +1,6 @@
 <?php
 
-namespace Catalog\Filter\Category;
+namespace Catalog\Filter;
 
 use Zend\InputFilter\InputFilter;
 
@@ -18,7 +18,7 @@ class Category extends InputFilter
 
         $this->add($factory->createInput(array(
                     'name'     => 'id',
-                    'required' => true,
+                    'required' => false,
                     'filters'  => array(
                         array('name' => 'Int'),
                     ),
@@ -29,7 +29,7 @@ class Category extends InputFilter
                     'required' => true,
                     'filters'  => array(
                         array('name' => 'StripTags'),
-                        array('name' => 'StringTrim'),
+                        array('name'       => 'StringTrim'),
                     ),
                     'validators' => array(
                         array(
@@ -40,12 +40,29 @@ class Category extends InputFilter
                                 'max'      => 100,
                             ),
                         ),
+                        array(
+                            'name' => 'not_empty',
+                        ),
                     ),
                 )));
 
         $this->add($factory->createInput(array(
-                    'name'    => 'parent',
-                    'filters' => array(
+                    'name'     => 'name',
+                    'required' => true,
+                    'filters'  => array(
+                        array('name' => 'StringTrim'),
+                    ),
+                    'validators' => array(
+                        array(
+                            'name' => 'not_empty',
+                        ),
+                    ),
+                )));
+
+        $this->add($factory->createInput(array(
+                    'name'       => 'parent',
+                    'required'   => false,
+                    'validators' => array(
                         array('name' => 'Int'),
                     ),
                 )));
