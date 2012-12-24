@@ -242,7 +242,7 @@ abstract class CrudService extends Service
 
         if (!$this->validate())
             return false;
-
+        
         $em = $this->em();
 
         $em->persist($entity);
