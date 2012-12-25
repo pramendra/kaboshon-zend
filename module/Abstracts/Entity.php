@@ -11,12 +11,9 @@ abstract class Entity
      */
     private $caller;
 
-    public function __construct($data = null) {        
+    public function __construct($data = null) {
         if (is_array($data))
             $this->exchangeArray($data);
-        
-        //Call after ctreate event
-        $this->onCreate();
     }
 
     /**
@@ -33,10 +30,7 @@ abstract class Entity
                 return $this->getter($name);
             break;
 
-            case 'set':
-                if (!isset($arguments[0]))
-                     throw new \RuntimeException('Missed property value');
-
+            case 'set':               
                 if (!$this->setter($name, $arguments[0]) === null)
                     throw new \RuntimeException('Property not exist');
 
@@ -106,7 +100,7 @@ abstract class Entity
         }
         return $this;
     }
-    
+
     /**
      * Alias for $this->exchangeArray
      */
@@ -118,7 +112,7 @@ abstract class Entity
     /**
      * Check property exists in inherit class
      * @param string $property Property name
-     * @return bool 
+     * @return bool
      */
     private function propertyExists($property)
     {
@@ -126,10 +120,5 @@ abstract class Entity
             $this->caller = get_called_class();
 
         return property_exists($this->caller, $property);
-    }        
-    
-    /**
-     * instead constructor overriding override this method
-     */
-    protected function onCreate() {}
+    }
 }

@@ -11,7 +11,6 @@ use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as PaginatorAdapter;
 
 abstract class CrudService extends Service
 {
-
     /**
      * @var string FQCN of current inherit class
      */
@@ -72,7 +71,7 @@ abstract class CrudService extends Service
     {
         $form = new $this->formName($this->em());
         $form->setInputFilter($this->get('filter'))
-                ->setBindOnValidate(false);
+            ->setBindOnValidate(false);
 
         return $form;
     }
@@ -134,7 +133,7 @@ abstract class CrudService extends Service
      */
     public function load($id)
     {
-        $entity = $this->em()->find($this->entityName, (int) $id);
+        $entity = $this->em()->find($this->entityName, (int)$id);
 
         if ($entity === null) {
             $this->sm()->get('response')->setStatusCode(404);
@@ -161,7 +160,7 @@ abstract class CrudService extends Service
         if ($this->isValid !== null)
             return $this->isValid;
 
-        if ($form          = $this->getForm())
+        if ($form = $this->getForm())
             return $this->isValid = $form->isValid();
         else
             throw new LogicException('form not init');
@@ -199,7 +198,8 @@ abstract class CrudService extends Service
         if ($this->$propertyName)
             return true;
 
-        $FQCN = str_replace('\\Service\\', '\\' . ucfirst($name) . '\\', $this->caller);
+        $FQCN = str_replace('\\Service\\', '\\' . ucfirst($name) . '\\',
+                                                          $this->caller);
 
         if (class_exists($FQCN))
             return $this->$propertyName = $FQCN;
@@ -227,7 +227,6 @@ abstract class CrudService extends Service
     }
 
     //CRUD Methods
-
     /**
      * Create operation
      * @param array $data new entity property values
@@ -242,9 +241,9 @@ abstract class CrudService extends Service
 
         if (!$this->validate())
             return false;
-        
-        $em = $this->em();
 
+        $em           = $this->em();
+        $entity->setParent(1);
         $em->persist($entity);
         $em->flush();
         return $this->entity = $entity;

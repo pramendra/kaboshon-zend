@@ -13,7 +13,6 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Category extends \Abstracts\Entity
 {
-
     /**
      * @var integer $id
      *
@@ -73,9 +72,11 @@ class Category extends \Abstracts\Entity
      */
     protected $products;
 
-    protected function onCreate()
+    public function __construt(Category $parent = null, $data = array())
     {
+        $this->parent   = $parent;
         $this->children = new ArrayCollection();
+        parent::__construct($data);
     }
 
 }

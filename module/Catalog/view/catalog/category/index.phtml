@@ -6,8 +6,8 @@ $this->headTitle($title);
 
 <p><a href="<?php echo $this->url('admin/category', array(
         'action'=>'add'));?>">Добавить категорию</a></p>
-
-<table class="table"> 
+<?php var_dump(count($categories)) ?>
+<table class="table">
 <tr>
     <th>ID</th>
     <th>Название</th>
