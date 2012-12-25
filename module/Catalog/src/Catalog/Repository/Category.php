@@ -9,7 +9,7 @@ use Abstracts\CrudRepositoryInterface;
 class Category extends EntityRepository implements CrudRepositoryInterface
 {
 
-    public function paginateWithParents($offset = 0, $limit = 0)
+    public function getAdminPaginator($offset = 0, $limit = 0)
     {
         $qb = $this->_em->createQueryBuilder();
         $qb->select('c')
@@ -27,10 +27,4 @@ class Category extends EntityRepository implements CrudRepositoryInterface
 
         return $paginator;
     }
-
-    public function fetch($offset = 0, $limit = 0, $criteria = null)
-    {
-        return $this->paginateWithParents($offset, $limit);
-    }
-
 }
