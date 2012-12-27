@@ -30,7 +30,7 @@ abstract class Entity
                 return $this->getter($name);
             break;
 
-            case 'set':               
+            case 'set':
                 if (!$this->setter($name, $arguments[0]) === null)
                     throw new \RuntimeException('Property not exist');
 

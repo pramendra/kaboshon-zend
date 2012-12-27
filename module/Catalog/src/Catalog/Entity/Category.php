@@ -79,4 +79,13 @@ class Category extends \Abstracts\Entity
         parent::__construct($data);
     }
 
+    public function getParentName()
+    {
+        $parent = $this->getParent();
+        if ($parent === null)
+            return null;
+        else
+            return $parent->getName();
+    }
+
 }
