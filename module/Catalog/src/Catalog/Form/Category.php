@@ -50,7 +50,7 @@ class Category extends Form
                 'identifier'     => 'id',
                 'property'       => 'name',
                 'value_options'  => array(
-                    '' => 'parent not set'
+                    null => 'parent not set'
                 )
             ),
         ));

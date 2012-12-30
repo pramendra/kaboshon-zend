@@ -19,9 +19,9 @@ $this->headTitle($title);
     <td><?= $this->escapeHtml($category->getName()); ?></td>
     <td><?= $this->escapeHtml($category->getParentName()); ?></td>
     <td>
-        <a href="<?php echo $this->url('category',
+        <a href="<?php echo $this->url('admin/category',
             array('action'=>'edit', 'id' => $category->getId()));?>">Редактировать</a>
-        <a href="<?php echo $this->url('category',
+        <a href="<?php echo $this->url('admin/category',
             array('action'=>'delete', 'id' => $category->getId()));?>">Удалить</a>
     </td>
 </tr>

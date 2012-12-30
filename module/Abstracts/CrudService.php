@@ -127,22 +127,6 @@ abstract class CrudService extends Service
     }
 
     /**
-     * Load entity by id and validate exists
-     * @param type $id
-     * @return \Abstracts\Entity Doctrine entity object
-     */
-    public function load($id)
-    {
-        $entity = $this->em()->find($this->entityName, (int)$id);
-
-        if ($entity === null) {
-            $this->sm()->get('response')->setStatusCode(404);
-            return false;
-        } else
-            return $this->entity = $entity;
-    }
-
-    /**
      * Repository for this service entity
      * @return type Doctrine\ORM\EntityRepository
      */
@@ -235,15 +219,15 @@ abstract class CrudService extends Service
     public function add($data = null)
     {
         if ($data)
-            $entity = $this->setData($data);
+            $this->setData($data);
 
         $entity = $this->getEntity();
 
         if (!$this->validate())
             return false;
-
+        $entity->setParent(null);
         $em           = $this->em();
-        $entity->setParent(1);
+
         $em->persist($entity);
         $em->flush();
         return $this->entity = $entity;
@@ -256,11 +240,13 @@ abstract class CrudService extends Service
      */
     public function delete($id)
     {
-        if ($entity = $this->load($id))
+        $entity = $this->em()->find($this->entityName, (int)$id);;
+        if ($entity === null)
             return false;
 
         $em = $this->em();
         $em->remove($entity);
+        $em->flush();
 
         return true;
     }
@@ -276,7 +262,8 @@ abstract class CrudService extends Service
         if ($data)
             $entity = $this->setData($data);
 
-        if ($entity = $this->load($id))
+        $entity = $this->em()->find($this->entityName, (int)$id);
+        if ($entity === null)
             return false;
 
         if (!$this->validate())

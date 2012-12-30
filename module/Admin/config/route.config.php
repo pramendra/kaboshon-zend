@@ -19,8 +19,8 @@ return array(
                         'options' => array(
                             'route'       => '/category[/:action][/:id]',
                             'constraints' => array(
-                                'action'   => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'id'       => '[0-9]+',                                
+                                'action'   => '[a-zA-Z][a-zA-Z0-9_-]+',
+                                'id'       => '[0-9]+',
                             ),
                             'defaults' => array(
                                 'controller' => 'Catalog\Controller\Category',

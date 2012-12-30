@@ -48,6 +48,11 @@ class CategoryController extends ActionController
 
     public function deleteAction()
     {
+        $id = (int) $this->getEvent()->getRouteMatch()->getParam('id');
 
+        if ($this->getService()->delete($id))
+            return $this->redirect()->toRoute('admin/category/index');
+        else
+            $this->getResponse()->setStatusCode(404);
     }
 }
