@@ -7,7 +7,6 @@ use Zend\View\Model\ViewModel;
 
 class CategoryController extends ActionController
 {
-
     protected $service;
 
     public function getService()
@@ -18,13 +17,12 @@ class CategoryController extends ActionController
         return $this->service;
     }
 
-
     public function indexAction()
     {
         return new ViewModel(array(
-            'categories' => $this->getService()->fetch(),
-            'paginator' =>$this->getService()->getPaginator()
-        ));
+                'categories' => $this->getService()->fetch(),
+                'paginator'  => $this->getService()->getPaginator()
+            ));
     }
 
     public function addAction()
@@ -43,16 +41,32 @@ class CategoryController extends ActionController
 
     public function editAction()
     {
+        $request = $this->getRequest();
+        $id      = (int)$this->getEvent()->getRouteMatch()->getParam('id');
 
+        if ($request->isPost()) {
+            if ($this->getService()->edit($id, $request->getPost()))
+                return $this->redirect()->toRoute('admin/category/index');
+            else
+                $this->getResponse()->setStatusCode(404);
+        }
+
+
+        $form = $this->getService()->getForm();
+
+        return array(
+            'form' => $form
+        );
     }
 
     public function deleteAction()
     {
-        $id = (int) $this->getEvent()->getRouteMatch()->getParam('id');
+        $id = (int)$this->getEvent()->getRouteMatch()->getParam('id');
 
         if ($this->getService()->delete($id))
             return $this->redirect()->toRoute('admin/category/index');
         else
             $this->getResponse()->setStatusCode(404);
     }
+
 }

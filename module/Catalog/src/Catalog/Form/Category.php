@@ -6,14 +6,20 @@ use Zend\Form\Form;
 
 class Category extends Form
 {
-
     public function __construct($em, $name = 'category')
     {
         parent::__construct($name);
 
         $this->setAttribute('method', 'post');
 
-        $this->add(array(
+        $this->initElements($em);
+
+        $this->initDefaultValues($em);
+    }
+
+    private function initElements($em)
+    {
+       $this->add(array(
             'name'       => 'id',
             'attributes' => array(
                 'type' => 'hidden',
@@ -46,13 +52,14 @@ class Category extends Form
             'options' => array(
                 'label'          => 'parent category',
                 'object_manager' => $em,
+                'empty_option'   => 'root category',
                 'target_class'   => 'Catalog\Entity\Category',
                 'identifier'     => 'id',
                 'property'       => 'name',
-                'value_options'  => array(
-                    null => 'parent not set'
-                )
             ),
+            'attributes'     => array(
+                'required' => false
+            )
         ));
 
         $this->add(array(
@@ -74,6 +81,11 @@ class Category extends Form
                 'class' => 'btn red-btn',
             ),
         ));
+    }
+
+    private function initDefaultValues($em = null)
+    {
+
     }
 
 }

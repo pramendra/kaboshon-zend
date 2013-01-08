@@ -144,7 +144,7 @@ abstract class CrudService extends Service
         if ($this->isValid !== null)
             return $this->isValid;
 
-        if ($form = $this->getForm())
+        if ($form          = $this->getForm())
             return $this->isValid = $form->isValid();
         else
             throw new LogicException('form not init');
@@ -226,7 +226,7 @@ abstract class CrudService extends Service
         if (!$this->validate())
             return false;
         $entity->setParent(null);
-        $em           = $this->em();
+        $em = $this->em();
 
         $em->persist($entity);
         $em->flush();
@@ -240,7 +240,8 @@ abstract class CrudService extends Service
      */
     public function delete($id)
     {
-        $entity = $this->em()->find($this->entityName, (int)$id);;
+        $entity = $this->em()->find($this->entityName, (int)$id);
+        ;
         if ($entity === null)
             return false;
 
