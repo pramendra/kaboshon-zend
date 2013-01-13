@@ -44,13 +44,15 @@ class CategoryController extends ActionController
         $request = $this->getRequest();
         $id      = (int)$this->getEvent()->getRouteMatch()->getParam('id');
 
+        if (!$this->getService()->load($id))
+                $this->getResponse()->setStatusCode(404);
+
         if ($request->isPost()) {
             if ($this->getService()->edit($id, $request->getPost()))
                 return $this->redirect()->toRoute('admin/category/index');
             else
                 $this->getResponse()->setStatusCode(404);
         }
-
 
         $form = $this->getService()->getForm();
 

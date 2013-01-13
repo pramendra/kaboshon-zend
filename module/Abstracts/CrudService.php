@@ -113,13 +113,20 @@ abstract class CrudService extends Service
      * create new form instance, init sevice form and entity and set from data
      * @param array $name Data from different source
      */
-    public function setData($data)
+    public function setFormData($data)
     {
         if (!$this->form)
             $this->form = $this->newForm();
 
         $this->form->setData($data);
+    }
 
+    /**
+     *
+     * @param array $data Key value array include model data
+     */
+    public function setEntityData($data)
+    {
         if (!$this->entity)
             $this->entity = $this->newEntity();
 
@@ -144,7 +151,8 @@ abstract class CrudService extends Service
         if ($this->isValid !== null)
             return $this->isValid;
 
-        if ($form          = $this->getForm())
+        $form          = $this->getForm();
+        if ($form)
             return $this->isValid = $form->isValid();
         else
             throw new LogicException('form not init');
@@ -182,9 +190,9 @@ abstract class CrudService extends Service
         if ($this->$propertyName)
             return true;
 
-        $FQCN = str_replace('\\Service\\', '\\' . ucfirst($name) . '\\',
+        $FQCN                = str_replace('\\Service\\',
+                                           '\\' . ucfirst($name) . '\\',
                                                           $this->caller);
-
         if (class_exists($FQCN))
             return $this->$propertyName = $FQCN;
         else
@@ -210,6 +218,19 @@ abstract class CrudService extends Service
         }
     }
 
+    public function load($id)
+    {
+        $entity = $this->em()->find($this->entityName, (int)$id);
+
+        if ($entity === null)
+            return null;
+
+        $this->entity = $entity;
+        $this->setFormData($entity->getArrayCopy());
+
+        return $entity;
+    }
+
     //CRUD Methods
     /**
      * Create operation
@@ -218,8 +239,10 @@ abstract class CrudService extends Service
      */
     public function add($data = null)
     {
-        if ($data)
-            $this->setData($data);
+        if ($data) {
+            $this->setEntityData($data);
+            $this->setFormData($data);
+        }
 
         $entity = $this->getEntity();
 
@@ -230,7 +253,7 @@ abstract class CrudService extends Service
 
         $em->persist($entity);
         $em->flush();
-        return $this->entity = $entity;
+        return true;
     }
 
     /**
@@ -249,6 +272,8 @@ abstract class CrudService extends Service
         $em->remove($entity);
         $em->flush();
 
+        $this->entity = $entity;
+
         return true;
     }
 
@@ -260,12 +285,14 @@ abstract class CrudService extends Service
      */
     public function edit($id, $data = null)
     {
-        if ($data)
-            $entity = $this->setData($data);
-
         $entity = $this->em()->find($this->entityName, (int)$id);
         if ($entity === null)
             return false;
+
+        if ($data)
+            $this->setFormData($data);
+        else
+            $this->setFormData($entity->populate());
 
         if (!$this->validate())
             return false;
@@ -273,7 +300,9 @@ abstract class CrudService extends Service
         $entity->populate($this->getForm()->getData());
         $this->em()->flush();
 
-        return $this->entity = $entity;
+        $this->entity = $entity;
+
+        return true;
     }
 
     public function fetch($offset = 0)
