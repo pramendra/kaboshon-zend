@@ -3,6 +3,7 @@
 namespace Catalog\Form;
 
 use Zend\Form\Form;
+use Zend\Form\FormInterface;
 
 class Category extends Form
 {
@@ -14,12 +15,11 @@ class Category extends Form
 
         $this->initElements($em);
 
-        $this->initDefaultValues($em);
     }
 
     private function initElements($em)
     {
-       $this->add(array(
+        $this->add(array(
             'name'       => 'id',
             'attributes' => array(
                 'type' => 'hidden',
@@ -82,10 +82,4 @@ class Category extends Form
             ),
         ));
     }
-
-    private function initDefaultValues($em = null)
-    {
-
-    }
-
 }

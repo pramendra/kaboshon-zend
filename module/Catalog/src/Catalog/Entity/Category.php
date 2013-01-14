@@ -53,7 +53,7 @@ class Category extends \Abstracts\Entity
     /**
      * @var Catalog\Entity\Category
      *
-     * @ORM\ManyToOne(targetEntity="Catalog\Entity\Category", inversedBy="children")
+     * @ORM\ManyToOne(targetEntity="Catalog\Entity\Category", inversedBy="children", cascade={"persist"})
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      */
     protected $parent;
@@ -61,7 +61,7 @@ class Category extends \Abstracts\Entity
     /**
      * @var Catalog\Entity\Category[]
      *
-     * @ORM\OneToMany(targetEntity="Catalog\Entity\Category", mappedBy="parent")
+     * @ORM\OneToMany(targetEntity="Catalog\Entity\Category", mappedBy="parent", cascade={"persist"})
      */
     protected $children;
 
@@ -74,7 +74,6 @@ class Category extends \Abstracts\Entity
 
     public function __construt(Category $parent = null, $data = array())
     {
-        $this->parent   = $parent;
         $this->children = new ArrayCollection();
         parent::__construct($data);
     }
@@ -87,5 +86,4 @@ class Category extends \Abstracts\Entity
         else
             return $parent->getName();
     }
-
 }
