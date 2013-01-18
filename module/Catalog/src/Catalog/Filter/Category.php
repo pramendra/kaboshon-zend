@@ -59,13 +59,13 @@ class Category extends InputFilter
                     ),
                 )));
 
-        $this->add($factory->createInput(array(
-                    'name'       => 'parent',
-                    'required'   => false,
-                    'validators' => array(
-                        array('name' => 'Int'),
-                    ),
-                )));
+//        $this->add($factory->createInput(array(
+//                    'name'       => 'parent',
+//                    'required'   => false,
+//                    'validators' => array(
+//                        array('name' => 'Int'),
+//                    ),
+//                )));
     }
 
 }

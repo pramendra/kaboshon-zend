@@ -11,6 +11,7 @@ use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as PaginatorAdapter;
 
 abstract class CrudService extends Service
 {
+
     /**
      * @var string FQCN of current inherit class
      */
@@ -47,15 +48,13 @@ abstract class CrudService extends Service
     protected $filter;
 
     /**
-     * @var \Zend\Pagination\Paginator paginator component, init in $this->fetch()
-     * @see $this->fetch()
-     */
-    protected $paginator;
-
-    /**
      * @var bool validation data result
      */
     protected $isValid;
+
+    /**
+     * @var int Items per page in listin items page
+     */
     protected $rowsPerPage = 20;
 
     protected function newFilter()
@@ -68,10 +67,10 @@ abstract class CrudService extends Service
      * @return \Zend\Form\Form
      */
     protected function newForm()
-    {
-        $form = new $this->formName($this->em());
+    {        
+        $form = new $this->formName($this->em(), $this->entity);
         $form->setInputFilter($this->get('filter'))
-            ->setBindOnValidate(false);
+                ->setBindOnValidate(false);
 
         return $form;
     }
@@ -90,7 +89,7 @@ abstract class CrudService extends Service
      * @param string $name name of property
      * @return mixed property value like a form, filter and entity instance
      */
-    public function get($name)
+    public function get($name, $params = null)
     {
         if (!$name)
             return null;
@@ -110,7 +109,17 @@ abstract class CrudService extends Service
     }
 
     /**
-     * create new form instance, init sevice form and entity and set from data
+     * Create and return new paginator object
+     * @param Doctrine\ORM\Tools\Paginator $result Result to paginate
+     * @return Paginator
+     */
+    public function getPaginator($result)
+    {
+        return new Paginator(new PaginatorAdapter($result));
+    }
+
+    /**
+     * set form data form and init form object if it needed
      * @param array $name Data from different source
      */
     public function setFormData($data)
@@ -122,7 +131,7 @@ abstract class CrudService extends Service
     }
 
     /**
-     *
+     * set entity data and init entity object if it needed
      * @param array $data Key value array include model data
      */
     public function setEntityData($data)
@@ -131,6 +140,15 @@ abstract class CrudService extends Service
             $this->entity = $this->newEntity();
 
         $this->entity->populate($data);
+    }
+
+    /**
+     * calling setters for entity and form objects
+     */
+    public function setData($data)
+    {
+        $this->setEntityData($data);
+        $this->setFormData($data);
     }
 
     /**
@@ -190,9 +208,7 @@ abstract class CrudService extends Service
         if ($this->$propertyName)
             return true;
 
-        $FQCN                = str_replace('\\Service\\',
-                                           '\\' . ucfirst($name) . '\\',
-                                                          $this->caller);
+        $FQCN                = str_replace('\\Service\\', '\\' . ucfirst($name) . '\\', $this->caller);
         if (class_exists($FQCN))
             return $this->$propertyName = $FQCN;
         else
@@ -218,16 +234,146 @@ abstract class CrudService extends Service
         }
     }
 
+    /**
+     * Select entity by id
+     */
+    public function findById($id)
+    {
+        return $this->em()->find($this->entityName, $id);
+    }
+
+
+    /**
+     * Select entity by id and init another service data from entity fields
+     * @param int $id
+     * @return \Abstract\Entity
+     */
     public function load($id)
     {
-        $entity = $this->em()->find($this->entityName, (int)$id);
+         if ($this->entity && ($this->entity->getId() == $id))
+            return $this->entity;
 
-        if ($entity === null)
+        $this->entity = $this->findById($id);
+
+        if ($this->entity === null)
             return null;
 
-        $this->entity = $entity;
-        $this->setFormData($entity->getArrayCopy());
+        $this->setFormData($this->entity->getArrayCopy());
 
-        return $entity;
+        return $this->entity;
+    }
+
+    //Events
+    protected function preSave()
+    {
+        return true;
+    }
+
+    protected function preInsert()
+    {
+        return true;
+    }
+
+    protected function preUpdate()
+    {
+        return true;
+    }
+
+    protected function preDelete()
+    {
+        return true;
+    }
+
+    //CRUD Methods
+    /**
+     * Create operation
+     * @param array $data new entity property values
+     * @return type Description
+     */
+    public function add($data = null)
+    {
+        if ($data)
+            $this->setData($data);
+
+        if (!$this->validate())
+            return false;
+
+        $em = $this->em();
+
+        if (!$this->preSave() || !$this->preInsert())
+            return false;
+
+        $em->persist($this->entity);
+        $em->flush();
+
+        return true;
+    }
+
+    /**
+     * Delete operation
+     * @param type $id
+     * @return bool success delete or not
+     */
+    public function delete($id)
+    {
+        if ($this->load($id) === null)
+            return false;
+
+        $em = $this->em();
+        $em->remove($this->entity);
+
+        if (!$this->preDelete())
+            return false;
+
+        $em->flush();
+        return true;
+    }
+
+    /**
+     * Update operation
+     * @param int $id
+     * @param array $data
+     * @return boolean success update or not
+     */
+    public function edit($id, $data = null)
+    {
+        if ($this->load($id) === null)
+            return false;
+
+        if ($data)
+            $this->setData($data);
+        else
+            $this->setEntityData($this->getFormData());
+
+        if (!$this->validate())
+            return false;
+
+        if (!$this->preSave() || !$this->preUpdate())
+            return false;
+
+        $this->em()->flush();
+
+        return true;
+    }
+
+    /**
+     * fetch object collections for list items
+     * @param type $offset
+     * @return boolean|null
+     */
+    public function fetch($offset = 0)
+    {
+        if ($offset < 0)
+            return false;
+
+        $result    = $this->getRepository()->fetch($offset, $this->rowsPerPage);
+        $paginator = $this->getPaginator($result);
+        if (count($result)) {
+            $paginator->setCurrentPageNumber($offset);
+            $paginator->setItemCountPerPage($this->rowsPerPage);
+            return $paginator;
+        }
+
+        return null;
     }
 }

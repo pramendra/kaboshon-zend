@@ -22,7 +22,7 @@ class Category extends EntityRepository
         if ($limit)
             $qb->setMaxResults($limit);
 
-        $paginator = new Paginator($qb, true);
+        $paginator = new Paginator($qb);
 
         return $paginator;
     }
@@ -32,4 +32,15 @@ class Category extends EntityRepository
         return $this->getAdminPaginator($offset, $limit);
     }
 
+    public function findWithoutId($id)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('c')
+            ->from('Catalog\Entity\Category', 'c')
+            ->where('c.id <> :id')
+            ->setParameter('id', $id)
+            ->orderBy('c.id', 'ASC');
+
+        return $qb->getQuery()->getResult();
+    }
 }

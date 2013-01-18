@@ -13,7 +13,7 @@ $this->headTitle($title);
     <th>Родительская категория</th>
     <th>&nbsp;</th>
 </tr>
-<?php foreach($categories as $category) : ?>
+<?php if ($categories) foreach($categories as $category) : ?>
 <tr>
     <td><?= $this->escapeHtml($category->getId()); ?></td>
     <td><?= $this->escapeHtml($category->getName()); ?></td>

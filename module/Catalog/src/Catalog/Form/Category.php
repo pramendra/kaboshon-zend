@@ -7,7 +7,8 @@ use Zend\Form\FormInterface;
 
 class Category extends Form
 {
-    public function __construct($em, $name = 'category')
+
+    public function __construct($em, $entity = null, $name = 'category')
     {
         parent::__construct($name);
 
@@ -15,6 +16,7 @@ class Category extends Form
 
         $this->initElements($em);
 
+        $this->initValues($entity);
     }
 
     private function initElements($em)
@@ -63,16 +65,6 @@ class Category extends Form
         ));
 
         $this->add(array(
-            'name'       => 'submit',
-            'attributes' => array(
-                'type'  => 'submit',
-                'value' => 'Go',
-                'id'    => 'submitbutton',
-                'class' => 'btn btn-primary',
-            ),
-        ));
-
-        $this->add(array(
             'name'       => 'reset',
             'attributes' => array(
                 'type'  => 'reset',
@@ -81,5 +73,29 @@ class Category extends Form
                 'class' => 'btn red-btn',
             ),
         ));
+
+        $this->add(array(
+            'name'       => 'submit',
+            'attributes' => array(
+                'type'  => 'submit',
+                'value' => 'Go',
+                'id'    => 'submitbutton',
+                'class' => 'btn btn-primary',
+            ),
+        ));
     }
+
+    private function initValues($entity)
+    {
+        if ($entity) {
+            $parent = $this->get('parent');
+            $parent->setOptions(array(
+                'find_method' => array(
+                    'name'   => 'findWithoutId',
+                    'params' => array('id' => $entity->getId()),
+                )
+            ));
+        }
+    }
+
 }

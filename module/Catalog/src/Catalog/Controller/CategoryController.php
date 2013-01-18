@@ -20,8 +20,7 @@ class CategoryController extends ActionController
     public function indexAction()
     {
         return new ViewModel(array(
-                'categories' => $this->getService()->fetch(),
-                'paginator'  => $this->getService()->getPaginator()
+                'categories' => $this->getService()->fetch()
             ));
     }
 
@@ -42,7 +41,7 @@ class CategoryController extends ActionController
     public function editAction()
     {
         $request = $this->getRequest();
-        $id      = (int)$this->getEvent()->getRouteMatch()->getParam('id');
+        $id      = (int) $this->getEvent()->getRouteMatch()->getParam('id');
 
         if (!$this->getService()->load($id))
                 $this->getResponse()->setStatusCode(404);
