@@ -67,10 +67,10 @@ abstract class CrudService extends Service
      * @return \Zend\Form\Form
      */
     protected function newForm()
-    {        
+    {
         $form = new $this->formName($this->em(), $this->entity);
         $form->setInputFilter($this->get('filter'))
-                ->setBindOnValidate(false);
+            ->setBindOnValidate(false);
 
         return $form;
     }
@@ -110,7 +110,7 @@ abstract class CrudService extends Service
 
     /**
      * Create and return new paginator object
-     * @param Doctrine\ORM\Tools\Paginator $result Result to paginate
+     * @param \Doctrine\ORM\Tools\Paginator $result Result to paginate
      * @return Paginator
      */
     public function getPaginator($result)
@@ -120,7 +120,8 @@ abstract class CrudService extends Service
 
     /**
      * set form data form and init form object if it needed
-     * @param array $name Data from different source
+     * @param array $data Data from different source
+     * @return \Abstracts\CrudService
      */
     public function setFormData($data)
     {
@@ -128,6 +129,8 @@ abstract class CrudService extends Service
             $this->form = $this->newForm();
 
         $this->form->setData($data);
+
+        return $this;
     }
 
     /**
@@ -153,7 +156,7 @@ abstract class CrudService extends Service
 
     /**
      * Repository for this service entity
-     * @return type Doctrine\ORM\EntityRepository
+     * @return  \Doctrine\ORM\EntityRepository
      */
     protected function getRepository()
     {
@@ -162,14 +165,15 @@ abstract class CrudService extends Service
 
     /**
      * Validate data before crud operations
-     * @return bool data validation reslut
+     * @throws \Zend\Stdlib\Exception\LogicException
+     * @return bool data validation result
      */
     public function validate()
     {
         if ($this->isValid !== null)
             return $this->isValid;
 
-        $form          = $this->getForm();
+        $form = $this->getForm();
         if ($form)
             return $this->isValid = $form->isValid();
         else
@@ -178,7 +182,7 @@ abstract class CrudService extends Service
 
     /**
      * Init on the setting service locator event
-     * @throws InvalidArgumentException
+     * @throws DomainException
      */
     public function onInit()
     {
@@ -196,7 +200,9 @@ abstract class CrudService extends Service
 
     /**
      * init $this->entity and $this->entityName, if service name equals to entity name
-     * @return bool succsess init or not
+     * @param string $name "meta" name of property? which be initialized
+     * @throws \Zend\Stdlib\Exception\InvalidArgumentException
+     * @return bool|string success init or not
      */
     protected function initName($name)
     {
@@ -208,7 +214,7 @@ abstract class CrudService extends Service
         if ($this->$propertyName)
             return true;
 
-        $FQCN                = str_replace('\\Service\\', '\\' . ucfirst($name) . '\\', $this->caller);
+        $FQCN = str_replace('\\Service\\', '\\' . ucfirst($name) . '\\', $this->caller);
         if (class_exists($FQCN))
             return $this->$propertyName = $FQCN;
         else
@@ -246,11 +252,11 @@ abstract class CrudService extends Service
     /**
      * Select entity by id and init another service data from entity fields
      * @param int $id
-     * @return \Abstract\Entity
+     * @return Abstract\Entity
      */
     public function load($id)
     {
-         if ($this->entity && ($this->entity->getId() == $id))
+        if ($this->entity && ($this->entity->getId() == $id))
             return $this->entity;
 
         $this->entity = $this->findById($id);
@@ -288,7 +294,7 @@ abstract class CrudService extends Service
     /**
      * Create operation
      * @param array $data new entity property values
-     * @return type Description
+     * @return bool result of adding
      */
     public function add($data = null)
     {
@@ -311,7 +317,7 @@ abstract class CrudService extends Service
 
     /**
      * Delete operation
-     * @param type $id
+     * @param int $id
      * @return bool success delete or not
      */
     public function delete($id)
@@ -326,6 +332,7 @@ abstract class CrudService extends Service
             return false;
 
         $em->flush();
+
         return true;
     }
 
@@ -358,7 +365,7 @@ abstract class CrudService extends Service
 
     /**
      * fetch object collections for list items
-     * @param type $offset
+     * @param int $offset
      * @return boolean|null
      */
     public function fetch($offset = 0)
@@ -371,6 +378,7 @@ abstract class CrudService extends Service
         if (count($result)) {
             $paginator->setCurrentPageNumber($offset);
             $paginator->setItemCountPerPage($this->rowsPerPage);
+
             return $paginator;
         }
 
