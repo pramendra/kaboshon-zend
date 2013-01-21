@@ -12,12 +12,11 @@ class Category extends Service
         $parent = (int) $this->entity->getParent();
 
         if ($parent > 0) {
-            $parent = $this->em()->find($parent);
+            $parent = $this->findById($parent);
         } else
             $parent = null;
 
         $this->entity->setParent($parent);
-
         return parent::preSave();
     }
 
@@ -25,7 +24,7 @@ class Category extends Service
     {
         if ($this->entity->getParent() == $this->entity->getid())
             $this->entity->setParent(null);
-        
+
         return parent::preUpdate();
     }
 
