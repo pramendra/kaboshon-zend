@@ -28,7 +28,7 @@ abstract class CrudService extends Service
     protected $entity;
 
     /**
-     * @var \Zend\From\From form for this service entity
+     * @var \Zend\Form\Form form for this service entity
      */
     protected $form;
 
@@ -77,6 +77,7 @@ abstract class CrudService extends Service
 
     /**
      * Create and return new entity
+     * @param null|array $data
      * @return \Abstracts\Entity
      */
     protected function newEntity($data = null)
@@ -87,6 +88,9 @@ abstract class CrudService extends Service
     /**
      * Getter for service properties, this method cant work in inherit classes
      * @param string $name name of property
+     * @param null|array $params
+     * @throws \Zend\Stdlib\Exception\InvalidArgumentException
+     * @throws \Zend\Stdlib\Exception\LogicException
      * @return mixed property value like a form, filter and entity instance
      */
     public function get($name, $params = null)
@@ -110,7 +114,7 @@ abstract class CrudService extends Service
 
     /**
      * Create and return new paginator object
-     * @param \Doctrine\ORM\Tools\Paginator $result Result to paginate
+     * @param \Doctrine\ORM\Tools\Pagination\Paginator $result Result to paginate
      * @return Paginator
      */
     public function getPaginator($result)
@@ -252,7 +256,7 @@ abstract class CrudService extends Service
     /**
      * Select entity by id and init another service data from entity fields
      * @param int $id
-     * @return Abstract\Entity
+     * @return \Abstracts\Entity
      */
     public function load($id)
     {

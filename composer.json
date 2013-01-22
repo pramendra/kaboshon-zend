@@ -10,7 +10,8 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=5.3.3",
-        "zendframework/zendframework": "2.*",    
+        "zendframework/zendframework": "2.*",
+        "zendframework/zftool": "dev-master",
         "doctrine/doctrine-orm-module": "dev-master"     
     }
 }
