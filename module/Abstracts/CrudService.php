@@ -70,7 +70,7 @@ abstract class CrudService extends Service
     {
         $form = new $this->formName($this->em(), $this->entity);
         if ($this->filterName)
-            $form->setInputFilter($this->get('filter'))
+            $form->setInputFilter($this->get('filter'));
         $form->setBindOnValidate(false);
 
         return $form;
