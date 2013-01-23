@@ -43,7 +43,7 @@ class ProductPhoto extends \Abstracts\Entity
     protected $isMain = false;
 
     /**
-     * @var Catalog\Entity\Product
+     * @var \Catalog\Entity\Product
      *
      * @ORM\ManyToOne(targetEntity="Catalog\Entity\Product", inversedBy="photos")
      * @ORM\JoinColumn(name="product_id", referencedColumnName="id")

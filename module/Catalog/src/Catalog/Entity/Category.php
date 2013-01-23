@@ -51,7 +51,7 @@ class Category extends \Abstracts\Entity
     protected $metaKeywords;
 
     /**
-     * @var Catalog\Entity\Category
+     * @var \Catalog\Entity\Category
      *
      * @ORM\ManyToOne(targetEntity="Catalog\Entity\Category", inversedBy="children", cascade={"persist"})
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
@@ -59,25 +59,33 @@ class Category extends \Abstracts\Entity
     protected $parent;
 
     /**
-     * @var Catalog\Entity\Category[]
+     * @var \Catalog\Entity\Category[]
      *
      * @ORM\OneToMany(targetEntity="Catalog\Entity\Category", mappedBy="parent", cascade={"persist"})
      */
     protected $children;
 
     /**
-     * @var Catalog\Entity\Product[]
+     * @var \Catalog\Entity\Product[]
      *
      * @ORM\OneToMany(targetEntity="Catalog\Entity\Product", mappedBy="category")
      */
     protected $products;
 
+    /**
+     * @param Category $parent
+     * @param array $data
+     */
     public function __construt(Category $parent = null, $data = array())
     {
         $this->children = new ArrayCollection();
         parent::__construct($data);
     }
 
+    /**
+     * return parent category name or null
+     * @return null|string
+     */
     public function getParentName()
     {
         $parent = $this->getParent();

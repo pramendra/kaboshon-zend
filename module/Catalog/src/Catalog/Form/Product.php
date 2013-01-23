@@ -18,7 +18,40 @@ class Product extends Form
 
     private function initElements($em)
     {
+        $this->add(array(
+                        'name'       => 'id',
+                        'attributes' => array(
+                            'type' => 'hidden',
+                        ),
+                   ));
 
+        $this->add(array(
+                        'name'       => 'name',
+                        'attributes' => array(
+                            'type'     => 'text',
+                            'required' => 'required',
+                        ),
+                        'options'    => array(
+                            'label' => 'name',
+                        ),
+                   ));
+
+        $this->add(array(
+                      'name' => 'descr',
+                      'attributes' => array(
+                          'type' => 'textarea',
+                      )
+                   ));
+
+        $this->add(array(
+                        'name'       => 'price',
+                        'attributes' => array(
+                            'type'     => 'text',
+                            'required' => 'required',
+                            'pattern'  => '\d+(\.\d{2})?'
+                        ),
+                        'label'      => 'price'
+                   ));
     }
 
     private function initValues($em)

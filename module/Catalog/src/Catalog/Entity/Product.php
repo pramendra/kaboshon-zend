@@ -43,7 +43,7 @@ class Product extends \Abstracts\Entity
     protected $descr;
 
     /**
-     * @var Catalog\Entity\Category
+     * @var \Catalog\Entity\Category
      *
      * @ORM\ManyToOne(targetEntity="Catalog\Entity\Category", inversedBy="products")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
@@ -51,10 +51,21 @@ class Product extends \Abstracts\Entity
     protected $category;
     
     /**     
-     * @var Catalog\Entity\Photo[]
+     * @var \Catalog\Entity\ProductPhoto[]
      * 
      * @ORM\OneToMany(targetEntity="Catalog\Entity\ProductPhoto", mappedBy="product")
      */
     protected $photos;
 
+    /**
+     * @param Category $category
+     * @param array $data
+     */
+    public function __construct(Category $category = null, $data = null)
+    {
+        if ($category)
+            $this->setCategory($category);
+
+        parent::__construct($data);
+    }
 }

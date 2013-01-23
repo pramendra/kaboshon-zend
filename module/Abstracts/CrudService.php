@@ -69,8 +69,9 @@ abstract class CrudService extends Service
     protected function newForm()
     {
         $form = new $this->formName($this->em(), $this->entity);
-        $form->setInputFilter($this->get('filter'))
-            ->setBindOnValidate(false);
+        if ($this->filterName)
+            $form->setInputFilter($this->get('filter'))
+        $form->setBindOnValidate(false);
 
         return $form;
     }
@@ -197,9 +198,6 @@ abstract class CrudService extends Service
 
         if (!$this->formName && !$this->initNameForm())
             throw new DomainException('form name not correct');
-
-        if (!$this->filterName && !$this->initNameFilter())
-            throw new DomainException('filter name not correct');
     }
 
     /**
