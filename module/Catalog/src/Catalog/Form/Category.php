@@ -23,6 +23,7 @@ class Category extends Form
     {
         $this->add(array(
             'name'       => 'id',
+            'type' => 'Zend\Form\Element\Hidden',
             'attributes' => array(
                 'type' => 'hidden',
             ),
@@ -30,6 +31,7 @@ class Category extends Form
 
         $this->add(array(
             'name'       => 'name',
+            'type' => 'Zend\Form\Element\Text',
             'attributes' => array(
                 'type'    => 'text',
             ),
@@ -40,9 +42,7 @@ class Category extends Form
 
         $this->add(array(
             'name'       => 'descr',
-            'attributes' => array(
-                'type'    => 'textarea',
-            ),
+            'type' => 'Zend\Form\Element\TextArea',
             'options' => array(
                 'label' => 'description',
             ),
@@ -62,16 +62,6 @@ class Category extends Form
             'attributes'     => array(
                 'required' => false
             )
-        ));
-
-        $this->add(array(
-            'name'       => 'reset',
-            'attributes' => array(
-                'type'  => 'reset',
-                'value' => 'Cancel',
-                'id'    => 'resetbutton',
-                'class' => 'btn red-btn',
-            ),
         ));
 
         $this->add(array(

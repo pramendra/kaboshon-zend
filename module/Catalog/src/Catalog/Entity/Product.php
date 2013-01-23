@@ -19,7 +19,7 @@ class Product extends \Abstracts\Entity
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    protected $productId;
+    protected $id;
 
     /**
      * @var string $name

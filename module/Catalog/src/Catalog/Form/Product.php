@@ -7,26 +7,25 @@ use Zend\Form\FormInterface;
 
 class Product extends Form
 {
-    public function __construct($em, $entity = null, $name = 'product')
+    public function __construct($em, $category = null, $name = 'product')
     {
         $this->setAttribute('method', 'post');
 
         $this->initElements($em);
 
-        $this->initValues($entity);
+        $this->initValues($entity, $em);
     }
 
     private function initElements($em)
     {
         $this->add(array(
-                        'name'       => 'id',
-                        'attributes' => array(
-                            'type' => 'hidden',
-                        ),
+                        'name' => 'id',
+                        'type' => 'Zend\Form\Element\Hidden',
                    ));
 
         $this->add(array(
                         'name'       => 'name',
+                        'type'       => 'Zend\Form\Element\Text',
                         'attributes' => array(
                             'type'     => 'text',
                             'required' => 'required',
@@ -37,10 +36,11 @@ class Product extends Form
                    ));
 
         $this->add(array(
-                      'name' => 'descr',
-                      'attributes' => array(
-                          'type' => 'textarea',
-                      )
+                        'name'       => 'descr',
+                        'type'       => 'Zend\Form\Element\TextArea',
+                        'attributes' => array(
+                            'type' => 'textarea',
+                        )
                    ));
 
         $this->add(array(
@@ -52,10 +52,41 @@ class Product extends Form
                         ),
                         'label'      => 'price'
                    ));
+
+        $this->add(array(
+                        'name'       => 'category',
+                        'type'       => 'DoctrineORMModule\Form\Element\EntitySelect',
+                        'options'    => array(
+                            'label'          => 'category',
+                            'object_manager' => $em,
+                            'target_class'   => 'Catalog\Entity\Category',
+                            'identifier'     => 'id',
+                            'property'       => 'name',
+                        ),
+                        'attributes' => array(
+                            'required' => true
+                        )
+                   ));
     }
 
-    private function initValues($em)
+    private function initValues($entity, $em)
     {
-
+        if ($entity) {
+            $this->add(array(
+                            'name'    => 'main_photo',
+                            'type'    => 'DoctrineORMModule\Form\Element\EntitySelect',
+                            'options' => array(
+                                'label'          => 'main_photo',
+                                'object_manager' => $em,
+                                'target_class'   => 'Catalog\Entity\ProductPhoto',
+                                'identifier'     => 'id',
+                                'property'       => 'name',
+                                'find_method'    => array(
+                                    'name'   => 'findWithoutId',
+                                    'params' => array('id' => $entity->getId()),
+                                )
+                            )
+                       ));
+        }
     }
 }
