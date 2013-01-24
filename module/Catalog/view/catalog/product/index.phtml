@@ -1,0 +1,32 @@
+<?php
+$title = 'Товары';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<p><a href="<?php echo $this->url('admin/product', array(
+                                                         'action' => 'add'
+                                                    ));?>">Добавить товар</a></p>
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Название</th>
+        <th>Категория</th>
+        <th>Цена</th>
+        <th>На складе</th>
+        <th>&nbsp;</th>
+    </tr>
+    <?php if ($products) foreach ($products as $product) : ?>
+    <tr>
+        <td><?= $this->escapeHtml($product->getId()); ?></td>
+        <td><?= $this->escapeHtml($product->getName()); ?></td>
+        <td><?= $this->escapeHtml($product->getCategoryName()); ?></td>
+        <td>
+            <a href="<?php echo $this->url('admin/category',
+                array('action' => 'edit', 'id' => $product->getId()));?>">Редактировать</a>
+            <a href="<?php echo $this->url('admin/category',
+                array('action' => 'delete', 'id' => $product->getId()));?>">Удалить</a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>

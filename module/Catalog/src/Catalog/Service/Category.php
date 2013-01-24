@@ -27,6 +27,5 @@ class Category extends Service
 
         return parent::preUpdate();
     }
-
 }
 

@@ -68,4 +68,9 @@ class Product extends \Abstracts\Entity
 
         parent::__construct($data);
     }
+
+    public function getCategoryName()
+    {
+        return $this->category->getName();
+    }
 }

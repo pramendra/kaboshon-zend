@@ -15,8 +15,8 @@ class ProductPhoto extends EntityRepository
         $qb = $this->_em->createQueryBuilder();
         $qb->select('pp')
             ->from('Catalog\Entity\Category', 'pp')
-            ->where('pp.product <> :id')
-            ->setParameter('id', $product)
-            ->orderBy('c.id', 'ASC');
+            ->where('pp.product <> :product')
+            ->setParameter('product', $product)
+            ->orderBy('p.id', 'ASC');
     }
 }

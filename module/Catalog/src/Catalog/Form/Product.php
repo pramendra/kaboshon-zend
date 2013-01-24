@@ -67,6 +67,28 @@ class Product extends Form
                             'required' => true
                         )
                    ));
+
+        $this->add(array(
+                        'name'       => 'submit',
+                        'type'       => 'Zend\From\Element\Submit',
+                        'attributes' => array(
+                            'type'  => 'submit',
+                            'value' => 'Go',
+                            'id'    => 'submit-button',
+                            'class' => 'btn btn-primary',
+                        ),
+                   ));
+
+        $this->add(array(
+                        'name'       => 'reset',
+                        'type'       => 'Zend\From\Element\Button',
+                        'attributes' => array(
+                            'type'  => 'reset',
+                            'value' => 'Go',
+                            'id'    => 'reset-button',
+                            'class' => 'btn',
+                        ),
+                   ));
     }
 
     private function initValues($entity, $em)
@@ -83,7 +105,7 @@ class Product extends Form
                                 'property'       => 'name',
                                 'find_method'    => array(
                                     'name'   => 'findWithoutId',
-                                    'params' => array('id' => $entity->getId()),
+                                    'params' => array('id' => $entity),
                                 )
                             )
                        ));
