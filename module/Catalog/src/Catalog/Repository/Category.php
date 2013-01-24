@@ -4,8 +4,11 @@ namespace Catalog\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use Abstracts\CrudRepositoryInterface;
 
+
+/**
+ * Repository for \Catalog\Entity\Category
+ */
 class Category extends EntityRepository
 {
     public function getAdminPaginator($offset = 0, $limit = 0)
@@ -32,13 +35,18 @@ class Category extends EntityRepository
         return $this->getAdminPaginator($offset, $limit);
     }
 
-    public function findWithoutId($id)
+    /**
+     * Find categories exclude specified category
+     * @param $category
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function findWithoutId($category)
     {
         $qb = $this->_em->createQueryBuilder();
         $qb->select('c')
             ->from('Catalog\Entity\Category', 'c')
-            ->where('c.id <> :id')
-            ->setParameter('id', $id)
+            ->where('c <> :category')
+            ->setParameter('category', $category)
             ->orderBy('c.id', 'ASC');
 
         return $qb->getQuery()->getResult();
