@@ -1,12 +1,15 @@
 <?php
 
-namespace Catalog;
+namespace Catalog\Service;
 
-use Abstracts\DomainService as Service;
+use Abstracts\CrudService as Service;
 
-class ProductService extends Service
+/**
+ * Product service
+ */
+class Product extends Service
 {
-    protected function preSave()
+    /*protected function preSave()
     {
         $category = (int) $this->entity->getCategory();
 
@@ -17,6 +20,6 @@ class ProductService extends Service
 
         $this->entity->setCategory($category);
         return parent::preSave();
-    }
+    }*/
 }
 

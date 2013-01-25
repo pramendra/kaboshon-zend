@@ -4,10 +4,10 @@ $this->headTitle($title);
 ?>
 <h1><?php echo $this->escapeHtml($title); ?></h1>
 <?php
-$form  = $this->form;
+$form = $this->form;
 $form->setAttribute('action',
-                    $this->url('admin/category',
-                               array('action' => 'edit', 'id'     => $form->get('id')->getValue())));
+    $this->url('admin/category',
+        array('action' => 'edit', 'id' => $form->get('id')->getValue())));
 $form->prepare();
 echo $this->form()->openTag($form);
 echo $this->formHidden($form->get('id'));

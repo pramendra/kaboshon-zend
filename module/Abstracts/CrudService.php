@@ -53,7 +53,7 @@ abstract class CrudService extends Service
     protected $isValid;
 
     /**
-     * @var int Items per page in listin items page
+     * @var int Items per page in listing items page
      */
     protected $rowsPerPage = 20;
 

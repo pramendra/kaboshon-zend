@@ -10,6 +10,10 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProductPhoto extends EntityRepository
 {
+    /**
+     * fetch photos for specified product
+     * @param \Catalog\Entity\Product $product
+     */
     public function findByProduct($product)
     {
         $qb = $this->_em->createQueryBuilder();

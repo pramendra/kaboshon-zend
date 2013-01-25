@@ -89,7 +89,7 @@ class Category extends Form
 
     private function initValues($entity)
     {
-        if ($entity) {
+        if ($entity && $entity->getId()) {
             $parent = $this->get('parent');
             $parent->setOptions(array(
                                      'find_method' => array(

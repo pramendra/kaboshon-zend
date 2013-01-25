@@ -20,8 +20,8 @@ class CategoryController extends ActionController
     public function indexAction()
     {
         return new ViewModel(array(
-                'categories' => $this->getService()->fetch()
-            ));
+                                  'categories' => $this->getService()->fetch()
+                             ));
     }
 
     public function addAction()
@@ -41,17 +41,14 @@ class CategoryController extends ActionController
     public function editAction()
     {
         $request = $this->getRequest();
-        $id      = (int) $this->getEvent()->getRouteMatch()->getParam('id');
+        $id      = (int)$this->getEvent()->getRouteMatch()->getParam('id');
 
         if (!$this->getService()->load($id))
-                $this->getResponse()->setStatusCode(404);
+            $this->getResponse()->setStatusCode(404);
 
-        if ($request->isPost()) {
-            if ($this->getService()->edit($id, $request->getPost()))
-                return $this->redirect()->toRoute('admin/category/index');
-            else
-                $this->getResponse()->setStatusCode(404);
-        }
+        if ($request->isPost() && $this->getService()->edit($id, $request->getPost()));
+            return $this->redirect()->toRoute('admin/category/index');
+
 
         $form = $this->getService()->getForm();
 

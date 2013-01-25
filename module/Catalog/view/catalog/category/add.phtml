@@ -9,10 +9,9 @@ $form->setAttribute('action', $this->url('admin/category', array('action' => 'ad
 $form->prepare();
 
 echo $this->form()->openTag($form);
-echo $this->formHidden($form->get('id'));
 echo $this->formRow($form->get('name'));
 echo $this->formRow($form->get('descr'));
 echo $this->formRow($form->get('parent'));
 echo $this->formSubmit($form->get('submit'));
-echo $this->formSubmit($form->get('reset'));
+echo $this->formReset($form->get('reset'));
 echo $this->form()->closeTag();

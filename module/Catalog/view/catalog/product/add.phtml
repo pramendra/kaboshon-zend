@@ -1,0 +1,19 @@
+<?php
+$title = 'Добавить товар';
+$this->headTitle($title);
+?>
+
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('admin/product', array('action' => 'add')));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formRow($form->get('name'));
+echo $this->formRow($form->get('descr'));
+echo $this->formRow($form->get('price'));
+echo $this->formRow($form->get('category'));
+echo $this->formSubmit($form->get('submit'));
+echo $this->formReset($form->get('reset'));
+echo $this->form()->closeTag();
