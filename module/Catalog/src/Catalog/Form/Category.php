@@ -49,9 +49,9 @@ class Category extends Form
                    ));
 
         $this->add(array(
-                        'name'       => 'parent',
-                        'type'       => 'DoctrineORMModule\Form\Element\DoctrineEntity',
-                        'options'    => array(
+                        'name'     => 'parent',
+                        'type'     => 'DoctrineORMModule\Form\Element\DoctrineEntity',
+                        'options'  => array(
                             'label'          => 'parent category',
                             'object_manager' => $em,
                             'empty_option'   => 'root category',
@@ -59,14 +59,11 @@ class Category extends Form
                             'identifier'     => 'id',
                             'property'       => 'name',
                         ),
-                        'attributes' => array(
-                            'required' => false
-                        )
                    ));
 
         $this->add(array(
                         'name'       => 'submit',
-                        'type'    => 'Zend\Form\Element\Submit',
+                        'type'       => 'Zend\Form\Element\Submit',
                         'attributes' => array(
                             'type'  => 'submit',
                             'value' => 'Go',
@@ -77,7 +74,7 @@ class Category extends Form
 
         $this->add(array(
                         'name'       => 'reset',
-                        'type'    => 'Zend\Form\Element\Button',
+                        'type'       => 'Zend\Form\Element\Button',
                         'attributes' => array(
                             'type'  => 'submit',
                             'value' => 'Reset',

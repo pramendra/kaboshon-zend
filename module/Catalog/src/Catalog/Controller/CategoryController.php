@@ -5,10 +5,16 @@ namespace Catalog\Controller;
 use Abstracts\ActionController;
 use Zend\View\Model\ViewModel;
 
+/**
+ * Category Controller
+ */
 class CategoryController extends ActionController
 {
     protected $service;
 
+    /**
+     * @return \Catalog\Service\Category
+     */
     public function getService()
     {
         if (!$this->service)
@@ -17,6 +23,9 @@ class CategoryController extends ActionController
         return $this->service;
     }
 
+    /**
+     * @return \Zend\View\Model\ViewModel
+     */
     public function indexAction()
     {
         return new ViewModel(array(
@@ -24,6 +33,9 @@ class CategoryController extends ActionController
                              ));
     }
 
+    /**
+     * @return array
+     */
     public function addAction()
     {
         $request = $this->getRequest();
@@ -38,6 +50,9 @@ class CategoryController extends ActionController
         );
     }
 
+    /**
+     * @return array
+     */
     public function editAction()
     {
         $request = $this->getRequest();
@@ -46,9 +61,9 @@ class CategoryController extends ActionController
         if (!$this->getService()->load($id))
             $this->getResponse()->setStatusCode(404);
 
-        if ($request->isPost() && $this->getService()->edit($id, $request->getPost()));
-            return $this->redirect()->toRoute('admin/category/index');
-
+        if ($request->isPost())
+            if ($this->getService()->edit($id, $request->getPost()))
+                return $this->redirect()->toRoute('admin/category/index');
 
         $form = $this->getService()->getForm();
 
@@ -57,14 +72,15 @@ class CategoryController extends ActionController
         );
     }
 
+    /**
+     * @return bool
+     */
     public function deleteAction()
     {
         $id = (int)$this->getEvent()->getRouteMatch()->getParam('id');
+        $this->getService()->delete($id);
 
-        if ($this->getService()->delete($id))
-            return $this->redirect()->toRoute('admin/category/index');
-        else
-            $this->getResponse()->setStatusCode(404);
+        return $this->redirect()->toRoute('admin/category/index');
     }
 
 }
