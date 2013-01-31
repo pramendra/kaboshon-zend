@@ -24,63 +24,73 @@ class CategoryController extends ActionController
     }
 
     /**
+     * Redirect to index page
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function redirectToIndex()
+    {
+        return $this->redirect()->toRoute('admin/category/index');
+    }
+
+
+    /**
      * @return \Zend\View\Model\ViewModel
      */
     public function indexAction()
     {
+        $offset = (int) $this->getEvent()->getRouteMatch()->getParam('id');
+
         return new ViewModel(array(
-                                  'categories' => $this->getService()->fetch()
+                                  'categories' => $this->getService()->fetch($offset)
                              ));
     }
 
     /**
-     * @return array
+     * @return mixed
      */
     public function addAction()
     {
+        $service = $this->getService();
         $request = $this->getRequest();
 
-        if ($request->isPost() && $this->getService()->add($request->getPost()))
-            return $this->redirect()->toRoute('admin/category/index');
+        $result = $service->add($request);
 
-        $form = $this->getService()->getForm();
+        if ($result === true)
+            return $this->redirectToIndex();
 
         return array(
-            'form' => $form
+            'form' => $result
         );
     }
 
     /**
-     * @return array
+     * @return mixed
      */
     public function editAction()
     {
-        $request = $this->getRequest();
         $id      = (int)$this->getEvent()->getRouteMatch()->getParam('id');
+        $service = $this->getService();
+        $request = $this->getRequest();
 
-        if (!$this->getService()->load($id))
-            $this->getResponse()->setStatusCode(404);
+        $result = $service->edit($request, $id);
 
-        if ($request->isPost())
-            if ($this->getService()->edit($id, $request->getPost()))
-                return $this->redirect()->toRoute('admin/category/index');
-
-        $form = $this->getService()->getForm();
+        if ($result === true)
+            return $this->redirectToIndex();
 
         return array(
-            'form' => $form
+            'form' => $result
         );
     }
 
     /**
-     * @return bool
+     * @return \Zend\Http\Response
      */
     public function deleteAction()
     {
         $id = (int)$this->getEvent()->getRouteMatch()->getParam('id');
         $this->getService()->delete($id);
 
-        return $this->redirect()->toRoute('admin/category/index');
+        return $this->redirectToIndex();
     }
 
 }

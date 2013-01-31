@@ -63,7 +63,7 @@ abstract class Service implements ServiceLocatorAwareInterface
      * Merge options
      *
      * @param array $options Options
-     * @return \Abstract\LService
+     * @return \Abstracts\Service
      */
     protected function mergeOptions($options)
     {

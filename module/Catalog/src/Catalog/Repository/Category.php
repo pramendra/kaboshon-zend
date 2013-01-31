@@ -30,11 +30,6 @@ class Category extends EntityRepository
         return $paginator;
     }
 
-    public function fetch($offset = 0, $limit = 0)
-    {
-        return $this->getAdminPaginator($offset, $limit);
-    }
-
     /**
      * Find categories exclude specified category
      * @param $category

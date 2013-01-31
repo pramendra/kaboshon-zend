@@ -4,18 +4,20 @@ namespace Catalog\Form;
 
 use Zend\Form\Form;
 use Zend\Form\FormInterface;
+use DoctrineORMModule\Stdlib\Hydrator\DoctrineEntity;
+use Catalog\Entity\Category as Entity;
 
 class Category extends Form
 {
 
-    public function __construct($em, $entity = null, $name = 'category')
+    public function s__construct($em, $entity = null, $name = 'category')
     {
         parent::__construct($name);
-
-        $this->setAttribute('method', 'post');
+        $this->setAttribute('method', 'post')
+            ->setHydrator(new DoctrineEntity($em))
+            ->setObject(new Entity);
 
         $this->initElements($em);
-
         $this->initValues($entity);
     }
 
@@ -49,9 +51,9 @@ class Category extends Form
                    ));
 
         $this->add(array(
-                        'name'     => 'parent',
-                        'type'     => 'DoctrineORMModule\Form\Element\DoctrineEntity',
-                        'options'  => array(
+                        'name'    => 'parent',
+                        'type'    => 'DoctrineORMModule\Form\Element\DoctrineEntity',
+                        'options' => array(
                             'label'          => 'parent category',
                             'object_manager' => $em,
                             'empty_option'   => 'root category',

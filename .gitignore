@@ -15,4 +15,6 @@ composer.lock
 vendor
 data
 tmp
+mysql-connector-java-5.1.22-bin.jar
+mysql-connector-license.txt
 logs/*

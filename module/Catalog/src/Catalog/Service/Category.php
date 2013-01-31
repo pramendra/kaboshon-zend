@@ -4,28 +4,55 @@ namespace Catalog\Service;
 
 use Abstracts\CrudService as Service;
 
+/**
+ * Category manage service
+ */
 class Category extends Service
 {
-
-    protected function preSave()
+    /**
+     * List categories
+     * @param int $offset
+     * @return \Zend\Paginator\Paginator
+     */
+    public function fetch($offset = 0)
     {
-        $parent = (int) $this->entity->getParent();
+        $entites = $this->getRepository()->getAdminPaginator((int) $offset);
+        $paginator = $this->getPaginator($entites);
 
-        if ($parent > 0) {
-            $parent = $this->findById($parent);
-        } else
-            $parent = null;
-
-        $this->entity->setParent($parent);
-        return parent::preSave();
+        return $paginator;
     }
 
-    protected function preUpdate()
+    /**
+     * Add category
+     * @param \Zend\Http\Request
+     */
+    public function add($request = null)
     {
-        if ($this->entity->getParent() == $this->entity->getid())
-            $this->entity->setParent(null);
+        if ($request->isPost()) {
 
-        return parent::preUpdate();
+        }
+
+
     }
+
+    /**
+     * Edit category
+     * @param int $id
+     * @param \Zend\Http\Request
+     */
+    public function edit($id, $request = null)
+    {
+
+    }
+
+    /**
+     * Delete category
+     * @param int $id
+     */
+    public function delete($id)
+    {
+
+    }
+
 }
 

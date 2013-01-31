@@ -42,9 +42,6 @@ class Category extends InputFilter
                                                   ),
                                               ),
                                          )));
-        $filter = $factory->createInput(array('name' => 'parent'));
-        $filter->setAllowEmpty(true)->setRequired(false);
-        $this->add($filter);
     }
 
 }
