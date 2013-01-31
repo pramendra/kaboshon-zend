@@ -25,14 +25,33 @@ class Category extends Service
     /**
      * Add category
      * @param \Zend\Http\Request
+     * @return bool|\Zend\Form\Form
      */
-    public function add($request = null)
+    public function add($request)
     {
+        $em = $this->em();
+        $form = $this->getForm($em);
         if ($request->isPost()) {
+            $category = $this->getEntity();
+            $form->setData($request->getParams())->bind($category)->setData();
 
+            if ($form->isValid()) {
+                //Определение категории - родителя
+                $parent = (int) $category->getParent();
+                if ($parent > 0)
+                    $parent = $this->findById($parent);
+                else
+                    $parent = null;
+                $category->setParent($parent);
+
+                //Сохранение категории
+                $em->perist($category);
+                $em->flush();
+                return true;
+            }
         }
 
-
+        return $form;
     }
 
     /**
@@ -40,7 +59,7 @@ class Category extends Service
      * @param int $id
      * @param \Zend\Http\Request
      */
-    public function edit($id, $request = null)
+    public function edit($id, $request)
     {
 
     }

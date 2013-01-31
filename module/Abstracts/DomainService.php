@@ -11,10 +11,13 @@ abstract class DomainService extends Service
 {
     /**
      * Instance of doctrine entity manager. Lazy init on first call.
-     * @var Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityManager
      */
     protected $em;
 
+    /**
+     * @return \Doctrine\ORM\EntityManager
+     */
     protected function em()
     {   
         if (null === $this->em) {

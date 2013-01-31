@@ -10,7 +10,7 @@ use Catalog\Entity\Category as Entity;
 class Category extends Form
 {
 
-    public function s__construct($em, $entity = null, $name = 'category')
+    public function __construct($em, $entity = null, $name = 'category')
     {
         parent::__construct($name);
         $this->setAttribute('method', 'post')

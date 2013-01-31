@@ -95,13 +95,15 @@ abstract class CrudService extends Service
      */
     protected function onInit()
     {
-        $this->caller = __CLASS__;
+        $this->caller = get_called_class();
 
         if (!$this->entityName && !$this->initNameEntity())
             throw new DomainException('entity name not correct');
 
         if (!$this->formName && !$this->initNameForm())
             throw new DomainException('form name not correct');
+
+        return parent::onInit();
     }
 
     /**
@@ -131,7 +133,7 @@ abstract class CrudService extends Service
     {
         if (strstr($method, 'initName')) {
             $name = substr($method, strlen('initName'));
-            return $this->initName(lcfirst($name) . 'Name');
+            return $this->initName(lcfirst($name));
         }
 
         throw new \BadFunctionCallException("$method not found");
