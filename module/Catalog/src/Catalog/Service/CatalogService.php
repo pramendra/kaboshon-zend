@@ -4,7 +4,7 @@ namespace Catalog\Service;
 
 use Abstracts\DomainService as Service;
 
-class Catalog extends Service
+class CatalogService extends Service
 {
     
 }

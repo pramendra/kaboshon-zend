@@ -7,25 +7,29 @@ use Zend\Form\FormInterface;
 use DoctrineORMModule\Stdlib\Hydrator\DoctrineEntity;
 use Catalog\Entity\Category as Entity;
 
-class Category extends Form
+class CategoryForm extends Form
 {
+    protected $em;
 
     public function __construct($em, $entity = null, $name = 'category')
     {
         parent::__construct($name);
+        $this->em = $em;
+
         $this->setAttribute('method', 'post')
-            ->setHydrator(new DoctrineEntity($em))
+            ->setHydrator(new DoctrineEntity($this->em))
             ->setObject(new Entity);
 
-        $this->initElements($em);
+        $this->initElements();
         $this->initValues($entity);
     }
 
-    private function initElements($em)
+    private function initElements()
     {
         $this->add(array(
                         'name'       => 'id',
                         'type'       => 'Zend\Form\Element\Hidden',
+                        'require'    => false,
                         'attributes' => array(
                             'type' => 'hidden',
                         ),
@@ -55,7 +59,7 @@ class Category extends Form
                         'type'    => 'DoctrineORMModule\Form\Element\DoctrineEntity',
                         'options' => array(
                             'label'          => 'parent category',
-                            'object_manager' => $em,
+                            'object_manager' => $this->em,
                             'empty_option'   => 'root category',
                             'target_class'   => 'Catalog\Entity\Category',
                             'identifier'     => 'id',
@@ -88,7 +92,7 @@ class Category extends Form
 
     private function initValues($entity)
     {
-        if ($entity && $entity->getId()) {
+        if ($entity) {
             $parent = $this->get('parent');
             $parent->setOptions(array(
                                      'find_method' => array(

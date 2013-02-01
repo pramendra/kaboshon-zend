@@ -7,7 +7,7 @@ use Abstracts\CrudService as Service;
 /**
  * Category manage service
  */
-class Category extends Service
+class CategoryService extends Service
 {
     /**
      * List categories

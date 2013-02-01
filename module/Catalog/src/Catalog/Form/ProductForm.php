@@ -13,7 +13,7 @@ class Product extends Form
 
         $this->initElements($em);
 
-        $this->initValues($entity, $em);
+        $this->initValues($category, $em);
     }
 
     private function initElements($em)

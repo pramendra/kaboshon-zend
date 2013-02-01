@@ -6,10 +6,10 @@ return array(
     'service_manager'=>array(
         'factories' => array(
             'category.service' => function() {
-                return new Service\Category();
+                return new Service\CategoryService();
             },
             'product.service'=> function() {
-                return new Service\Product();
+                return new Service\ProductService();
             },
         ),
     ),

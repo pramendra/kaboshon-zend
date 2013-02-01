@@ -9,7 +9,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 /**
  * Repository for \Catalog\Entity\Category
  */
-class Category extends EntityRepository
+class CategoryRepository extends EntityRepository
 {
     public function getAdminPaginator($offset = 0, $limit = 0)
     {

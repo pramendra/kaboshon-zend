@@ -7,7 +7,7 @@ use Abstracts\CrudService as Service;
 /**
  * Product service
  */
-class Product extends Service
+class ProductService extends Service
 {
     /*protected function preSave()
     {

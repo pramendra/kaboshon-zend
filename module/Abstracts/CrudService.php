@@ -11,10 +11,27 @@ use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as PaginatorAdapter;
 
 abstract class CrudService extends Service
 {
+
+
+    // $name . self::objectName
+    const entityName = 'Entity';
+    const formName = 'Form';
+    const inputFilterName = 'Filter';
+
     /**
-     * @var string FQCN of current inherit class
+     * @var string FQCN of called class
      */
     protected $caller;
+
+    /**
+     * @var string module name, which called class placed
+     */
+    protected $moduleName;
+
+    /**
+     * @var string called class name without namespace and 'Service' substring
+     */
+    protected $serviceName;
 
     /**
      * @var mixed FQCN for entity, wich used in this service
@@ -97,46 +114,61 @@ abstract class CrudService extends Service
     {
         $this->caller = get_called_class();
 
-        if (!$this->entityName && !$this->initNameEntity())
-            throw new DomainException('entity name not correct');
+        // Calc namespace
+        $this->moduleName = substr($this->caller, 0, strpos($this->caller, "\\"));
 
-        if (!$this->formName && !$this->initNameForm())
-            throw new DomainException('form name not correct');
+        // Calc service name
+        $name = substr($this->caller, strrpos($this->caller, "\\") + 1);
+        $this->serviceName = str_replace('Service', '', $name);
+
+        if (!$this->entityName) {
+            $this->entityName = $this->getEntityName();
+            if (!$this->entityName)
+                throw new DomainException('entity name not correct');
+        }
+
+        if (!$this->formName) {
+            $this->filterName = $this->getFormName();
+            if (!$this->filterName)
+                throw new DomainException('form name not correct');
+        }
+
+        if (!$this->filterName)
+            $this->filterName = $this->getInputFilter();
 
         return parent::onInit();
     }
 
     /**
-     * init $this->entity and $this->entityName, if service name equals to entity name
-     * @param string $name "meta" name of property? which be initialized
-     * @throws \Zend\Stdlib\Exception\InvalidArgumentException
-     * @return bool|string success init or not
+     * get entity class name, which based of namespace and called class name
+     * @return string
      */
-    protected function initName($name)
+    public function getEntityName()
     {
-        $propertyName = $name . 'Name';
-
-        if (!property_exists($this->caller, $propertyName))
-            throw new InvalidArgumentException("property $name not exists");
-
-        if ($this->$propertyName)
-            return true;
-
-        $FQCN = str_replace('\\Service\\', '\\' . ucfirst($name) . '\\', $this->caller);
-        if (class_exists($FQCN))
-            return $this->$propertyName = $FQCN;
-        else
-            return false;
+        $class = $this->moduleName . '\\' . self::entityName . '\\' . $this->serviceName;
+        $class = class_exists($class)? $class: null;
+        return $class;
     }
 
-    public function __call($method, $argumetns)
+    /**
+     * get form class name, which based of namespace and called class name
+     * @return string
+     */
+    public function getFormName()
     {
-        if (strstr($method, 'initName')) {
-            $name = substr($method, strlen('initName'));
-            return $this->initName(lcfirst($name));
-        }
+        $class =  $this->moduleName . '\\' . self::formName . '\\' . $this->serviceName . self::formName;
+        $class = class_exists($class)? $class: null;
+        return $class;
+    }
 
-        throw new \BadFunctionCallException("$method not found");
+    /**
+     * get input filter class name, which based if namespace and called class name
+     * @return string
+     */
+    public function getInputFilterName()
+    {
+        $class = $this->namespace . '\\' . self::inputFilterName;
+        return $this->namespace . '\\' . self::inputFilterName;
     }
 
     /**

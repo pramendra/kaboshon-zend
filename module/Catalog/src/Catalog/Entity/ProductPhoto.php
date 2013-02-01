@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Catalog\Entity\ProductPhoto
  *
  * @ORM\Table(name="shop_product_photos")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Catalog\Repository\ProductPhotoRepository")
  */
 class ProductPhoto extends \Abstracts\Entity
 {
