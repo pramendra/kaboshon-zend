@@ -4,7 +4,7 @@ namespace Catalog\Filter;
 
 use Zend\InputFilter\InputFilter;
 
-class Category extends InputFilter
+class CategoryFilter extends InputFilter
 {
 
     public function __construct()

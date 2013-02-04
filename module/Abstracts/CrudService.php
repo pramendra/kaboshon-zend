@@ -167,7 +167,8 @@ abstract class CrudService extends Service
      */
     public function getInputFilterName()
     {
-        $class = $this->moduleName . '\\' . self::inputFilterName;
+        $class = $this->moduleName . '\\' . self::inputFilterName
+            . '\\' . $this->serviceName . self::inputFilterName;
         return $class;
     }
 
