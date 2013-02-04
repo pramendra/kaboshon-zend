@@ -128,13 +128,13 @@ abstract class CrudService extends Service
         }
 
         if (!$this->formName) {
-            $this->filterName = $this->getFormName();
-            if (!$this->filterName)
+            $this->formName = $this->getFormName();
+            if (!$this->formName)
                 throw new DomainException('form name not correct');
         }
 
         if (!$this->filterName)
-            $this->filterName = $this->getInputFilter();
+            $this->filterName = $this->getInputFilterName();
 
         return parent::onInit();
     }
@@ -167,8 +167,8 @@ abstract class CrudService extends Service
      */
     public function getInputFilterName()
     {
-        $class = $this->namespace . '\\' . self::inputFilterName;
-        return $this->namespace . '\\' . self::inputFilterName;
+        $class = $this->moduleName . '\\' . self::inputFilterName;
+        return $class;
     }
 
     /**

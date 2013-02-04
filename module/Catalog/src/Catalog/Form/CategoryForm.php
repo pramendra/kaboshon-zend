@@ -4,7 +4,7 @@ namespace Catalog\Form;
 
 use Zend\Form\Form;
 use Zend\Form\FormInterface;
-use DoctrineORMModule\Stdlib\Hydrator\DoctrineEntity;
+use DoctrineModule\Stdlib\Hydrator\DoctrineObject;
 use Catalog\Entity\Category as Entity;
 
 class CategoryForm extends Form
@@ -17,7 +17,7 @@ class CategoryForm extends Form
         $this->em = $em;
 
         $this->setAttribute('method', 'post')
-            ->setHydrator(new DoctrineEntity($this->em))
+            ->setHydrator(new DoctrineObject($this->em, 'Catalog\Entity\Category'))
             ->setObject(new Entity);
 
         $this->initElements();
