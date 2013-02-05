@@ -24,6 +24,7 @@ class CategoryFilter extends InputFilter
                                               ),
                                          )));
 
+
         $this->add($factory->createInput(array(
                                               'name'       => 'name',
                                               'required'   => true,
@@ -41,6 +42,20 @@ class CategoryFilter extends InputFilter
                                                       ),
                                                   ),
                                               ),
+                                         )));
+
+        $this->add($factory->createInput(array(
+                                              'name'     => 'descr',
+                                              'required' => false,
+                                              'filters'  => array(
+                                                  array('name' => 'StripTags'),
+                                                  array('name' => 'StringTrim'),
+                                              ),
+                                         )));
+
+        $this->add($factory->createInput(array(
+                                              'name'     => 'parent',
+                                              'required' => false,
                                          )));
     }
 

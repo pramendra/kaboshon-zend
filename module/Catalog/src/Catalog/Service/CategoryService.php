@@ -45,7 +45,7 @@ class CategoryService extends Service
                 $category->setParent($parent);
 
                 //Сохранение категории
-                $em->perist($category);
+                $em->persist($category);
                 $em->flush();
                 return true;
             }

@@ -15,10 +15,13 @@ class CategoryForm extends Form
     {
         parent::__construct($name);
         $this->em = $em;
-
+        /*
+         * @todo Добавить гидратор для Abstracts\Entities или избавится от них
+         */
         $this->setAttribute('method', 'post')
-            ->setHydrator(new DoctrineObject($this->em, 'Catalog\Entity\Category'))
+            ->setHydrator(new DoctrineObject($this->em, 'Catalog\Entity\Category', false))
             ->setObject(new Entity);
+
 
         $this->initElements();
         $this->initValues($entity);
@@ -57,7 +60,6 @@ class CategoryForm extends Form
         $this->add(array(
                         'name'     => 'parent',
                         'type'     => 'DoctrineORMModule\Form\Element\EntitySelect',
-                        'required' => false,
                         'options'  => array(
                             'label'          => 'parent category',
                             'object_manager' => $this->em,
