@@ -55,9 +55,10 @@ class CategoryForm extends Form
                    ));
 
         $this->add(array(
-                        'name'    => 'parent',
-                        'type'    => 'DoctrineORMModule\Form\Element\DoctrineEntity',
-                        'options' => array(
+                        'name'     => 'parent',
+                        'type'     => 'DoctrineORMModule\Form\Element\EntitySelect',
+                        'required' => false,
+                        'options'  => array(
                             'label'          => 'parent category',
                             'object_manager' => $this->em,
                             'empty_option'   => 'root category',

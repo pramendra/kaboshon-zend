@@ -30,10 +30,10 @@ class CategoryService extends Service
     public function add($request)
     {
         $em = $this->em();
-        $form = $this->getForm($em);
+        $form = $this->getForm();
         if ($request->isPost()) {
             $category = $this->getEntity();
-            $form->setData($request->getParams())->bind($category)->setData();
+            $form->bind($category)->setData($request->getPost());
 
             if ($form->isValid()) {
                 //Определение категории - родителя
