@@ -104,6 +104,9 @@ class CategoryForm extends Form
                                          'params' => array('category' => $entity),
                                      )
                                 ));
+            $parentEntity = $entity->getParent();
+            if ($parentEntity)
+                $parent->setValue($parentEntity->getId());
         }
     }
 
