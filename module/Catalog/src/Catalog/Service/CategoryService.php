@@ -58,10 +58,34 @@ class CategoryService extends Service
      * Edit category
      * @param int $id
      * @param \Zend\Http\Request
+     * @return bool|\Zend\Form\Form
      */
     public function edit($id, $request)
     {
+        $category = $this->load($id);
+        if ($category === null)
+            return;
 
+        $form = $this->getForm($category);
+
+        if ($request->isPost()) {
+            $form->setData($request->getPost());
+
+            if ($form->isValid()) {
+
+                $parent = (int) $category->getParent();
+                if ($parent > 0)
+                    $parent = $this->findById($parent);
+                else
+                    $parent = null;
+
+                $category->setParent($parent);
+                $this->em()->flush();
+                return true;
+            }
+        }
+
+        return $form;
     }
 
     /**
@@ -70,7 +94,12 @@ class CategoryService extends Service
      */
     public function delete($id)
     {
-
+        $category = $this->load($id);
+        if ($category === null)
+            return;
+        $em = $this->em();
+        $em->remove($category);
+        $em->flush();
     }
 
 }

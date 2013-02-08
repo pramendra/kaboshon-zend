@@ -189,6 +189,7 @@ abstract class CrudService extends Service
      */
     protected function load($id)
     {
+        $id = (int) $id;
         $entity = $this->findById($id);
 
         if ($entity === null) {

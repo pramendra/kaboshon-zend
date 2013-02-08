@@ -13,7 +13,7 @@ class CategoryController extends ActionController
     protected $service;
 
     /**
-     * @return \Catalog\Service\Category
+     * @return \Catalog\Service\CategoryService
      */
     public function getService()
     {
@@ -72,7 +72,7 @@ class CategoryController extends ActionController
         $service = $this->getService();
         $request = $this->getRequest();
 
-        $result = $service->edit($request, $id);
+        $result = $service->edit($id, $request);
 
         if ($result === true)
             return $this->redirectToIndex();

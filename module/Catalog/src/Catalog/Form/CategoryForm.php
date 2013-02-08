@@ -96,6 +96,7 @@ class CategoryForm extends Form
     private function initValues($entity)
     {
         if ($entity) {
+            $this->bind($entity);
             $parent = $this->get('parent');
             $parent->setOptions(array(
                                      'find_method' => array(
