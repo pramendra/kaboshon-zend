@@ -8,7 +8,7 @@ use Doctrine\ORM\EntityRepository;
 /**
  * Repository for \Catalog\Entity\ProductPhoto
  */
-class ProductPhoto extends EntityRepository
+class ProductPhotoRepository extends EntityRepository
 {
     /**
      * fetch photos for specified product

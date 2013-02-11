@@ -17,7 +17,7 @@ class CategoryRepository extends EntityRepository
         $qb->select('c')
             ->from('Catalog\Entity\Category', 'c')
             ->leftJoin('c.parent', 'p')
-            ->orderBy('c.id', 'ASC');
+            ->orderBy('c.id', 'DESC');
 
         if ($offset)
             $qb->setFirstResult($offset);

@@ -78,6 +78,9 @@ class Category extends \Abstracts\Entity
      */
     public function __construt(Category $parent = null, $data = array())
     {
+        if ($parent)
+            $this->setParent($parent);
+
         $this->children = new ArrayCollection();
         parent::__construct($data);
     }

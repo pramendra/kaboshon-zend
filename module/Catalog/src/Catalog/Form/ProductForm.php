@@ -5,7 +5,7 @@ namespace Catalog\Form;
 use Zend\Form\Form;
 use Zend\Form\FormInterface;
 
-class Product extends Form
+class ProductForm extends Form
 {
     public function __construct($em, $category = null, $name = 'product')
     {

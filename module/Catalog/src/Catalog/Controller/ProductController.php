@@ -24,7 +24,7 @@ class ProductController extends ActionController
     public function indexAction()
     {
         return new ViewModel(array(
-                                  'categories' => $this->getService()->fetch()
+                                  'products' => $this->getService()->fetch()
                              ));
     }
 

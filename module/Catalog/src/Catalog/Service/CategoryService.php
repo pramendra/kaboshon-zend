@@ -3,6 +3,7 @@
 namespace Catalog\Service;
 
 use Abstracts\CrudService as Service;
+use Zend\Http\Request;
 
 /**
  * Category manage service
@@ -27,7 +28,7 @@ class CategoryService extends Service
      * @param \Zend\Http\Request
      * @return bool|\Zend\Form\Form
      */
-    public function add($request)
+    public function add(Request $request)
     {
         $em = $this->em();
         $form = $this->getForm();

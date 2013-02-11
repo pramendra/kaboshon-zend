@@ -3,23 +3,24 @@
 namespace Catalog\Service;
 
 use Abstracts\CrudService as Service;
-
+use Zend\Http\Request;
 /**
  * Product service
  */
 class ProductService extends Service
 {
-    /*protected function preSave()
+
+    public function fetch($offset = 0)
     {
-        $category = (int) $this->entity->getCategory();
+        $entities = $this->getRepository()->getAdminPaginator($offset, $this->rowsPerPage);
+        $paginator = $this->getPaginator($entities);
+        return $paginator;
+    }
 
-        if ($category > 0) {
-            $category = $this->em()->find('Catalog\Entity\Category' ,$category);
-        } else
-            $category = null;
-
-        $this->entity->setCategory($category);
-        return parent::preSave();
-    }*/
+    public function add(Request $request)
+    {
+        $em = $this->em();
+        $form = $this->getForm();
+    }
 }
 

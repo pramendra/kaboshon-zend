@@ -8,7 +8,7 @@ abstract class ActionController extends AbstractActionController
 {          
     /**
      * Instance of service manager. Lazy init.
-     * @var Zend\ServiceManager\ServiceManager
+     * @var \Zend\ServiceManager\ServiceManager
      */
     private $serviceManager;
 
@@ -26,7 +26,7 @@ abstract class ActionController extends AbstractActionController
     
     /**
      * init and return service manager for this controller
-     * @return Zend\ServiceManager\ServiceLocatorInterface
+     * @return \Zend\ServiceManager\ServiceLocatorInterface
      */
     public function sm()
     {

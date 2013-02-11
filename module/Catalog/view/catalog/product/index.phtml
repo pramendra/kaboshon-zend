@@ -16,7 +16,7 @@ $this->headTitle($title);
         <th>На складе</th>
         <th>&nbsp;</th>
     </tr>
-    <?php if ($products) foreach ($products as $product) : ?>
+    <?php if (count($products)) foreach ($products as $product) : ?>
     <tr>
         <td><?= $this->escapeHtml($product->getId()); ?></td>
         <td><?= $this->escapeHtml($product->getName()); ?></td>
