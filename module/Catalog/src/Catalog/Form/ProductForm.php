@@ -5,6 +5,9 @@ namespace Catalog\Form;
 use Zend\Form\Form;
 use Zend\Form\FormInterface;
 
+/**
+ * Product Form
+ */
 class ProductForm extends Form
 {
     public function __construct($em, $category = null, $name = 'product')
@@ -16,6 +19,10 @@ class ProductForm extends Form
         $this->initValues($category, $em);
     }
 
+    /**
+     * Init Form elements
+     * @param $em
+     */
     private function initElements($em)
     {
         $this->add(array(

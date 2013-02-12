@@ -30,47 +30,40 @@ class ProductController extends ActionController
 
     public function addAction()
     {
+        $service = $this->getService();
         $request = $this->getRequest();
 
-        if ($request->isPost() && $this->getService()->add($request->getPost()))
-            return $this->redirect()->toRoute('admin/product/index');
+        $result = $service->add($request);
 
-        $form = $this->getService()->getForm();
+        if ($result === true)
+            return $this->redirectToIndex();
 
         return array(
-            'form' => $form
+            'form' => $result
         );
     }
 
     public function editAction()
     {
-        $request = $this->getRequest();
         $id      = (int) $this->getEvent()->getRouteMatch()->getParam('id');
+        $service = $this->getService();
+        $request = $this->getRequest();
 
-        if (!$this->getService()->load($id))
-            $this->getResponse()->setStatusCode(404);
+        $result = $service->edit($id, $request);
 
-        if ($request->isPost()) {
-            if ($this->getService()->edit($id, $request->getPost()))
-                return $this->redirect()->toRoute('admin/product/index');
-            else
-                $this->getResponse()->setStatusCode(404);
-        }
-
-        $form = $this->getService()->getForm();
+        if ($result === true)
+            return $this->redirectToIndex();
 
         return array(
-            'form' => $form
+            'form' => $result
         );
     }
 
     public function deleteAction()
     {
         $id = (int)$this->getEvent()->getRouteMatch()->getParam('id');
+        $this->getService()->delete($id);
 
-        if ($this->getService()->delete($id))
-            return $this->redirect()->toRoute('admin/product/index');
-        else
-            $this->getResponse()->setStatusCode(404);
+        return $this->redirectToIndex();
     }
 }

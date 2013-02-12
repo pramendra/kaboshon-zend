@@ -38,7 +38,7 @@ class CategoryController extends ActionController
      */
     public function indexAction()
     {
-        $offset = (int) $this->getEvent()->getRouteMatch()->getParam('id');
+        $offset = (int)$this->getEvent()->getRouteMatch()->getParam('id');
 
         return new ViewModel(array(
                                   'categories' => $this->getService()->fetch($offset)
