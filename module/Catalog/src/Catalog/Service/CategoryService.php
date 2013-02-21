@@ -73,14 +73,6 @@ class CategoryService extends Service
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
-
-                $parent = (int) $category->getParent();
-                if ($parent > 0)
-                    $parent = $this->findById($parent);
-                else
-                    $parent = null;
-
-                $category->setParent($parent);
                 $this->em()->flush();
                 return true;
             }

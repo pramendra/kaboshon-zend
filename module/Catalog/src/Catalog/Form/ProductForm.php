@@ -12,9 +12,12 @@ class ProductForm extends Form
 {
     public function __construct($em, $category = null, $name = 'product')
     {
+        parent::__construct($name);
+        $this->em = $em;
+
         $this->setAttribute('method', 'post');
 
-        $this->initElements($em);
+        $this->initElements();
 
         $this->initValues($category, $em);
     }
@@ -23,7 +26,7 @@ class ProductForm extends Form
      * Init Form elements
      * @param $em
      */
-    private function initElements($em)
+    private function initElements()
     {
         $this->add(array(
                         'name' => 'id',
@@ -65,7 +68,7 @@ class ProductForm extends Form
                         'type'       => 'DoctrineORMModule\Form\Element\EntitySelect',
                         'options'    => array(
                             'label'          => 'category',
-                            'object_manager' => $em,
+                            'object_manager' => $this->em,
                             'target_class'   => 'Catalog\Entity\Category',
                             'identifier'     => 'id',
                             'property'       => 'name',
@@ -98,7 +101,7 @@ class ProductForm extends Form
                    ));
     }
 
-    private function initValues($entity, $em)
+    private function initValues($entity)
     {
         if ($entity) {
             $this->add(array(
@@ -106,7 +109,7 @@ class ProductForm extends Form
                             'type'    => 'DoctrineORMModule\Form\Element\EntitySelect',
                             'options' => array(
                                 'label'          => 'main_photo',
-                                'object_manager' => $em,
+                                'object_manager' => $this->em,
                                 'target_class'   => 'Catalog\Entity\ProductPhoto',
                                 'identifier'     => 'id',
                                 'property'       => 'name',
