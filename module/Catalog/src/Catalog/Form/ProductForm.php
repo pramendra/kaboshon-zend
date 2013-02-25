@@ -24,7 +24,6 @@ class ProductForm extends Form
 
     /**
      * Init Form elements
-     * @param $em
      */
     private function initElements()
     {
@@ -80,7 +79,7 @@ class ProductForm extends Form
 
         $this->add(array(
                         'name'       => 'submit',
-                        'type'       => 'Zend\From\Element\Submit',
+                        'type'       => 'Zend\Form\Element\Submit',
                         'attributes' => array(
                             'type'  => 'submit',
                             'value' => 'Go',
@@ -91,7 +90,7 @@ class ProductForm extends Form
 
         $this->add(array(
                         'name'       => 'reset',
-                        'type'       => 'Zend\From\Element\Button',
+                        'type'       => 'Zend\Form\Element\Button',
                         'attributes' => array(
                             'type'  => 'reset',
                             'value' => 'Go',
