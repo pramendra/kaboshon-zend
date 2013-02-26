@@ -29,6 +29,13 @@ class ProductPhoto extends \Abstracts\Entity
     protected $name;
 
     /**
+     * @var bool $main
+     *
+     * @ORM\Column(name="name", type="boolean", nullable=false)
+     */
+    protected $main = false;
+
+    /**
      * @var string $file
      *
      * @ORM\Column(name="file", type="string", length=255, nullable=false)

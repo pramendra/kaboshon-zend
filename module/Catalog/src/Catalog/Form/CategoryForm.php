@@ -22,7 +22,6 @@ class CategoryForm extends Form
             ->setHydrator(new DoctrineObject($this->em, 'Catalog\Entity\Category', false))
             ->setObject(new Entity);
 
-
         $this->initElements();
         $this->initValues($entity);
     }

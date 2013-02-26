@@ -4,22 +4,31 @@ namespace Catalog\Form;
 
 use Zend\Form\Form;
 use Zend\Form\FormInterface;
+use DoctrineModule\Stdlib\Hydrator\DoctrineObject;
+use Catalog\Entity\Product as Entity;
 
 /**
  * Product Form
  */
 class ProductForm extends Form
 {
-    public function __construct($em, $category = null, $name = 'product')
+    public function __construct($em, $entity = null, $name = 'product')
     {
         parent::__construct($name);
         $this->em = $em;
 
         $this->setAttribute('method', 'post');
 
+        /*
+         * @todo Добавить гидратор для Abstracts\Entities или избавится от них
+         */
+        $this->setAttribute('method', 'post')
+            ->setHydrator(new DoctrineObject($this->em, 'Catalog\Entity\Category', false))
+            ->setObject(new Entity);
+
         $this->initElements();
 
-        $this->initValues($category, $em);
+        $this->initValues($entity);
     }
 
     /**
@@ -98,6 +107,9 @@ class ProductForm extends Form
                             'class' => 'btn',
                         ),
                    ));
+        /*
+         * @todo Добавить валидацию для категории и главной фотографии
+         */
     }
 
     private function initValues($entity)
@@ -113,8 +125,8 @@ class ProductForm extends Form
                                 'identifier'     => 'id',
                                 'property'       => 'name',
                                 'find_method'    => array(
-                                    'name'   => 'findWithoutId',
-                                    'params' => array('id' => $entity),
+                                    'name'   => 'find',
+                                    'params' => array($entity->getMainPhoto()),
                                 )
                             )
                        ));

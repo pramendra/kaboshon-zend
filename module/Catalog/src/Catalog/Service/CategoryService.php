@@ -64,10 +64,9 @@ class CategoryService extends Service
     public function edit($id, $request)
     {
         $category = $this->load($id);
-        if ($category === null)
-            return;
-
         $form = $this->getForm($category);
+        if ($category === null)
+            return $form;
 
         if ($request->isPost()) {
             $form->setData($request->getPost());

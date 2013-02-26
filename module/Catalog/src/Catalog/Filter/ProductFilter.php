@@ -55,16 +55,16 @@ class ProductFilter extends InputFilter
                                          )));
 
         $this->add($factory->createInput(array(
-                        'name'     => 'price',
-                        'required' => true,
-                        'validators' => array(
-                            array(
-                                'type' => 'Zend\I18n\Validator\Float'
-                            ),
-                            array(
-                                'name' => 'not_empty',
-                            ),
-                        ),
-                   )));
+                                              'name'       => 'price',
+                                              'required'   => true,
+                                              'validators' => array(
+                                                  array(
+                                                      'name' => 'Zend\I18n\Validator\Float'
+                                                  ),
+                                                  array(
+                                                      'name' => 'not_empty',
+                                                  ),
+                                              ),
+                                         )));
     }
 }

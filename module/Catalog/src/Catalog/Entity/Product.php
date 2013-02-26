@@ -3,6 +3,9 @@
 namespace Catalog\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Criteria;
+use Catalog\Entity\ProductPhoto;
+use Catalog\Entity\Category;
 
 /**
  * Catalog\Entity\Product
@@ -58,6 +61,18 @@ class Product extends \Abstracts\Entity
     protected $photos;
 
     /**
+     * Main product photo, which shows in catalog
+     * @var \Catalog\Entity\ProductPhoto
+     */
+    protected $mainPhoto;
+
+    /**
+     * Criteria for ProductPhoto[], for filter main photo
+     * @var \Doctrine\Common\Collections\Criteria
+     */
+    static private $mainPhotoCriteria;
+
+    /**
      * @param Category $category
      * @param array $data
      */
@@ -72,5 +87,27 @@ class Product extends \Abstracts\Entity
     public function getCategoryName()
     {
         return $this->category->getName();
+    }
+
+    public function getMainPhoto()
+    {
+        if ($this->mainPhoto)
+            return $this->mainPhoto;
+
+        if (!self::$mainPhotoCriteria)
+            self::$mainPhotoCriteria = Criteria::create()
+                ->where(Criteria::expr()->eq("main", true))
+                ->setFirstResult(0)
+                ->setMaxResults(1);
+
+        $this->mainPhoto =  $this->getPhotos()->matching(self::$mainPhotoCriteria)->first();
+
+        return $this->mainPhoto;
+    }
+
+    public function setMainPhoto(ProductPhoto $mainPhoto)
+    {
+        $this->mainPhoto = $mainPhoto;
+        return $this;
     }
 }
