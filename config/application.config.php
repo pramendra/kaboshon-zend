@@ -12,6 +12,7 @@ return array(
         'Profile',
         'DoctrineModule',
         'DoctrineORMModule',
+        'ZendDeveloperTools',
     ),
     'module_listener_options' => array(
         'config_glob_paths'    => array(

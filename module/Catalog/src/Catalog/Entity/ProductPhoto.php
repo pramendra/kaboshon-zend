@@ -31,7 +31,7 @@ class ProductPhoto extends \Abstracts\Entity
     /**
      * @var bool $main
      *
-     * @ORM\Column(name="name", type="boolean", nullable=false)
+     * @ORM\Column(name="main", type="boolean", nullable=false)
      */
     protected $main = false;
 
