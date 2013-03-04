@@ -44,38 +44,47 @@ class ProductForm extends Form
         $this->add(array(
                         'name'       => 'name',
                         'type'       => 'Zend\Form\Element\Text',
+                        'options' => array(
+                            'label' => 'Name'
+                        ),
                         'attributes' => array(
                             'type'     => 'text',
                             'required' => 'required',
                         ),
                         'options'    => array(
-                            'label' => 'name',
+                            'label' => 'Name',
                         ),
                    ));
 
         $this->add(array(
                         'name'       => 'descr',
                         'type'       => 'Zend\Form\Element\TextArea',
+                        'options'    => array(
+                            'label' => 'Description,'
+                        ),
                         'attributes' => array(
                             'type' => 'textarea',
-                        )
+                        ),
                    ));
 
         $this->add(array(
                         'name'       => 'price',
+                        'type'       => 'Zend\Form\Element\Text',
+                        'options'    => array(
+                            'label' => 'Price',
+                        ),
                         'attributes' => array(
                             'type'     => 'text',
                             'required' => 'required',
                             'pattern'  => '\d+(\.\d{2})?'
                         ),
-                        'label'      => 'price'
                    ));
 
         $this->add(array(
                         'name'       => 'category',
                         'type'       => 'DoctrineORMModule\Form\Element\EntitySelect',
                         'options'    => array(
-                            'label'          => 'category',
+                            'label'          => 'Category',
                             'object_manager' => $this->em,
                             'target_class'   => 'Catalog\Entity\Category',
                             'identifier'     => 'id',
@@ -102,14 +111,21 @@ class ProductForm extends Form
                         'type'       => 'Zend\Form\Element\Button',
                         'attributes' => array(
                             'type'  => 'reset',
-                            'value' => 'Go',
+                            'value' => 'Reset',
                             'id'    => 'reset-button',
                             'class' => 'btn',
                         ),
                    ));
-        /*
-         * @todo Добавить валидацию для категории и главной фотографии
-         */
+        $this->add(array(
+                        'name'       => 'goBack',
+                        'type'       => 'Zend\Form\Element\Button',
+                        'attributes' => array(
+                            'type'  => 'button',
+                            'value' => 'Back',
+                            'id'    => 'go-back-button',
+                            'class' => 'btn',
+                        ),
+                   ));
     }
 
     private function initValues($entity)

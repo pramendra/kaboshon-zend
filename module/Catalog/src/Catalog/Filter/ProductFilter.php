@@ -66,5 +66,8 @@ class ProductFilter extends InputFilter
                                                   ),
                                               ),
                                          )));
+        /*
+         * @todo Добавить валидацию для категории и главной фотографии
+         */
     }
 }
